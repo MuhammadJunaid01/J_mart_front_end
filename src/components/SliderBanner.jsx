@@ -22,7 +22,7 @@ const SliderBanner = () => {
       image: banner3,
     },
   ];
-  setInterval(() => {}, 2000);
+
   const slideLeft = () => {
     if (slide === items.length - 1) {
       return;
@@ -32,11 +32,11 @@ const SliderBanner = () => {
   const slideRight = () => {
     if (slide === 0) {
       setSlide((prev) => prev + 1);
-
       return;
     }
     setSlide((prev) => prev - 1);
   };
+
   return (
     <div className="slide">
       <Grid container spacing={2}>

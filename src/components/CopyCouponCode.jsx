@@ -3,7 +3,7 @@ import useClipboard from "react-hook-clipboard";
 import "../assets/styles/copyCopun.css";
 const CopyToClipBoard = () => {
   const [clipboard, copyToClipboard] = useClipboard();
-  const [clip, setClip] = useState("hello");
+  const [clip, setClip] = useState("J_MART02");
   const [check, setCheck] = useState(false);
   const copy = () => {
     copyToClipboard(clip);

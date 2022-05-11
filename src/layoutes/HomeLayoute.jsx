@@ -7,9 +7,7 @@ const HomeLayoute = ({ children }) => {
   return (
     <div>
       <Menubar />
-      <div style={{ marginTop: "10px" }} maxWidth="lg">
-        {children}
-      </div>
+      <div style={{ marginTop: "10px" }}>{children}</div>
     </div>
   );
 };

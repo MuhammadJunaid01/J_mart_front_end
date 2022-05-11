@@ -1,12 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import Context from "./hooks/Context";
+
 import RoutesPage from "./routes/RoutesPage";
 
 function App() {
   return (
-    <div className="App">
-      <RoutesPage />
+    <div>
+      <Context>
+        <RoutesPage />
+      </Context>
     </div>
   );
 }

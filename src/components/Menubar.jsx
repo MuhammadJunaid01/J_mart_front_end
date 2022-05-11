@@ -45,7 +45,7 @@ const Menubar = () => {
         sx={{ backgroundColor: "#10B981", padding: "7px" }}
         position="static"
       >
-        <Container maxWidth="xl">
+        <Container>
           <Toolbar disableGutters>
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
             <Typography
