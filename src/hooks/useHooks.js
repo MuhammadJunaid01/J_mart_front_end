@@ -1,35 +1,61 @@
 import React, { useEffect, useState } from "react";
 
 const useHooks = () => {
-  const [price, setPrice] = useState(0);
-  const [quantity, setQuantity] = useState(0);
-  let storage;
-  const t = {
-    ...storage,
-    price: price,
-    quan: quantity,
-  };
-  const addToLocalStorage = () => {
-    localStorage.setItem("cart", JSON.stringify(t));
-  };
-  const cart = async (price, quantity) => {
-    setPrice((prev) => prev + price);
-    setQuantity((prev) => prev + 1);
+  let [cart, setCart] = useState([]);
+  const [cartValue, setCartValue] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
+  let localCart = JSON.parse(localStorage.getItem("cart"));
 
-    storage = localStorage.getItem("cart");
+  //adding new item
+
+  const addTocart = async (item, quantity) => {
+    console.log(item);
+    let cartCopy = [...cart];
+    let { id } = item;
+    //look for item in cart array
+    let existingItem = cart.find((cartItem) => cartItem.id === id);
+    //if item already exists
+    if (existingItem) {
+      existingItem.quantity = +parseInt(1);
+      existingItem.sum = item.price; //update item
+      existingItem.total = existingItem.sum + item.price; //update item
+      existingItem.quantity = existingItem.quantity + 1;
+      alert("exeee");
+      // cartCopy.push(existingItem);
+    } else {
+      //if item doesn't exist, simply add it
+      cartCopy.push(item);
+    }
+
+    //update app state
+    setCart(cartCopy);
+    console.log("exis", existingItem);
+    //make cart a string and store in local space
+    let stringCart = JSON.stringify(cartCopy);
+    localStorage.setItem("cart", stringCart);
+    // setItems(t);
   };
-  // useEffect(() => {
-  //   addToLocalStorage();
-  // }, []);
-  setTimeout(() => {
-    addToLocalStorage();
-  }, 1000);
+  const updateItem = (itemID, amount) => {};
+  const removeItem = (itemID) => {};
+  useEffect(() => {
+    if (localCart) setCart(localCart);
+  }, []);
+  useEffect(() => {
+    setCartValue(JSON.parse(localStorage.getItem("cart")));
+  }, [cart]);
+  let total = [...(cartTotal || "")];
+  let sum = 0;
+  for (const key in cartValue) {
+    const element = cartValue[key];
+    sum = sum + element.price;
+    total.push(sum);
+  }
+  // setCart(sum);
+  console.log("sum", sum);
   return {
-    price,
-    setPrice,
-    cart,
-    quantity,
-    setQuantity,
+    addTocart,
+    updateItem,
+    removeItem,
   };
 };
 

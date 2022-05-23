@@ -1,0 +1,6 @@
+.add_to_cart_btn {
+  cursor: pointer;
+}
+.btn_disable {
+  pointer-events: none;
+}

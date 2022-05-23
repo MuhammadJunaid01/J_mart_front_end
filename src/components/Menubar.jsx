@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -38,14 +38,33 @@ const Menubar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  //resize window height
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(0);
+  const [topMenuBar, setTopMenuBar] = useState(false);
+  let resizeWindow = () => {
+    if (window.scrollY >= 120) {
+      setTopMenuBar(true);
+    } else {
+      setTopMenuBar(false);
+    }
+  };
+
+  useEffect(() => {
+    resizeWindow();
+    window.addEventListener("scroll", resizeWindow);
+
+    return () => window.removeEventListener("resize", resizeWindow);
+  }, [windowHeight]);
 
   return (
     <div>
       <AppBar
+        style={{ transition: "ease-in-out" }}
         sx={{ backgroundColor: "#10B981", padding: "7px" }}
-        position="static"
+        position={topMenuBar ? "fixed" : "static"}
       >
-        <Container>
+        <>
           <Toolbar disableGutters>
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
             <Typography
@@ -145,7 +164,7 @@ const Menubar = () => {
               </Menu>
             </Box>
           </Toolbar>
-        </Container>
+        </>
       </AppBar>
     </div>
   );
