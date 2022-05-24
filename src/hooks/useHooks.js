@@ -4,6 +4,8 @@ const useHooks = () => {
   let [cart, setCart] = useState([]);
   const [cartValue, setCartValue] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
+  const [open, setOpen] = useState(true);
+
   let localCart = JSON.parse(localStorage.getItem("cart"));
 
   //adding new item
@@ -51,11 +53,17 @@ const useHooks = () => {
     total.push(sum);
   }
   // setCart(sum);
-  console.log("sum", sum);
+  const check = () => {
+    setOpen((open) => !open);
+    console.log("open", open);
+  };
   return {
     addTocart,
     updateItem,
     removeItem,
+    check,
+    open,
+    setOpen,
   };
 };
 

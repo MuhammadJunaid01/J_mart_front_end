@@ -1,27 +1,24 @@
 import { Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import Tooltip from "@mui/material/Tooltip";
 import DensityMediumIcon from "@mui/icons-material/DensityMedium";
+import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
 import "../assets/styles/dashboardNavbar.css";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import userImage from "../assets/images/user.jpg";
+import useAuth from "../hooks/useAuth";
 const DashboardNavbar = () => {
+  // const [open, setOpen] = useState(true);
+  const { open, setOpen, check } = useAuth();
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "10px",
-      }}
-    >
+    <div className="dash_board_nvbar_container">
       <div className="tooltip">
-        <Tooltip title="open menu">
-          <span className="tooltipIcon">
-            <DensityMediumIcon />
+        <Tooltip title={`${open ? "open menu" : "close menu"}`}>
+          <span onClick={check} className="tooltipIcon">
+            {open ? <DensityMediumIcon /> : <FormatAlignRightIcon />}
           </span>
         </Tooltip>
       </div>
@@ -46,16 +43,27 @@ const DashboardNavbar = () => {
           JMART
         </Typography>
       </span>
-      <img
+      <div
         style={{
-          height: "50px",
-          width: "50px",
-          borderRadius: "50%",
           backgroundSize: "cover",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100px",
+          cursor: "pointer",
         }}
-        src={userImage}
-        alt=""
-      />
+      >
+        <img
+          style={{
+            height: "40px",
+            width: "40px",
+            borderRadius: "50%",
+          }}
+          src={userImage}
+          alt=""
+        />
+        <p>junaid</p>
+      </div>
     </div>
   );
 };

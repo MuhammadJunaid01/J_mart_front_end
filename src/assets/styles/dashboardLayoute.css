@@ -1,0 +1,40 @@
+.dahboard_menu_bar {
+  height: 30rem;
+  overflow-y: scroll;
+  width: 80%;
+  background-color: #ffffff;
+}
+.dashboard_menuTitle {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #9398a4;
+  font-size: 15px;
+  margin-left: 8px;
+  margin-bottom: 1rem;
+  margin-top: 5px;
+}
+.active {
+  border-left: 5px solid #28ac65;
+  text-decoration: none;
+  color: white;
+  justify-content: space-between;
+  color: #a8b6f2;
+  /* background-color: #f3f8fb; */
+  padding: 5px 0px;
+}
+.dashboard_count {
+  padding: 5px 7px;
+  border-color: #28ac65;
+  color: white;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.navlink {
+  text-decoration: none;
+}
+.navlink:hover {
+  background-color: white;
+}

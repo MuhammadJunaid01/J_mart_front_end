@@ -1,10 +1,15 @@
-.tooltipIcon {
-  /*font-size: 40px;
-  */
+.dash_board_nvbar_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
 }
 .tooltip > .tooltipIcon {
   padding: 10px;
-  margin-top: 13px;
+  text-align: center;
+  display: flex;
+  align-items: center;
   color: gainsboro;
   cursor: pointer;
   background-size: cover;
