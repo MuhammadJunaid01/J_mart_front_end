@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CollapsableSidebar = ({ array }) => {
+const CollapsableSidebarMenu = ({ array }) => {
   return (
     <div>
       {array.map((arr, index) => (
@@ -24,4 +24,4 @@ const CollapsableSidebar = ({ array }) => {
   );
 };
 
-export default CollapsableSidebar;
+export default CollapsableSidebarMenu;

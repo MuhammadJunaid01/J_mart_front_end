@@ -13,7 +13,8 @@ import "../assets/styles/dashboardLayoute.css";
 import useAuth from "../hooks/useAuth";
 import DashboardTitle from "../components/DashboardTitle";
 import Sidebar from "../components/Sidebar";
-import CollapsableSidebar from "../components/CollapsableSidebar";
+import CollapsableSidebarMenu from "../components/CollapsableSidebarMenu";
+import CollapsebleItems from "../components/CollapsebleItems";
 const DashBoardLayoute = ({ children }) => {
   const { open } = useAuth();
   const [collapseSidebar, setCollapseSidebar] = useState(true);
@@ -46,39 +47,23 @@ const DashBoardLayoute = ({ children }) => {
                 chat={"new"}
               />
               {/* start collapsable side bar */}
-              <div
-                onClick={collapse}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  cursor: "pointer",
-                  color: "#B2B4B5",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <p style={{ marginTop: "6px" }}>
-                    <CreditCardIcon />
-                  </p>
-                  <p style={{ marginLeft: "6px" }}>Ecommerce</p>
-                </div>
-                <p>
-                  {collapseSidebar ? (
-                    <KeyboardArrowDownIcon />
-                  ) : (
-                    <KeyboardControlKeyIcon />
-                  )}
-                </p>
-              </div>
-              {collapseSidebar && <CollapsableSidebar array={data} />}
+
+              <CollapsebleItems
+                TitleIcon={CreditCardIcon}
+                collapseSidebar={collapseSidebar}
+                collapse={collapse}
+                IconDown={KeyboardArrowDownIcon}
+                IconUp={KeyboardControlKeyIcon}
+                name={"Ecommerce"}
+                menuItem={data}
+              />
+
+              {/* end collapsable sidebar */}
+              {/* start pages here */}
+              <DashboardTitle name={"Pages"} />
+
+              {/* end  pages here */}
             </div>
-            {/* end collapsable sidebar */}
           </Grid>
           <Outlet />
         </Grid>
