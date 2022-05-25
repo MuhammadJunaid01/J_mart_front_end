@@ -9,7 +9,7 @@ import DashBoardOrders from "../components/dashBoard/DashBoardOrders";
 import DashBoardProducts from "../components/dashBoard/DashBoardProducts";
 import DashBoardProductsDetails from "../components/dashBoard/DashBoardProductsDetails";
 import Shops from "../components/dashBoard/Shops";
-import Profile from "../components/Profile";
+import DashBoardHome from "../components/DashBoardHome";
 import Users from "../components/Users";
 import DashBoardLayoute from "../layoutes/DashBoardLayoute";
 import HomeLayoute from "../layoutes/HomeLayoute";
@@ -39,7 +39,7 @@ const RoutesPage = () => {
             }
           />
           <Route path="dashboard" element={<DashBoardLayoute />}>
-            <Route path="profile" element={<Profile />} />
+            <Route path="home" element={<DashBoardHome />} />
             <Route path="user" element={<Users />} />
             <Route path="chat" element={<Chat />} />
             <Route path="products" element={<DashBoardProducts />} />

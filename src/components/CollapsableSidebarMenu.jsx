@@ -1,12 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const CollapsableSidebarMenu = ({ array }) => {
   return (
     <div>
       {array.map((arr, index) => (
         <div key={index}>
-          <Link
+          <NavLink
+            className={(navData) =>
+              navData.isActive ? "activeSidebarMnu" : "navlink"
+            }
             style={{
               textDecoration: "none",
               display: "block",
@@ -17,7 +20,7 @@ const CollapsableSidebarMenu = ({ array }) => {
             to={arr.to}
           >
             {arr.name}
-          </Link>
+          </NavLink>
         </div>
       ))}
     </div>

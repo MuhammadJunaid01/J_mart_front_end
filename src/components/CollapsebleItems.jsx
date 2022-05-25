@@ -36,7 +36,9 @@ const CollapsebleItems = ({
         </div>
         <p>{collapseSidebar ? <IconDown /> : <IconUp />}</p>
       </div>
-      {collapseSidebar && <CollapsableSidebarMenu array={menuItem} />}
+      {collapseSidebar && menuItem && (
+        <CollapsableSidebarMenu array={menuItem} />
+      )}
     </div>
   );
 };
