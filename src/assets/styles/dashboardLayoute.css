@@ -23,7 +23,7 @@
   -o-border-radius: 20px;
 }
 .dahboard_menu_bar::-webkit-scrollbar-thumb {
-  background-color: #28ac65;
+  background-image: linear-gradient(#d16ba5, #86a8e7, #5ffbf1);
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -70,3 +70,16 @@
   text-decoration: none;
   padding-left: 5px;
 }
+/* add products category styles */
+.category:hover {
+  background-color: #1e90ff;
+  padding: 2px 8px;
+  color: white;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  cursor: pointer;
+}
+/* file upload */

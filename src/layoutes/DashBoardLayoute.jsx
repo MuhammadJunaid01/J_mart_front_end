@@ -94,7 +94,9 @@ const DashBoardLayoute = ({ children }) => {
               {/* end  pages here */}
             </div>
           </Grid>
-          <Outlet />
+          <Grid item xs={12} md={9}>
+            <Outlet />
+          </Grid>
         </Grid>
       </div>
     </div>
