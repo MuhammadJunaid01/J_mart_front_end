@@ -7,7 +7,7 @@ const HomeLayoute = ({ children }) => {
   return (
     <div>
       <Menubar />
-      <div style={{ marginTop: "10px" }}>{children}</div>
+      <div style={{ marginTop: "0px" }}>{children}</div>
     </div>
   );
 };

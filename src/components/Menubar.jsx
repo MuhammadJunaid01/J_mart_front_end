@@ -101,9 +101,7 @@ const Menubar = () => {
                 color: "inherit",
                 textDecoration: "none",
               }}
-            >
-              LOGO
-            </Typography>
+            ></Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {/* start */}
               <Paper

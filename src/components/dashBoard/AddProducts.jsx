@@ -1,19 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FileUpload from "react-material-file-upload";
 import SaveIcon from "@mui/icons-material/Save";
 import { Grid } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import CancelIcon from "@mui/icons-material/Cancel";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { catagory } from "../../assets/data/catagory";
+import axios from "axios";
 const AddProducts = () => {
   const [expanded, setExpanded] = useState(true);
   const [show, setShow] = useState(false);
   const [categoryName, setCategoryName] = useState("");
   const [showProductBelow, setShowProductBelow] = useState(false);
-  const [files, setFiles] = useState([]);
+  const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
-
+  const [productName, setProductName] = useState("");
+  const [manufacturerBrand, setManufacturerBrand] = useState("");
+  const [manufacturerName, setManufacturerName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
   const handleExpand = () => {
     setExpanded((expanded) => !expanded);
   };
@@ -26,19 +33,70 @@ const AddProducts = () => {
   const handleProductShow = () => {
     setShowProductBelow((prev) => !prev);
   };
-  useEffect(() => {
-    // setPreviewImage(URL.createObjectURL(files));
-    console.log("preview", previewImage);
-  }, [files]);
-  // console.log("file", files);
+
   const handleImage = (e) => {
-    console.log(e[0]);
+    setImage(e[0]);
     setPreviewImage(URL.createObjectURL(e[0]));
   };
+
+  const sendDatabackend = () => {
+    if (
+      categoryName ||
+      productName ||
+      manufacturerName ||
+      price ||
+      description ||
+      image === ""
+    ) {
+      toast.error("Please Fill All information ", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    const formData = new FormData();
+    formData.append("categoryName", categoryName);
+    formData.append("productName", productName);
+    formData.append("price", price);
+    formData.append("manufacturerBrand", manufacturerBrand);
+    formData.append("image", image);
+    formData.append("manufacturerName", manufacturerName);
+    formData.append("description", description);
+    formData.forEach((f) => {
+      console.log("f: ", f);
+    });
+
+    axios
+      .post("http://localhost:5000/addProduct", formData)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   return (
-    <div style={{ marginTop: "40px" }}>
+    <div style={{ marginTop: "40px", paddingBottom: "20px" }}>
       <div>
         <h4>Add Product</h4>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        {/* Same as */}
+        <ToastContainer />
         <Grid container spacing={2}>
           <Grid item xs={12} md={11}>
             <div
@@ -99,6 +157,7 @@ const AddProducts = () => {
                     <Grid item xs={12} md={12}>
                       <p style={{ marginBottom: "8px" }}>Product Name</p>
                       <input
+                        onBlur={(e) => setProductName(e.target.value)}
                         style={{
                           outline: "none",
                           border: "1px solid gainsboro",
@@ -112,6 +171,7 @@ const AddProducts = () => {
                     <Grid item xs={12} md={4}>
                       <p style={{ marginBottom: "8px" }}>Manufacturer Name</p>
                       <input
+                        onBlur={(e) => setManufacturerName(e.target.value)}
                         style={{
                           outline: "none",
                           border: "1px solid gainsboro",
@@ -125,6 +185,7 @@ const AddProducts = () => {
                     <Grid item xs={12} md={4}>
                       <p style={{ marginBottom: "8px" }}>Manufacturer Brand</p>
                       <input
+                        onBlur={(e) => setManufacturerBrand(e.target.value)}
                         style={{
                           outline: "none",
                           border: "1px solid gainsboro",
@@ -138,6 +199,7 @@ const AddProducts = () => {
                     <Grid item xs={12} md={4}>
                       <p style={{ marginBottom: "8px" }}>Price</p>
                       <input
+                        onBlur={(e) => setPrice(e.target.value)}
                         style={{
                           outline: "none",
                           border: "1px solid gainsboro",
@@ -182,6 +244,25 @@ const AddProducts = () => {
                           ))}
                         </div>
                       )}
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                      <p style={{ marginBottom: "8px" }}>Product Description</p>
+                      <textarea
+                        onBlur={(e) => setDescription(e.target.value)}
+                        style={{
+                          maxWidth: "100%",
+                          minWidth: "100%",
+                          minHeight: "60px",
+                          maxHeight: "120px",
+                          outline: "none",
+                          border: "1px solid gainsboro",
+                          width: "100%",
+                          padding: "9px 0px",
+                          borderRadius: "3px",
+                          fontSize: "18px",
+                          boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                        }}
+                      ></textarea>
                     </Grid>
                   </Grid>
                 </div>
@@ -268,7 +349,8 @@ const AddProducts = () => {
                           />
                         </div>
                       )}
-                      <FileUpload value={files} onChange={handleImage} />
+                      <FileUpload onChange={handleImage} />
+                      {/* <input onChange={handleImage} type="file" /> */}
                     </div>
                     <div style={{ marginTop: "10px", display: "flex" }}>
                       <button
@@ -289,6 +371,7 @@ const AddProducts = () => {
                       </button>
 
                       <button
+                        onClick={sendDatabackend}
                         style={{
                           backgroundColor: "#2CA67A",
                           color: "white",
