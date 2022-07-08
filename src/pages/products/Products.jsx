@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
 import useAuth from "../../hooks/useAuth";
 import { Box, Grid } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
@@ -9,30 +9,24 @@ import Typography from "@mui/material/Typography";
 import productsImg1 from "../../assets/images/banner1.jpg";
 import productsImg2 from "../../assets/images/banner2.jpg";
 import productsImg3 from "../../assets/images/banner3.jpg";
-import Cart from "../../components/Cart";
-import { addToCart } from "../../features/cart/cart";
 import "../../assets/styles/products.css";
+import { addToCart } from "../../redux/reduicers/cart/cart";
 const products = [
-  { name: "fis", id: "0", img: productsImg1, stock: true, price: 20 },
-  { name: "food", id: "01", img: productsImg2, stock: false, price: 27 },
-  { name: "organic", id: "02", img: productsImg3, stock: true, price: 15 },
-  { name: "orange", id: " 03", img: productsImg1, stock: true, price: 40 },
-  { name: "tomatto", id: " 04", img: productsImg2, stock: true, price: 22 },
-  { name: "lebo", id: "05", img: productsImg3, stock: true, price: 10 },
-  { name: "komola", id: "06", img: productsImg1, stock: false, price: 20 },
+  { name: "fis", id: uuidv4(), img: productsImg1, stock: true, price: 20 },
+  { name: "food", id: uuidv4(), img: productsImg2, stock: false, price: 27 },
+  { name: "organic", id: uuidv4(), img: productsImg3, stock: true, price: 15 },
+  { name: "orange", id: uuidv4(), img: productsImg1, stock: true, price: 40 },
+  { name: "tomatto", id: uuidv4(), img: productsImg2, stock: true, price: 22 },
+  { name: "lebo", id: uuidv4(), img: productsImg3, stock: true, price: 10 },
+  { name: "komola", id: uuidv4(), img: productsImg1, stock: false, price: 20 },
 ];
 const Products = () => {
   const [disable, setDisable] = useState(true);
-  const dispatch = useDispatch();
+
+  const disepatch = useDispatch();
   const handleAddToCart = (item) => {
     // console.log(item);
-    dispatch(addToCart(item));
-    setTimeout(() => {
-      setDisable(false);
-    }, 100);
-    setTimeout(() => {
-      setDisable(true);
-    }, 2000);
+    disepatch(addToCart(item));
   };
   const { setPrice, price } = useAuth();
 
@@ -84,7 +78,6 @@ const Products = () => {
           </Grid>
         ))}
       </Grid>
-      <Cart />
     </div>
   );
 };

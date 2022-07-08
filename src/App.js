@@ -3,7 +3,7 @@ import Context from "./hooks/Context";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RoutesPage from "./routes/RoutesPage";
-
+import "./App.css";
 function App() {
   return (
     <div>

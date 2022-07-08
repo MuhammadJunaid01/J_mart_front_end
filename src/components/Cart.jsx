@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const cart = useSelector((state) => state.cart);
+  const { cartItems, totalAmount } = useSelector((state) => state.cart);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const dispatch = useDispatch();
   useEffect(() => {
-    // const cart = JSON.parse(localStorage.getItem("cartItems"));
-    // setCartItems(cart);
-    let sum = 0;
-    if (cartItems) {
-      for (const total of cartItems) {
-        console.log(total.price * total.cartTotalQuantity);
-        sum = sum + total.price * total.cartTotalQuantity;
-      }
+    if (totalAmount) {
+      const total = totalAmount.reduce((prev, next) => {
+        return prev + next;
+      }, 0);
+
+      setTotalPrice(total);
     }
-  }, [cart.cartItems]);
+  }, [cartItems]);
+
   return (
     <div>
-      <h1>cart items {cartItems?.length}</h1>
-      {/* {cartItems.map((item, index) => (
+      <h1>hello cart</h1>
+      {cartItems?.map((item, index) => (
         <div key={index}>
-          <h1>hello</h1>
+          <h1>{item.id}</h1>
+          <img
+            style={{ height: "120px", width: "160px" }}
+            src={item.img}
+            alt=""
+          />
         </div>
-      ))} */}
+      ))}
+      <h1>total price:{totalPrice}</h1>
     </div>
   );
 };

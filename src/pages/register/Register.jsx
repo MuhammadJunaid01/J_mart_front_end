@@ -1,26 +1,23 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
-import { useSelector, useDispatch } from "react-redux";
 import registerLogo from "../../assets/images/register.gif";
 import GoogleIcon from "@mui/icons-material/Google";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import { userSelector, signupUser } from "../../features/authentication/auth";
 const Register = () => {
-  const dispatch = useDispatch();
   // cons {}=useSelector(userSelector)
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = {
-      name: name,
-      email: email,
-      password: password,
-    };
-    dispatch(signupUser({ name, email, password }));
-    // console.log(name, email, password);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const data = {
+  //     name: name,
+  //     email: email,
+  //     password: password,
+  //   };
+  //   dispatch(signupUser({ name, email, password }));
+  //   // console.log(name, email, password);
+  // };
   return (
     <div style={{ backgroundColor: "white", padding: "20px 0px" }}>
       <Grid container spacing={2}>
@@ -54,10 +51,7 @@ const Register = () => {
               }}
             >
               <div style={{ padding: "20px 0px" }}>
-                <form
-                  onSubmit={handleSubmit}
-                  style={{ width: "90%", margin: "0 auto" }}
-                >
+                <form style={{ width: "90%", margin: "0 auto" }}>
                   <input
                     onBlur={(e) => setName(e.target.value)}
                     style={{

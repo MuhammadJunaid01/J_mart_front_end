@@ -1,0 +1,15 @@
+.drawerContainer {
+  width: 6%;
+  box-shadow: 10px 10px 2px gainsboro;
+  position: absolute;
+  top: 110%;
+  right: 0%;
+  border: 5px solid red;
+  cursor: pointer;
+  margin: 0 auto;
+}
+.open_drawer {
+  opacity: 0.3;
+  height: 100%;
+  transition: opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
