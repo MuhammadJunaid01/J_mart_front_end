@@ -16,10 +16,7 @@ const Home = () => {
   // console.log(data);
 
   return (
-    <div
-      className={openDrawerBox ? "home_container" : ""}
-      style={{ padding: "10px" }}
-    >
+    <div style={{ padding: "10px" }}>
       <SliderBanner />
       <Products />
       <DrawerCart />

@@ -6,7 +6,7 @@ const useHooks = () => {
   const [cartTotal, setCartTotal] = useState(0);
   const [open, setOpen] = useState(true);
 
-  let localCart = JSON.parse(localStorage.getItem("cart"));
+  // let localCart = JSON.parse(localStorage.getItem("cart"));
 
   //adding new item
 
@@ -39,12 +39,12 @@ const useHooks = () => {
   };
   const updateItem = (itemID, amount) => {};
   const removeItem = (itemID) => {};
-  useEffect(() => {
-    if (localCart) setCart(localCart);
-  }, []);
-  useEffect(() => {
-    setCartValue(JSON.parse(localStorage.getItem("cart")));
-  }, [cart]);
+  // useEffect(() => {
+  //   if (localCart) setCart(localCart);
+  // }, []);
+  // useEffect(() => {
+  //   setCartValue(JSON.parse(localStorage.getItem("cart")));
+  // }, [cart]);
   let total = [...(cartTotal || "")];
   let sum = 0;
   for (const key in cartValue) {

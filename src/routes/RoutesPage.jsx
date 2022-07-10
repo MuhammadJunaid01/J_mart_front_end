@@ -4,6 +4,7 @@ import Chat from "../components/Chat";
 import AddProducts from "../components/dashBoard/AddProducts";
 import CheckOut from "../components/dashBoard/CheckOut";
 import Coustomers from "../components/dashBoard/Coustomers";
+import CreateOffer from "../components/dashBoard/CreateOffer";
 import DashBoardCart from "../components/dashBoard/DashBoardCart";
 import DashBoardOrders from "../components/dashBoard/DashBoardOrders";
 import DashBoardProducts from "../components/dashBoard/DashBoardProducts";
@@ -52,6 +53,7 @@ const RoutesPage = () => {
             <Route path="cart" element={<DashBoardCart />} />
             <Route path="checkout" element={<CheckOut />} />
             <Route path="shops" element={<Shops />} />
+            <Route path="create_offer" element={<CreateOffer />} />
             <Route path="addproduct" element={<AddProducts />} />
           </Route>
 

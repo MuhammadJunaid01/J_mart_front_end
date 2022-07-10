@@ -6,6 +6,7 @@ const data = [
   { to: "cart", name: "Cart" },
   { to: "checkout", name: "Checkout" },
   { to: "shops", name: "Shops" },
+  { to: "create_offer", name: "Create Offer" },
   { to: "addproduct", name: "Addproduct" },
 ];
 
