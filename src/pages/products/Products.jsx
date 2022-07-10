@@ -11,6 +11,9 @@ import productsImg2 from "../../assets/images/banner2.jpg";
 import productsImg3 from "../../assets/images/banner3.jpg";
 import "../../assets/styles/products.css";
 import { addToCart } from "../../redux/reduicers/cart/cart";
+import DrawerCart from "../../components/DrawerCart";
+import { traking, getTrackerData } from "../../redux/reduicers/tracker";
+import { useEffect } from "react";
 const products = [
   { name: "fis", id: uuidv4(), img: productsImg1, stock: true, price: 20 },
   { name: "food", id: uuidv4(), img: productsImg2, stock: false, price: 27 },
@@ -22,14 +25,18 @@ const products = [
 ];
 const Products = () => {
   const [disable, setDisable] = useState(true);
-
+  const { trackingData } = useSelector((state) => state.traker);
   const disepatch = useDispatch();
   const handleAddToCart = (item) => {
     // console.log(item);
     disepatch(addToCart(item));
+    disepatch(traking(item));
   };
   const { setPrice, price } = useAuth();
-
+  useEffect(() => {
+    disepatch(getTrackerData());
+  }, []);
+  console.log("trcker data", trackingData);
   return (
     <div style={{ marginTop: "50px" }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -78,6 +85,7 @@ const Products = () => {
           </Grid>
         ))}
       </Grid>
+      <DrawerCart />
     </div>
   );
 };

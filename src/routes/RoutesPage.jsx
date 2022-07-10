@@ -1,5 +1,6 @@
 import React, { Profiler } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import BestSale from "../components/BestSale";
 import Chat from "../components/Chat";
 import AddProducts from "../components/dashBoard/AddProducts";
 import CheckOut from "../components/dashBoard/CheckOut";
@@ -11,12 +12,15 @@ import DashBoardProducts from "../components/dashBoard/DashBoardProducts";
 import DashBoardProductsDetails from "../components/dashBoard/DashBoardProductsDetails";
 import Shops from "../components/dashBoard/Shops";
 import DashBoardHome from "../components/DashBoardHome";
+import HomeRoutes from "../components/HomeRoutes";
+import TopRated from "../components/TopRated";
 import Users from "../components/Users";
 import DashBoardLayoute from "../layoutes/DashBoardLayoute";
 import HomeLayoute from "../layoutes/HomeLayoute";
 import Detail from "../pages/detail/Detail";
 import Home from "../pages/home/Home";
 import Notfound from "../pages/notFound/Notfound";
+import Products from "../pages/products/Products";
 import Register from "../pages/register/Register";
 const RoutesPage = () => {
   return (
@@ -39,6 +43,7 @@ const RoutesPage = () => {
               </HomeLayoute>
             }
           />
+
           <Route path="dashboard" element={<DashBoardLayoute />}>
             <Route path="home" element={<DashBoardHome />} />
             <Route path="user" element={<Users />} />

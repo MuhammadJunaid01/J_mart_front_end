@@ -92,21 +92,17 @@ export const cartSlice = createSlice({
     },
     getTotal: (state) => {
       const currentState = current(state);
-      console.log("hello current state", currentState);
       // const total = currentState.cartItems?.map((item) => {
       //   return item.price * item.quantity;
       // });
       // console.log("hello test result totl", total);
       // return total;
       const test = currentState.cartItems.map((element) => {
-        console.log("test element", element);
         return element.quantity * element.price;
       });
-      console.log("hello test", test);
       const total = test.reduce((prev, next) => {
         return prev + next;
       }, 0);
-      console.log("hhhhhhhhhhhhhhhhhhhhhhhhh", total);
     },
   },
 });

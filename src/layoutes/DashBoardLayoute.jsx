@@ -18,7 +18,7 @@ import Sidebar from "../components/Sidebar";
 import CollapsebleItems from "../components/CollapsebleItems";
 import authenticationItem from "../assets/data/authenticationItem";
 import emailItem from "../assets/data/email";
-const DashBoardLayoute = ({ children }) => {
+const DashBoardLayoute = () => {
   const { open } = useAuth();
   const [collapseSidebar, setCollapseSidebar] = useState(true);
   const [pagesSidebar, setPagesSidebar] = useState(true);

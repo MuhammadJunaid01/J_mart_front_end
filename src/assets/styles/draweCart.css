@@ -1,6 +1,4 @@
 .drawerContainer {
-  /* width: 6%; */
-  box-shadow: 10px 10px 2px gainsboro;
   position: fixed;
   top: 70%;
   right: 0;
@@ -17,7 +15,6 @@
   right: 0;
   width: 30%;
   z-index: 200;
-  box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
   transform: translateX(100%);
   -webkit-transform: translateX(100%);
   -moz-transform: translateX(100%);

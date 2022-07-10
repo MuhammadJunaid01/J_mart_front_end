@@ -1,3 +1,25 @@
 .home_container {
   opacity: 0.3;
 }
+.home_menu_item {
+  width: 100%;
+  background-color: #10b981d0;
+  margin-top: 50px;
+  height: 40px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.home_menu_items_link {
+  text-decoration: none;
+  font-size: 19px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  list-style-type: none;
+}
