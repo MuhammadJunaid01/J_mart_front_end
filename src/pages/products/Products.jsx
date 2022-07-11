@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import useAuth from "../../hooks/useAuth";
-import { Box, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import Typography from "@mui/material/Typography";
 import productsImg1 from "../../assets/images/banner1.jpg";
 import productsImg2 from "../../assets/images/banner2.jpg";
 import productsImg3 from "../../assets/images/banner3.jpg";
@@ -36,7 +34,6 @@ const Products = () => {
   useEffect(() => {
     disepatch(getTrackerData());
   }, []);
-  console.log("trcker data", trackingData);
   return (
     <div style={{ marginTop: "50px" }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>

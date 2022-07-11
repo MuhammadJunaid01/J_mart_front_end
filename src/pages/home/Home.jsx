@@ -11,6 +11,7 @@ import menuItems from "../../assets/data/menuItems";
 import HomeRoutes from "../../components/HomeRoutes";
 import TopRated from "../../components/TopRated";
 import BestSale from "../../components/BestSale";
+import MarqueeSlider from "../../components/MarqueeSlider";
 const Home = () => {
   const [data, setData] = useState([]);
   const { openDrawerBox } = useSelector((state) => state.draw);
@@ -34,6 +35,10 @@ const Home = () => {
           <DrawerCart /> */}
 
           <HomeRoutes />
+        </Grid>
+
+        <Grid item xs={12} md={12}>
+          <MarqueeSlider />
         </Grid>
       </Grid>
     </div>

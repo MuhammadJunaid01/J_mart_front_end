@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { category } from "../redux/reduicers/category";
 import categoryMenu from "../assets/data/categoryMenu";
-import { integerPropType } from "@mui/utils";
+import Checkbox from "@mui/material/Checkbox";
+
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const Category = () => {
   const { openCategory } = useSelector((state) => state.category);
   const dispatch = useDispatch();
@@ -31,12 +33,19 @@ const Category = () => {
           <div className="category_body">
             {categoryMenu.map((item, i) => (
               <div key={i}>
-                <li
-                  onClick={() => handleCategory(item.name)}
-                  className="category_menu_link"
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
                 >
-                  {item.name}
-                </li>
+                  <Checkbox
+                    onClick={() => handleCategory(item.name)}
+                    {...label}
+                  />
+
+                  <li className="category_menu_link">{item.name}</li>
+                </div>
               </div>
             ))}
           </div>
