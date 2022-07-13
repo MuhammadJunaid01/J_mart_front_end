@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -19,7 +20,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import DirectionsIcon from "@mui/icons-material/Directions";
 const Menubar = () => {
   const pages = ["Products", "Pricing", "Blog"];
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  // const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const settings = [
+    { name: "Profile", to: "profile" },
+    { name: "Account", to: "account" },
+    { name: "Dashboard", to: "dashboard" },
+    { name: "Logout", to: "logout" },
+  ];
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -154,9 +161,11 @@ const Menubar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                {settings.map((setting, i) => (
+                  <MenuItem key={i} onClick={handleCloseUserMenu}>
+                    <Link to={setting.to}>
+                      <Typography textAlign="center">{setting.name}</Typography>
+                    </Link>
                   </MenuItem>
                 ))}
               </Menu>

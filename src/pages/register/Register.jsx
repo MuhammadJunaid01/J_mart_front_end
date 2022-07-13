@@ -3,21 +3,40 @@ import Grid from "@mui/material/Grid";
 import registerLogo from "../../assets/images/register.gif";
 import GoogleIcon from "@mui/icons-material/Google";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import "../../assets/styles/register.css";
+import {
+  useGetAllPostQuery,
+  useAddUserMutation,
+} from "../../redux/reduicers/auth/auth";
 const Register = () => {
   // cons {}=useSelector(userSelector)
+
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const data = {
-  //     name: name,
-  //     email: email,
-  //     password: password,
-  //   };
-  //   dispatch(signupUser({ name, email, password }));
-  //   // console.log(name, email, password);
-  // };
+  const [addUser, { data, isSuccess, isError, error }] = useAddUserMutation();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+    };
+    addUser(data);
+    // const data = {
+    //   name: name,
+    //   email: email,
+    //   password: password,
+    // };
+    // dispatch(signupUser({ name, email, password }));
+    // // console.log(name, email, password);
+  };
+  // console.log("hello rtk query", data);
+  // console.log("isloading ", isLoading);
+  if (error) {
+    return <h1>{error.message}</h1>;
+  }
+  console.log("helllllll user data", data);
   return (
     <div style={{ backgroundColor: "white", padding: "20px 0px" }}>
       <Grid container spacing={2}>
@@ -29,15 +48,8 @@ const Register = () => {
           />
         </Grid>
         <Grid item xs={12} md={4}>
-          <div
-            style={{
-              padding: "40px 5px",
-              backgroundColor: "#10B981",
-              borderRadius: "4px",
-              padding: "20px ",
-            }}
-          >
-            <div style={{ textAlign: "center" }}>
+          <div className="register_container">
+            <div className="register_header" style={{ textAlign: "center" }}>
               <h4 style={{ color: "#344055", fontFamily: "helvetica" }}>
                 Create New Account
               </h4>
@@ -51,15 +63,18 @@ const Register = () => {
               }}
             >
               <div style={{ padding: "20px 0px" }}>
-                <form style={{ width: "90%", margin: "0 auto" }}>
+                <form
+                  onSubmit={handleSubmit}
+                  style={{ width: "90%", margin: "0 auto" }}
+                >
                   <input
                     onBlur={(e) => setName(e.target.value)}
                     style={{
                       marginLeft: "9px",
-                      width: "80%",
+                      width: "90%",
                       border: "1px solid #ECEDF3",
                       outline: "none",
-                      padding: "8px 2px",
+                      padding: "10px 2px",
                       borderRadius: "3px",
                     }}
                     type="text"
@@ -72,10 +87,10 @@ const Register = () => {
                     onBlur={(e) => setEmail(e.target.value)}
                     style={{
                       marginLeft: "9px",
-                      width: "80%",
+                      width: "90%",
                       border: "1px solid #ECEDF3",
                       outline: "none",
-                      padding: "8px 2px",
+                      padding: "10px 2px",
                       borderRadius: "3px",
                       marginTop: "10px",
                     }}
@@ -89,10 +104,10 @@ const Register = () => {
                     onBlur={(e) => setPassword(e.target.value)}
                     style={{
                       marginLeft: "9px",
-                      width: "80%",
+                      width: "90%",
                       border: "1px solid #ECEDF3",
                       outline: "none",
-                      padding: "8px 2px",
+                      padding: "10px 2px",
                       borderRadius: "3px",
                       marginTop: "10px",
                     }}
@@ -102,7 +117,7 @@ const Register = () => {
                   <input
                     style={{
                       marginLeft: "9px",
-                      width: "80%",
+                      width: "91%",
                       border: "1px solid #ECEDF3",
                       outline: "none",
                       padding: "8px 2px",

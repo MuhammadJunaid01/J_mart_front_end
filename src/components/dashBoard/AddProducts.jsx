@@ -9,7 +9,10 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { catagory } from "../../assets/data/catagory";
 import axios from "axios";
-const AddProducts = () => {
+import { useCreateOfferMutation } from "../../redux/reduicers/auth/auth";
+const AddProducts = ({ isOffer }) => {
+  const [createOffer, { data, isLoading, error }] = useCreateOfferMutation();
+  console.log("is offer", isOffer);
   const [expanded, setExpanded] = useState(true);
   const [show, setShow] = useState(false);
   const [categoryName, setCategoryName] = useState("");
@@ -20,6 +23,8 @@ const AddProducts = () => {
   const [manufacturerBrand, setManufacturerBrand] = useState("");
   const [manufacturerName, setManufacturerName] = useState("");
   const [price, setPrice] = useState("");
+  const [copunCode, setCopunCode] = useState("");
+  const [expireDate, setExpireDate] = useState("");
   const [description, setDescription] = useState("");
   const handleExpand = () => {
     setExpanded((expanded) => !expanded);
@@ -40,25 +45,7 @@ const AddProducts = () => {
   };
 
   const sendDatabackend = () => {
-    if (
-      categoryName ||
-      productName ||
-      manufacturerName ||
-      price ||
-      description ||
-      image === ""
-    ) {
-      toast.error("Please Fill All information ", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      return;
-    }
+    const offer = isOffer ? true : false;
     const formData = new FormData();
     formData.append("categoryName", categoryName);
     formData.append("productName", productName);
@@ -67,36 +54,20 @@ const AddProducts = () => {
     formData.append("image", image);
     formData.append("manufacturerName", manufacturerName);
     formData.append("description", description);
-    formData.forEach((f) => {
-      console.log("f: ", f);
-    });
-
-    axios
-      .post("http://localhost:5000/addProduct", formData)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    formData.append("copunCode", copunCode);
+    formData.append("expireDate", expireDate);
+    formData.append("offer", offer);
+    console.log("offer is", offer);
+    createOffer(formData);
   };
+  console.log("data", data);
   return (
     <div style={{ marginTop: "40px", paddingBottom: "20px" }}>
       <div>
-        <h4>Add Product</h4>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+        {isOffer ? <h4>create Offer</h4> : <h4>Add Product</h4>}
+
         {/* Same as */}
-        <ToastContainer />
+        {/* <ToastContainer /> */}
         <Grid container spacing={2}>
           <Grid item xs={12} md={11}>
             <div
@@ -210,6 +181,41 @@ const AddProducts = () => {
                         type="text"
                       />
                     </Grid>
+                    {isOffer ? (
+                      <>
+                        <Grid item xs={12} md={6}>
+                          <p style={{ marginBottom: "8px" }}>copunCode</p>
+                          <input
+                            onBlur={(e) => setCopunCode(e.target.value)}
+                            style={{
+                              outline: "none",
+                              border: "1px solid gainsboro",
+                              width: "100%",
+                              padding: "9px 0px",
+                              borderRadius: "3px",
+                            }}
+                            type="text"
+                          />
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                          <p style={{ marginBottom: "8px" }}>Expire Date</p>
+                          <input
+                            onBlur={(e) => setExpireDate(e.target.value)}
+                            style={{
+                              outline: "none",
+                              border: "1px solid gainsboro",
+                              width: "100%",
+                              padding: "9px 0px",
+                              borderRadius: "3px",
+                            }}
+                            type="text"
+                          />
+                        </Grid>
+                      </>
+                    ) : (
+                      <div></div>
+                    )}
+
                     <Grid item xs={12} md={12}>
                       <p style={{ marginBottom: "8px" }}>Category</p>
                       <div onClick={handleShow}>
@@ -386,7 +392,9 @@ const AddProducts = () => {
                         }}
                       >
                         <SaveIcon />
-                        <span style={{ marginLeft: "7px" }}>Save</span>
+                        <span style={{ marginLeft: "7px" }}>
+                          {isLoading ? "Loading....." : "Save"}
+                        </span>
                       </button>
                     </div>
                   </Grid>
