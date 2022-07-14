@@ -8,12 +8,11 @@ import CopyToClipBoard from "../../components/CopyCouponCode";
 import { useSelector, useDispatch } from "react-redux";
 import SweetPagination from "sweetpagination";
 
-import {
-  offerTime,
-  useGetAllOfferQuery,
-} from "../../redux/reduicers/offer/offerSlice";
+import { useGetAllOfferQuery } from "../../redux/reduicers/offer/offerSlice";
 import { useEffect } from "react";
 import { useState } from "react";
+import { oferUrlImage } from "../../redux/api/api";
+import { timerHelper } from "../../redux/helper/timerHelper";
 const Offer = () => {
   const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
 
@@ -22,21 +21,12 @@ const Offer = () => {
     (state) => state.offer
   );
 
-  const dispatch = useDispatch();
-  const myInterval = (payload) => {
-    setInterval(() => {
-      dispatch(offerTime(payload));
-    }, 1000);
-  };
-  useEffect(() => {
-    // console.log("hello timer", days, hours, minutes, secounds);
-    myInterval(data);
-  }, [secounds, data]);
   //
   if (data === undefined) {
     return <h1>loading.....</h1>;
   }
   // console.log("offer data", data);
+
   return (
     <div className="offer_container">
       <div className="offer_title">
@@ -48,7 +38,10 @@ const Offer = () => {
             <Grid container key={i}>
               <Grid key={i} item xs={12} md={3}>
                 <div className="offer_image">
-                  <img src={offerImage} alt="offer_image" />
+                  <img
+                    src={oferUrlImage + item.ProductImage}
+                    alt="offer_image"
+                  />
                 </div>
               </Grid>
               <Grid item xs={12} md={5}>

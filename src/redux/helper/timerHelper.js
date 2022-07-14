@@ -1,21 +1,30 @@
-export const timerHelper = (data) => {
-  const dest = new Date(data).getTime();
+export const timerHelper = (data, fn) => {
+  const { _id } = data[0]?.data;
+  // console.log("helloid", _id);
+  // console.log("timer helper dta", data.data?.expireDate);
+  const dest = new Date(data[0]?.data?.expireDate).getTime();
+  const res = new Date("Jul 22 2022 03:44:00").getTime();
   // const test = new Date(Number(action?.payload)).getTime();
   const now = new Date().getTime();
   const diff = dest - now;
-
+  const timeOutOfferData = [];
   let days = Math.floor(diff / (1000 * 60 * 60 * 24));
   //   console.log("days", days);
   let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   //   console.log("hours", hours);
   let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   let secounds = Math.floor((diff % (1000 * 60)) / 1000);
-
+  if (days <= 0 || hours <= 0 || (minutes <= 0 && secounds <= 0)) {
+    // console.log("hello result final", data[0].arr[data[0].count]);
+    // console.log("timer helper dta", data[0].count);
+    timeOutOfferData.push(data[0].arr[data[0].count]);
+  }
   const obj = {
     days,
     hours,
     minutes,
     secounds,
+    expire: timeOutOfferData,
   };
   return obj;
 };

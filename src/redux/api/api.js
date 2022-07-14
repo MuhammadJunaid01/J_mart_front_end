@@ -1,1 +1,1 @@
-export default baseURL = "http://localhost:5000/";
+export const oferUrlImage = `http://localhost:5000/public/`;

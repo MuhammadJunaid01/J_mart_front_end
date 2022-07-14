@@ -1,3 +1,4 @@
+import { setDate } from "date-fns";
 import React, { useEffect, useState } from "react";
 
 const useHooks = () => {
@@ -5,7 +6,7 @@ const useHooks = () => {
   const [cartValue, setCartValue] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [open, setOpen] = useState(true);
-
+  const [date, setDate] = useState("");
   // let localCart = JSON.parse(localStorage.getItem("cart"));
 
   //adding new item
@@ -57,6 +58,9 @@ const useHooks = () => {
     setOpen((open) => !open);
     console.log("open", open);
   };
+  // const dateValueContext = (data) => {
+  //   setDate(data);
+  // };
   return {
     addTocart,
     updateItem,
@@ -64,6 +68,8 @@ const useHooks = () => {
     check,
     open,
     setOpen,
+    setDate,
+    date,
   };
 };
 
