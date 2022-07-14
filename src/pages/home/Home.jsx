@@ -11,7 +11,7 @@ import menuItems from "../../assets/data/menuItems";
 import HomeRoutes from "../../components/HomeRoutes";
 import TopRated from "../../components/TopRated";
 import BestSale from "../../components/BestSale";
-import MarqueeSlider from "../../components/MarqueeSlider";
+import MarqueeSlider from "../../components/Testimonal";
 const Home = () => {
   const [data, setData] = useState([]);
   const { openDrawerBox } = useSelector((state) => state.draw);

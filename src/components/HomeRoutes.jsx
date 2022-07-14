@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import menuItems, { routes } from "../assets/data/menuItems";
 import Products from "../pages/products/Products";
-import MarqueeSlider from "./MarqueeSlider";
+import MarqueeSlider from "./Testimonal";
 const HomeRoutes = () => {
   const [component, setComponent] = useState(undefined);
   const [init, setInit] = useState("allProducts" || "");

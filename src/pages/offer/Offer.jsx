@@ -14,8 +14,9 @@ import {
 } from "../../redux/reduicers/offer/offerSlice";
 import { useEffect } from "react";
 import { useState } from "react";
-import Test from "./Test";
 const Offer = () => {
+  const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
+
   const { data, isError, isLoading } = useGetAllOfferQuery();
   const { days, hours, minutes, secounds } = useSelector(
     (state) => state.offer
@@ -32,6 +33,9 @@ const Offer = () => {
     myInterval(data);
   }, [secounds, data]);
   //
+  if (data === undefined) {
+    return <h1>loading.....</h1>;
+  }
   // console.log("offer data", data);
   return (
     <div className="offer_container">
@@ -41,33 +45,30 @@ const Offer = () => {
       <Grid container>
         {data?.map((item, i, arr) => {
           return (
-            // <Test
-            //   key={i}
-            //   expireTime={item.expireDate}
-            //   offerImage={offerImage}
-            //   days={days}
-            //   hours={hours}
-            //   minutes={minutes}
-            //   secounds={secounds}
-            // />
             <Grid container key={i}>
-              <Grid key={i} item xs={4} md={3}>
+              <Grid key={i} item xs={12} md={3}>
                 <div className="offer_image">
                   <img src={offerImage} alt="offer_image" />
                 </div>
               </Grid>
-              <Grid item xs={8} md={6}>
+              <Grid item xs={12} md={5}>
                 <div style={{ textAlign: "center" }}>
                   <span>10% Off</span> <span>Active</span>
-                  <Timer data={arr[i]} />
+                  <Timer data={arr[i]} arr={arr} count={i} />
                 </div>
               </Grid>
-              <Grid item xs={8} md={3}>
+              <Grid item xs={12} md={3}>
                 <CopyToClipBoard />
               </Grid>
             </Grid>
           );
         })}
+
+        {/* <SweetPagination
+          currentPageData={setCurrentPageData}
+          getData={data}
+          dataPerPage={2}
+        /> */}
       </Grid>
       {/* secound offer */}
       <div>

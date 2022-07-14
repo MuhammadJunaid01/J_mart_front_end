@@ -7,7 +7,9 @@ const MarqueeSlider = () => {
   return (
     <div className="marquee_slider_container">
       <div className="mrquee_slider_info">
-        <h2>Testimonials</h2>
+        <h2>
+          <i>Testimonials</i>
+        </h2>
         <h4>What Users Say About Us</h4>
       </div>
       <Marquee Speed={20} gradient={false}>
