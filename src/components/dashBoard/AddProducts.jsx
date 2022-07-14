@@ -10,6 +10,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { catagory } from "../../assets/data/catagory";
 import axios from "axios";
 import { useCreateOfferMutation } from "../../redux/reduicers/auth/auth";
+import moment from "moment";
 const AddProducts = ({ isOffer }) => {
   const [createOffer, { data, isLoading, error }] = useCreateOfferMutation();
   console.log("is offer", isOffer);
@@ -26,6 +27,8 @@ const AddProducts = ({ isOffer }) => {
   const [copunCode, setCopunCode] = useState("");
   const [expireDate, setExpireDate] = useState("");
   const [description, setDescription] = useState("");
+  const [percentage, setPercentage] = useState("");
+
   const handleExpand = () => {
     setExpanded((expanded) => !expanded);
   };
@@ -45,6 +48,8 @@ const AddProducts = ({ isOffer }) => {
   };
 
   const sendDatabackend = () => {
+    // for (const iterator of object) {
+    // }
     const offer = isOffer ? true : false;
     const formData = new FormData();
     formData.append("categoryName", categoryName);
@@ -57,10 +62,13 @@ const AddProducts = ({ isOffer }) => {
     formData.append("copunCode", copunCode);
     formData.append("expireDate", expireDate);
     formData.append("offer", offer);
+    formData.append("percentage", percentage);
     console.log("offer is", offer);
-    createOffer(formData);
+    // createOffer(formData);
   };
   console.log("data", data);
+
+  /// test moment data
   return (
     <div style={{ marginTop: "40px", paddingBottom: "20px" }}>
       <div>
@@ -183,7 +191,7 @@ const AddProducts = ({ isOffer }) => {
                     </Grid>
                     {isOffer ? (
                       <>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={4}>
                           <p style={{ marginBottom: "8px" }}>copunCode</p>
                           <input
                             onBlur={(e) => setCopunCode(e.target.value)}
@@ -197,10 +205,24 @@ const AddProducts = ({ isOffer }) => {
                             type="text"
                           />
                         </Grid>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={4}>
                           <p style={{ marginBottom: "8px" }}>Expire Date</p>
                           <input
                             onBlur={(e) => setExpireDate(e.target.value)}
+                            style={{
+                              outline: "none",
+                              border: "1px solid gainsboro",
+                              width: "100%",
+                              padding: "9px 0px",
+                              borderRadius: "3px",
+                            }}
+                            type="text"
+                          />
+                        </Grid>
+                        <Grid item xs={12} md={4}>
+                          <p style={{ marginBottom: "8px" }}>Percentage </p>
+                          <input
+                            onBlur={(e) => setPercentage(e.target.value)}
                             style={{
                               outline: "none",
                               border: "1px solid gainsboro",

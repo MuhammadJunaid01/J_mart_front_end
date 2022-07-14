@@ -43,7 +43,7 @@ const SliderBanner = () => {
   return (
     <div className="slide">
       <Grid container spacing={2}>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={7}>
           <Carousel
             data={items}
             time={5000}
@@ -61,7 +61,7 @@ const SliderBanner = () => {
             thumbnails={false}
           />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <Offer />
         </Grid>
       </Grid>

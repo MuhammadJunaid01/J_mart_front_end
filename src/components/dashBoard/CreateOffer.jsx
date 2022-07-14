@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import FileUpload from "react-material-file-upload";
 import "../../assets/styles/createOffer.css";
-import { Grid } from "@mui/material";
-import SaveIcon from "@mui/icons-material/Save";
-import { useCreateOfferMutation } from "../../redux/reduicers/auth/auth";
+import DateAndTimePicker from "../DateAndTimePicker";
 import AddProducts from "./AddProducts";
 
 const CreateOffer = () => {
@@ -11,6 +8,7 @@ const CreateOffer = () => {
 
   return (
     <div className="">
+      <DateAndTimePicker />
       <AddProducts isOffer={offer} />
     </div>
   );

@@ -10,6 +10,7 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import userImage from "../assets/images/user.jpg";
 import useAuth from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 const DashboardNavbar = () => {
   // const [open, setOpen] = useState(true);
   const { open, setOpen, check } = useAuth();
@@ -25,23 +26,24 @@ const DashboardNavbar = () => {
 
       <span>
         {" "}
-        <Typography
-          variant="h6"
-          noWrap
-          component="a"
-          href="/"
-          sx={{
-            mr: 2,
-            display: { xs: "none", md: "flex" },
-            fontFamily: "monospace",
-            fontWeight: 700,
-            letterSpacing: ".3rem",
-            color: "#45C438",
-            textDecoration: "none",
-          }}
-        >
-          JMART
-        </Typography>
+        <Link to={"/"}>
+          <Typography
+            variant="h6"
+            noWrap
+            component="p"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "#45C438",
+              textDecoration: "none",
+            }}
+          >
+            JMART
+          </Typography>
+        </Link>
       </span>
       <div
         style={{
