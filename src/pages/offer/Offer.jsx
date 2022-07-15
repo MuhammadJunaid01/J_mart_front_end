@@ -8,7 +8,6 @@ import Loader from "../../assets/images/loader.gif";
 import { useGetAllOfferQuery } from "../../redux/reduicers/offer/offerSlice";
 import { useState } from "react";
 import { oferUrlImage } from "../../redux/api/api";
-import { timerHelper } from "../../redux/helper/timerHelper";
 const Offer = () => {
   const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
 
@@ -17,7 +16,6 @@ const Offer = () => {
     (state) => state.offer
   );
 
-  //
   if (data === undefined) {
     return (
       <div>
