@@ -163,7 +163,7 @@ const Menubar = () => {
               >
                 {settings.map((setting, i) => (
                   <MenuItem key={i} onClick={handleCloseUserMenu}>
-                    <Link to={setting.to}>
+                    <Link to={`/${setting.to}`}>
                       <Typography textAlign="center">{setting.name}</Typography>
                     </Link>
                   </MenuItem>
