@@ -27,8 +27,7 @@ const DrawerCart = () => {
   const handleRouting = () => {
     // setOpenDrawer((prev) => !prev);
   };
-  // console.log("open drawer", openDrawer);
-  // console.log("totsl ", totalAmount);
+
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {

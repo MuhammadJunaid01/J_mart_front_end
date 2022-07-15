@@ -11,8 +11,18 @@ const CopyToClipBoard = () => {
   };
   return (
     <div>
-      <div className="copy_coupon_container">
-        <button className="copy_btn" onClick={copy}>
+      <div style={{ width: "100%" }}>
+        <button
+          style={{
+            fontFamily: "monospace",
+            fontSize: "19px",
+            fontWeight: "600",
+            color: "grey",
+            width: "100%",
+          }}
+          className="copy_btn"
+          onClick={copy}
+        >
           {check ? "copied!" : "J_MART02"}
         </button>
         <p style={{ fontSize: "12px", color: "gray" }}>

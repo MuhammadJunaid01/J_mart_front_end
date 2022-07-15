@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
-import useAuth from "../../hooks/useAuth";
 import { Grid } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import productsImg1 from "../../assets/images/banner1.jpg";
@@ -12,6 +11,7 @@ import { addToCart } from "../../redux/reduicers/cart/cart";
 import DrawerCart from "../../components/DrawerCart";
 import { traking, getTrackerData } from "../../redux/reduicers/tracker";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const products = [
   { name: "fis", id: uuidv4(), img: productsImg1, stock: true, price: 20 },
   { name: "food", id: uuidv4(), img: productsImg2, stock: false, price: 27 },
@@ -22,24 +22,33 @@ const products = [
   { name: "komola", id: uuidv4(), img: productsImg1, stock: false, price: 20 },
 ];
 const Products = () => {
+  const navigate = useNavigate();
   const [disable, setDisable] = useState(true);
   const { trackingData } = useSelector((state) => state.traker);
   const disepatch = useDispatch();
   const handleAddToCart = (item) => {
-    // console.log(item);
     disepatch(addToCart(item));
     disepatch(traking(item));
   };
-  const { setPrice, price } = useAuth();
   useEffect(() => {
     disepatch(getTrackerData());
   }, []);
+  const handleNavigate = (id) => {
+    navigate(`/product/${id}`);
+  };
   return (
     <div style={{ marginTop: "50px" }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {products.map((product) => (
           <Grid key={product.id} item xs={12} md={2}>
-            <div style={{ height: "13rem", border: "2px solid gray" }}>
+            <div
+              onClick={() => handleNavigate(product.id)}
+              style={{
+                height: "13rem",
+                border: "2px solid gray",
+                cursor: "pointer",
+              }}
+            >
               <div style={{ width: "100%", position: "relative" }}>
                 <img
                   style={{
