@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../assets/styles/draweCart.css";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,14 +16,15 @@ import {
   getTotal,
 } from "../redux/reduicers/cart/cart";
 const DrawerCart = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { openDrawerBox } = useSelector((state) => state.draw);
   const { cartItems, quantity, totalAmount } = useSelector(
     (state) => state.cart
   );
   const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
-  // console.log("qqqqqqq", quantity);
-  const handleDrawer = () => {
+
+  const handleRouting = () => {
     // setOpenDrawer((prev) => !prev);
   };
   // console.log("open drawer", openDrawer);
@@ -183,6 +185,7 @@ const DrawerCart = () => {
           )}
           <div className="cart_footer">
             <div
+              onClick={() => navigate("/checkout")}
               style={{
                 display: "flex",
                 alignItems: "center",

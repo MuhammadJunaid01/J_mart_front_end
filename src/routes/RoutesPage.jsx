@@ -18,6 +18,8 @@ import Home from "../pages/home/Home";
 import Notfound from "../pages/notFound/Notfound";
 import Register from "../pages/register/Register";
 const RoutesPage = () => {
+  const isCheckout = true;
+
   return (
     <div>
       <Router>
@@ -65,6 +67,15 @@ const RoutesPage = () => {
               </HomeLayoute>
             }
           />
+          <Route
+            path="/checkout"
+            element={
+              <HomeLayoute>
+                <CheckOut />
+              </HomeLayoute>
+            }
+          />
+
           <Route
             path="*"
             element={
