@@ -10,6 +10,7 @@ import DashBoardProducts from "../components/dashBoard/DashBoardProducts";
 import DashBoardProductsDetails from "../components/dashBoard/DashBoardProductsDetails";
 import Shops from "../components/dashBoard/Shops";
 import DashBoardHome from "../components/DashBoardHome";
+import Product from "../components/Product";
 import Users from "../components/Users";
 import DashBoardLayoute from "../layoutes/DashBoardLayoute";
 import HomeLayoute from "../layoutes/HomeLayoute";
@@ -72,6 +73,14 @@ const RoutesPage = () => {
             element={
               <HomeLayoute>
                 <CheckOut />
+              </HomeLayoute>
+            }
+          />
+          <Route
+            path="/product/:id"
+            element={
+              <HomeLayoute>
+                <Product />
               </HomeLayoute>
             }
           />

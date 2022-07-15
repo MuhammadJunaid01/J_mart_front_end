@@ -2,14 +2,10 @@ import React from "react";
 import { Grid } from "@mui/material";
 import Timer from "../../components/Timer";
 import "../../assets/styles/offer.css";
-import offerImage from "../../assets/images/banner2.jpg";
-import offerImage2 from "../../assets/images/banner1.jpg";
 import CopyToClipBoard from "../../components/CopyCouponCode";
 import { useSelector, useDispatch } from "react-redux";
-import SweetPagination from "sweetpagination";
-
+import Loader from "../../assets/images/loader.gif";
 import { useGetAllOfferQuery } from "../../redux/reduicers/offer/offerSlice";
-import { useEffect } from "react";
 import { useState } from "react";
 import { oferUrlImage } from "../../redux/api/api";
 import { timerHelper } from "../../redux/helper/timerHelper";
@@ -23,18 +19,42 @@ const Offer = () => {
 
   //
   if (data === undefined) {
-    return <h1>loading.....</h1>;
+    return (
+      <div>
+        <div style={{ textAlign: "center" }}>
+          <img style={{ height: "200px" }} src={Loader} alt="" />
+        </div>
+      </div>
+    );
   }
-  // console.log("offer data", data);
 
   return (
-    <div className="offer_container">
+    <div style={{ cursor: "pointer" }} className="offer_container">
       <div className="offer_title">
-        <p>Active Offer</p>
+        <i
+          style={{
+            fontSize: "23px",
+            fontWeight: "500",
+            fontFamily: "monospace",
+          }}
+        >
+          Active offer
+        </i>
       </div>
-      <Grid container>
-        {data?.map((item, i, arr) => {
-          return (
+
+      {data?.map((item, i, arr) => {
+        return (
+          <div
+            key={i}
+            style={{
+              boxShadow:
+                "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+              padding: "20px 9px",
+              marginTop: "7px",
+              borderRadius: "7px",
+              boxSizing: "border-box",
+            }}
+          >
             <Grid container key={i}>
               <Grid key={i} item xs={12} md={3}>
                 <div className="offer_image">
@@ -44,9 +64,8 @@ const Offer = () => {
                   />
                 </div>
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={6}>
                 <div style={{ textAlign: "center" }}>
-                  <span>10% Off</span> <span>Active</span>
                   <Timer data={arr[i]} arr={arr} count={i} />
                 </div>
               </Grid>
@@ -54,35 +73,11 @@ const Offer = () => {
                 <CopyToClipBoard />
               </Grid>
             </Grid>
-          );
-        })}
+          </div>
+        );
+      })}
 
-        {/* <SweetPagination
-          currentPageData={setCurrentPageData}
-          getData={data}
-          dataPerPage={2}
-        /> */}
-      </Grid>
       {/* secound offer */}
-      <div>
-        <hr style={{ borderTop: "2px solid gray", width: "11rem" }} />
-        {/* <Grid container>
-          <Grid item xs={4} md={3}>
-            <div className="offer_image">
-              <img src={offerImage2} alt="offer_image" />
-            </div>
-          </Grid>
-          <Grid item xs={8} md={6}>
-            <div style={{ textAlign: "center" }}>
-              <span>10% Off</span> <span>Active</span>
-              <Timer expiryTimestamp={time} />
-            </div>
-          </Grid>
-          <Grid item xs={8} md={3}>
-            <CopyToClipBoard />
-          </Grid>
-        </Grid> */}
-      </div>
     </div>
   );
 };

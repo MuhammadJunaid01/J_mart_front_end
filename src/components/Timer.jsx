@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { useTimer } from "react-timer-hook";
+import { useNavigate } from "react-router-dom";
 import "../assets/styles/timer.css";
 import useAuth from "../hooks/useAuth";
 import { timerHelper } from "../redux/helper/timerHelper";
 import { useUpdateProductsMutation } from "../redux/reduicers/offer/offerSlice";
 import { timeOutOffer } from "../redux/reduicers/toggle/toggle";
 const Timer = (...props) => {
+  const navigate = useNavigate();
   const [updateProducts, { data, isLoading, error }] =
     useUpdateProductsMutation();
   const { timeOut } = useSelector((state) => state.timeOut);
@@ -22,12 +22,11 @@ const Timer = (...props) => {
   const myInterval = (payload) => {
     setInterval(() => {
       const data = timerHelper(payload);
-      // console.log("timer helper return data", data);
       if (data.expire.length > 0) {
-        // console.log("expire data", data.expire);
         data.expire.forEach((el) => {
-          // return console.log("hello element", el);
-          // updateProducts(el);
+          setTimeout(() => {
+            updateProducts(el);
+          }, 20000);
         });
       }
       if (
@@ -39,16 +38,9 @@ const Timer = (...props) => {
         setHours(0);
         setMinutes(0);
         setSeconds(0);
-        // for (const test of props.arr) {
-        //   if (data.id === props.arr._id) {
-        //     console.log("hello check");
-        //   }
-        // }
+
         return;
       }
-      const l = hours % 2;
-
-      // console.log("jkkkkkkkkkkkk", l);
       setDays(data?.days);
       setHours(data?.hours);
       setMinutes(data?.minutes);
@@ -56,34 +48,86 @@ const Timer = (...props) => {
     }, 1000);
   };
   useEffect(() => {
-    // console.log("hello timer", days, hours, minutes, secounds);
     myInterval(props, dispatch, timeOutOffer, timeOut);
   }, [seconds]);
-  // console.log("props data", props.data);
-  console.log("use context return date", date);
   return (
-    <div style={{ width: "80%" }}>
-      <div style={{ marginTop: "10px" }}>
+    <div
+      onClick={() => navigate(`/product/${props[0]?.data._id}`)}
+      style={{ width: "100%", padding: "0px" }}
+    >
+      <div>
         <div>
-          <span className="timer">day{days}</span>
           <span
-            style={{ fontSize: "30px", fontWeight: 600, margin: "0px 3px" }}
+            style={{
+              fontFamily: "monospace",
+              fontSize: "19px",
+              fontWeight: "600",
+              color: "grey",
+            }}
           >
-            :
+            {seconds === 0 ? "" : "10 % Off"}
+            {seconds === 0 ? (
+              <i style={{ color: "red" }}>Date oute</i>
+            ) : (
+              <i style={{ marginLeft: "4px" }}>Active </i>
+            )}
           </span>
-          <span className="timer">hour{hours}</span>{" "}
-          <span
-            style={{ fontSize: "30px", fontWeight: 600, marginRight: "6px" }}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+              marginTop: "4",
+            }}
           >
-            :
-          </span>
-          <span className="timer">min{minutes}</span>
-          <span
-            style={{ fontSize: "30px", fontWeight: 600, margin: "0px 3px" }}
+            <p
+              style={{
+                fontSize: "20px",
+                fontWeight: "500",
+                fontFamily: "cursive",
+              }}
+            >
+              Day {days}
+            </p>
+            <p
+              style={{
+                fontSize: "20px",
+                fontWeight: "500",
+                fontFamily: "cursive",
+              }}
+            >
+              Hours {hours}
+            </p>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginTop: "5px",
+              padding: "0px 9px",
+            }}
           >
-            :
-          </span>
-          <span className="timer">sec{seconds}</span>
+            <p
+              style={{
+                fontSize: "20px",
+                fontWeight: "500",
+                fontFamily: "cursive",
+              }}
+            >
+              minutes {minutes}
+            </p>
+
+            <p
+              style={{
+                fontSize: "20px",
+                fontWeight: "500",
+                fontFamily: "cursive",
+              }}
+            >
+              secounds <span>{seconds}</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
