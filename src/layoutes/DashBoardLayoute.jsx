@@ -18,6 +18,7 @@ import Sidebar from "../components/Sidebar";
 import CollapsebleItems from "../components/CollapsebleItems";
 import authenticationItem from "../assets/data/authenticationItem";
 import emailItem from "../assets/data/email";
+import Footer from "../pages/footer/Footer";
 const DashBoardLayoute = () => {
   const { open } = useAuth();
   const [collapseSidebar, setCollapseSidebar] = useState(true);
@@ -95,10 +96,13 @@ const DashBoardLayoute = () => {
             </div>
           </Grid>
           <Grid item xs={12} md={9}>
-            <Outlet />
+            <div style={{ overflowY: "scroll" }}>
+              <Outlet />
+            </div>
           </Grid>
         </Grid>
       </div>
+      <Footer />
     </div>
   );
 };

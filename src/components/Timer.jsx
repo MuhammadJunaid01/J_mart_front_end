@@ -19,10 +19,13 @@ const Timer = (...props) => {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  const myInterval = (payload) => {
+  const [activeOffer, setActiveOffer] = useState(false);
+  const myInterval = (payload, status) => {
     setInterval(() => {
-      const data = timerHelper(payload);
+      const data = timerHelper(payload, status);
       if (data.expire.length > 0) {
+        setActiveOffer(true);
+
         data.expire.forEach((el) => {
           setTimeout(() => {
             updateProducts(el);
@@ -48,7 +51,7 @@ const Timer = (...props) => {
     }, 1000);
   };
   useEffect(() => {
-    myInterval(props, dispatch, timeOutOffer, timeOut);
+    myInterval(props);
   }, [seconds]);
   return (
     <div
@@ -65,8 +68,8 @@ const Timer = (...props) => {
               color: "grey",
             }}
           >
-            {seconds === 0 ? "" : "10 % Off"}
-            {seconds === 0 ? (
+            {activeOffer === 0 ? "" : "10 % Off"}
+            {activeOffer === 0 ? (
               <i style={{ color: "red" }}>Date oute</i>
             ) : (
               <i style={{ marginLeft: "4px" }}>Active </i>

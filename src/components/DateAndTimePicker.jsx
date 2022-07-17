@@ -33,7 +33,7 @@ const DateAndTimePicker = () => {
       console.log(`key:${key} ${dateValue[key]}`);
     }
   }, [dateValue, date]);
-
+  console.log("date", typeof dateValue);
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDateFns}>

@@ -1,10 +1,13 @@
 import React from "react";
 import Context from "./hooks/Context";
-import { ToastContainer, toast } from "react-toastify";
+
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RoutesPage from "./routes/RoutesPage";
+
 import "./App.css";
 function App() {
+  console.log("app rendering");
   return (
     <div>
       <ToastContainer
@@ -20,6 +23,7 @@ function App() {
       />
       {/* Same as */}
       <ToastContainer />
+
       <Context>
         <RoutesPage />
       </Context>

@@ -4,10 +4,10 @@ import Timer from "../../components/Timer";
 import "../../assets/styles/offer.css";
 import CopyToClipBoard from "../../components/CopyCouponCode";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "../../assets/images/loader.gif";
 import { useGetAllOfferQuery } from "../../redux/reduicers/offer/offerSlice";
 import { useState } from "react";
 import { oferUrlImage } from "../../redux/api/api";
+import Loader from "../../components/Loader";
 const Offer = () => {
   const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
 
@@ -19,8 +19,13 @@ const Offer = () => {
   if (data === undefined) {
     return (
       <div>
-        <div style={{ textAlign: "center" }}>
-          <img style={{ height: "200px" }} src={Loader} alt="" />
+        <div style={{ textAlign: "center", marginBottom: "120px" }}>
+          <Grid container>
+            <Grid item xs={12} md={2}></Grid>
+            <Grid item xs={12} md={2}>
+              <Loader />
+            </Grid>
+          </Grid>
         </div>
       </div>
     );

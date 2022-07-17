@@ -16,10 +16,12 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import DirectionsIcon from "@mui/icons-material/Directions";
 const Menubar = () => {
   const pages = ["Products", "Pricing", "Blog"];
+  const navigate = useNavigate();
   // const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const settings = [
     { name: "Profile", to: "profile" },
@@ -75,10 +77,10 @@ const Menubar = () => {
           <Toolbar disableGutters>
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
             <Typography
+              onClick={() => navigate("/")}
               variant="h6"
               noWrap
-              component="a"
-              href="/"
+              component=""
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -87,6 +89,7 @@ const Menubar = () => {
                 letterSpacing: ".3rem",
                 color: "inherit",
                 textDecoration: "none",
+                cursor: "pointer",
               }}
             >
               JMART

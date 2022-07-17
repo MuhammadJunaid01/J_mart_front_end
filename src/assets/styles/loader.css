@@ -1,0 +1,98 @@
+.loader_container {
+  position: relative;
+}
+.loader {
+  position: absolute;
+  height: 160px;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: text_color infinite 1s;
+  -webkit-animation: text_color ease-in-out infinite 1s alternate;
+  overflow: hidden;
+}
+.loader::after {
+  content: "";
+  position: absolute;
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  /*background-color: lightblue;
+  */
+  overflow: hidden;
+  border-left: 5px solid lightgreen;
+  animation: loadin_after infinite 1s;
+  -webkit-animation: loadin_after infinite 1s;
+}
+.loader::before {
+  content: "";
+  position: absolute;
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  /*background-color: lightblue;
+  */
+  border-right: 5px solid lightblue;
+  animation: loading infinite 1s;
+  -webkit-animation: loading infinite 1s;
+  overflow: hidden;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+
+@keyframes loadin_after {
+  0% {
+    transform: rotate(-0deg);
+    -webkit-transform: rotate(-0deg);
+    -moz-transform: rotate(-0deg);
+    -ms-transform: rotate(-0deg);
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+@keyframes text_color {
+  0%,
+  100% {
+    color: rgba(0, 0, 0, 1);
+    font-size: 10px;
+  }
+  25%,
+  75% {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+  }
+  50% {
+    color: rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+  }
+}

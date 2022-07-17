@@ -12,7 +12,6 @@ import banner3 from "../assets/images/banner3.jpg";
 import Offer from "../pages/offer/Offer";
 const SliderBanner = () => {
   const [slide, setSlide] = useState(0);
-
   const items = [
     {
       image: banner1,

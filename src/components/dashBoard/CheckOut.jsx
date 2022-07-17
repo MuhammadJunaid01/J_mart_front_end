@@ -5,14 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../assets/styles/checkout.css";
 import Register from "../../pages/register/Register";
 import { getTotal } from "../../redux/reduicers/cart/cart";
-const CheckOut = ({ isCheckout }) => {
+import { useCreateOrderMutation } from "../../redux/reduicers/order";
+const CheckOut = () => {
   const { cartItems, quantity, totalAmount } = useSelector(
     (state) => state.cart
   );
+  const [createOrder, { data, isLoading, isSuccess, error }] =
+    useCreateOrderMutation();
   const [login, setLogin] = useState(false);
   const [copun, setCopun] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [tax, setTax] = useState(0);
+  const [success, setSuccess] = useState(true);
   const dispatch = useDispatch();
   const handleLoginPerform = () => {
     setLogin((login) => !login);
@@ -31,12 +35,28 @@ const CheckOut = ({ isCheckout }) => {
     }, 0);
     setTotalPrice(totalPriceCount);
     dispatch(getTotal());
-  }, [cartItems, quantity]);
+  }, [cartItems, quantity, totalAmount]);
   useEffect(() => {
     const test = totalPrice / 100;
     const taxCoutn = test * 6;
     setTax(taxCoutn);
-  }, [cartItems, quantity, totalPrice]);
+  }, [cartItems, quantity, totalAmount]);
+
+  const handleSubmit = async () => {
+    const data = {
+      products: cartItems,
+      amount: totalPrice,
+      status: "proccessing",
+      // orderBy: user._id,
+    };
+    createOrder(data);
+  };
+  if (data) {
+    console.log("data", data);
+  }
+  if (error) {
+    console.log("errrrrrrrrrrr", error);
+  }
   return (
     <div className="check_out_container">
       <div className="check_out_header">
@@ -50,7 +70,13 @@ const CheckOut = ({ isCheckout }) => {
             <span>Returning customer? </span>
             <i>Click here to login</i>
           </div>
-          <div>{login && <Register isCheckout={true} />}</div>
+          <div>
+            {login && (
+              <div>
+                <h2>hello register</h2>
+              </div>
+            )}
+          </div>
         </Grid>
         <Grid item xs={12} md={11}>
           <div onClick={handleCopun} className="returningLogin">
@@ -337,6 +363,8 @@ const CheckOut = ({ isCheckout }) => {
               </div>
               <div style={{ padding: "20px 0px" }}>
                 <button
+                  onClick={handleSubmit}
+                  className="checkout_btn"
                   style={{
                     padding: "16px",
                     width: "100%",
@@ -350,7 +378,7 @@ const CheckOut = ({ isCheckout }) => {
                     boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px 0px",
                   }}
                 >
-                  Place order
+                  {isLoading ? "Loading...." : "Place order"}
                 </button>
               </div>
             </div>

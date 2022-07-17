@@ -1,4 +1,4 @@
-export const timerHelper = (data, fn) => {
+export const timerHelper = (data, status) => {
   const { _id } = data[0]?.data;
   const dest = new Date(data[0]?.data?.expireDate).getTime();
   const res = new Date("Jul 22 2022 03:44:00").getTime();

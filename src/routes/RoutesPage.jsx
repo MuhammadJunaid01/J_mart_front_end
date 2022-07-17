@@ -11,16 +11,16 @@ import DashBoardProductsDetails from "../components/dashBoard/DashBoardProductsD
 import Shops from "../components/dashBoard/Shops";
 import DashBoardHome from "../components/DashBoardHome";
 import Product from "../components/Product";
+import Profile from "../components/Profile";
 import Users from "../components/Users";
 import DashBoardLayoute from "../layoutes/DashBoardLayoute";
 import HomeLayoute from "../layoutes/HomeLayoute";
 import Detail from "../pages/detail/Detail";
 import Home from "../pages/home/Home";
+import Login from "../pages/login/Login";
 import Notfound from "../pages/notFound/Notfound";
 import Register from "../pages/register/Register";
 const RoutesPage = () => {
-  const isCheckout = true;
-
   return (
     <div>
       <Router>
@@ -73,6 +73,24 @@ const RoutesPage = () => {
             element={
               <HomeLayoute>
                 <CheckOut />
+              </HomeLayoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <HomeLayoute>
+                <Login />
+              </HomeLayoute>
+            }
+          />
+          {/* just testing */}
+
+          <Route
+            path="/account"
+            element={
+              <HomeLayoute>
+                <Profile />
               </HomeLayoute>
             }
           />

@@ -42,14 +42,16 @@ const Products = () => {
         {products.map((product) => (
           <Grid key={product.id} item xs={12} md={2}>
             <div
-              onClick={() => handleNavigate(product.id)}
               style={{
                 height: "13rem",
                 border: "2px solid gray",
                 cursor: "pointer",
               }}
             >
-              <div style={{ width: "100%", position: "relative" }}>
+              <div
+                onClick={() => handleNavigate(product.id)}
+                style={{ width: "100%", position: "relative" }}
+              >
                 <img
                   style={{
                     width: "90%",

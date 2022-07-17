@@ -4,15 +4,12 @@ import Tooltip from "@mui/material/Tooltip";
 import DensityMediumIcon from "@mui/icons-material/DensityMedium";
 import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
 import "../assets/styles/dashboardNavbar.css";
-import { styled } from "@mui/material/styles";
-import Badge from "@mui/material/Badge";
-import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
 import userImage from "../assets/images/user.jpg";
 import useAuth from "../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const DashboardNavbar = () => {
   // const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
   const { open, setOpen, check } = useAuth();
   return (
     <div className="dash_board_nvbar_container">
@@ -26,24 +23,24 @@ const DashboardNavbar = () => {
 
       <span>
         {" "}
-        <Link to={"/"}>
-          <Typography
-            variant="h6"
-            noWrap
-            component="p"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "#45C438",
-              textDecoration: "none",
-            }}
-          >
-            JMART
-          </Typography>
-        </Link>
+        <Typography
+          onClick={() => navigate("/")}
+          variant="h6"
+          noWrap
+          component="p"
+          sx={{
+            mr: 2,
+            display: { xs: "none", md: "flex" },
+            fontFamily: "monospace",
+            fontWeight: 700,
+            letterSpacing: ".3rem",
+            color: "#45C438",
+            textDecoration: "none",
+            cursor: "pointer",
+          }}
+        >
+          JMART
+        </Typography>
       </span>
       <div
         style={{

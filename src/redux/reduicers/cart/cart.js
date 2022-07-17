@@ -1,5 +1,4 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 export const cartSlice = createSlice({
   name: "cart",
   initialState: JSON.parse(localStorage.getItem("cartItems")) || {
@@ -79,7 +78,6 @@ export const cartSlice = createSlice({
           return item;
         }
       });
-      // console.log("decrease by id", action.payload);
     },
     deleteById: (state, action) => {
       console.log(action.payload);
@@ -92,11 +90,7 @@ export const cartSlice = createSlice({
     },
     getTotal: (state) => {
       const currentState = current(state);
-      // const total = currentState.cartItems?.map((item) => {
-      //   return item.price * item.quantity;
-      // });
-      // console.log("hello test result totl", total);
-      // return total;
+
       const test = currentState.cartItems.map((element) => {
         return element.quantity * element.price;
       });
