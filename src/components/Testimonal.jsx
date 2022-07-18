@@ -2,7 +2,6 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 import { testmonalData } from "../assets/data/authenticationItem";
 import "../assets/styles/marqueeSlider.css";
-import Loader from "./Loader";
 
 const MarqueeSlider = () => {
   return (

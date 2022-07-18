@@ -13,17 +13,16 @@ import { traking, getTrackerData } from "../../redux/reduicers/tracker";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const products = [
-  { name: "fis", id: uuidv4(), img: productsImg1, stock: true, price: 20 },
-  { name: "food", id: uuidv4(), img: productsImg2, stock: false, price: 27 },
-  { name: "organic", id: uuidv4(), img: productsImg3, stock: true, price: 15 },
-  { name: "orange", id: uuidv4(), img: productsImg1, stock: true, price: 40 },
-  { name: "tomatto", id: uuidv4(), img: productsImg2, stock: true, price: 22 },
-  { name: "lebo", id: uuidv4(), img: productsImg3, stock: true, price: 10 },
-  { name: "komola", id: uuidv4(), img: productsImg1, stock: false, price: 20 },
+  { name: "fis", id: 1, img: productsImg1, stock: true, price: 20 },
+  { name: "food", id: 2, img: productsImg2, stock: false, price: 27 },
+  { name: "organic", id: 3, img: productsImg3, stock: true, price: 15 },
+  { name: "orange", id: 4, img: productsImg1, stock: true, price: 40 },
+  { name: "tomatto", id: 5, img: productsImg2, stock: true, price: 22 },
+  { name: "lebo", id: 6, img: productsImg3, stock: true, price: 10 },
+  { name: "komola", id: 7, img: productsImg1, stock: false, price: 20 },
 ];
 const Products = () => {
   const navigate = useNavigate();
-  const [disable, setDisable] = useState(true);
   const { trackingData } = useSelector((state) => state.traker);
   const disepatch = useDispatch();
   const handleAddToCart = (item) => {
@@ -83,7 +82,7 @@ const Products = () => {
                   </p>
                   <p
                     onClick={() => handleAddToCart(product)}
-                    className={`${disable ? "add_to_cart_btn" : "btn_disable"}`}
+                    className={` "add_to_cart_btn"  }`}
                   >
                     <LocalMallIcon />
                   </p>

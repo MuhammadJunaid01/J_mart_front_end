@@ -40,7 +40,7 @@ const CheckOut = () => {
     const test = totalPrice / 100;
     const taxCoutn = test * 6;
     setTax(taxCoutn);
-  }, [cartItems, quantity, totalAmount]);
+  }, [cartItems, quantity, totalPrice]);
 
   const handleSubmit = async () => {
     const data = {

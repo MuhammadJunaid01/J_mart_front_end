@@ -51,6 +51,26 @@ const AddProducts = ({ isOffer }) => {
     // for (const iterator of object) {
     // }
     const offer = isOffer ? true : false;
+    if (
+      categoryName === "" ||
+      productName === "" ||
+      manufacturerBrand === "" ||
+      price === "" ||
+      image === "" ||
+      manufacturerName === "" ||
+      description === ""
+    ) {
+      toast.error("Please fill all input!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
     const formData = new FormData();
     formData.append("categoryName", categoryName);
     formData.append("productName", productName);
@@ -64,7 +84,7 @@ const AddProducts = ({ isOffer }) => {
     formData.append("offer", offer);
     formData.append("percentage", percentage);
     console.log("offer is", offer);
-    // createOffer(formData);
+    createOffer(formData);
   };
   console.log("data", data);
 

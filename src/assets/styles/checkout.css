@@ -2,6 +2,7 @@
   padding: 50px;
   box-sizing: border-box;
   height: 100vh;
+  overflow-y: scroll;
 }
 .check_out_header {
   text-align: center;
