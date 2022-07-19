@@ -38,9 +38,13 @@ const Register = memo(() => {
     };
     addUser(data);
   };
-  // if (data) {
-  //   loginUser({ email: email, password: password });
-  // }
+  if (data) {
+    localStorage.setItem("user", JSON.stringify(data));
+  }
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("user", user);
+  }, []);
   console.log("user data", data);
   return (
     <div style={{ backgroundColor: "white", padding: "20px 0px" }}>

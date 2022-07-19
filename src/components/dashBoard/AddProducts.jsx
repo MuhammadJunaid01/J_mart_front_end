@@ -24,6 +24,7 @@ const AddProducts = ({ isOffer }) => {
   const [manufacturerBrand, setManufacturerBrand] = useState("");
   const [manufacturerName, setManufacturerName] = useState("");
   const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
   const [copunCode, setCopunCode] = useState("");
   const [expireDate, setExpireDate] = useState("");
   const [description, setDescription] = useState("");
@@ -58,7 +59,8 @@ const AddProducts = ({ isOffer }) => {
       price === "" ||
       image === "" ||
       manufacturerName === "" ||
-      description === ""
+      description === "" ||
+      stock === ""
     ) {
       toast.error("Please fill all input!", {
         position: "top-center",
@@ -75,6 +77,7 @@ const AddProducts = ({ isOffer }) => {
     formData.append("categoryName", categoryName);
     formData.append("productName", productName);
     formData.append("price", price);
+    formData.append("stock", stock);
     formData.append("manufacturerBrand", manufacturerBrand);
     formData.append("image", image);
     formData.append("manufacturerName", manufacturerName);
@@ -167,7 +170,7 @@ const AddProducts = ({ isOffer }) => {
                         type="text"
                       />
                     </Grid>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} md={3}>
                       <p style={{ marginBottom: "8px" }}>Manufacturer Name</p>
                       <input
                         onBlur={(e) => setManufacturerName(e.target.value)}
@@ -181,7 +184,7 @@ const AddProducts = ({ isOffer }) => {
                         type="text"
                       />
                     </Grid>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} md={3}>
                       <p style={{ marginBottom: "8px" }}>Manufacturer Brand</p>
                       <input
                         onBlur={(e) => setManufacturerBrand(e.target.value)}
@@ -195,10 +198,24 @@ const AddProducts = ({ isOffer }) => {
                         type="text"
                       />
                     </Grid>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} md={3}>
                       <p style={{ marginBottom: "8px" }}>Price</p>
                       <input
                         onBlur={(e) => setPrice(e.target.value)}
+                        style={{
+                          outline: "none",
+                          border: "1px solid gainsboro",
+                          width: "100%",
+                          padding: "9px 0px",
+                          borderRadius: "3px",
+                        }}
+                        type="text"
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                      <p style={{ marginBottom: "8px" }}>stock</p>
+                      <input
+                        onBlur={(e) => setStock(e.target.value)}
                         style={{
                           outline: "none",
                           border: "1px solid gainsboro",

@@ -7,8 +7,6 @@ import RoutesPage from "./routes/RoutesPage";
 
 import "./App.css";
 function App() {
-  console.log("app rendering");
-
   return (
     <div>
       <ToastContainer
