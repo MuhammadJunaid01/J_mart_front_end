@@ -7,11 +7,13 @@ import productsImg1 from "../../assets/images/banner1.jpg";
 import productsImg2 from "../../assets/images/banner2.jpg";
 import productsImg3 from "../../assets/images/banner3.jpg";
 import "../../assets/styles/products.css";
+
 import { addToCart } from "../../redux/reduicers/cart/cart";
 import DrawerCart from "../../components/DrawerCart";
 import { traking, getTrackerData } from "../../redux/reduicers/tracker";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 export const products = [
   { name: "fis", id: 1, img: productsImg1, stock: 10, price: 20 },
   { name: "food", id: 2, img: productsImg2, stock: 20, price: 27 },
@@ -92,6 +94,7 @@ const Products = () => {
           </Grid>
         ))}
       </Grid>
+
       <DrawerCart />
     </div>
   );

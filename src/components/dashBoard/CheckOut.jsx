@@ -1,9 +1,12 @@
 import { Grid } from "@mui/material";
 import React, { useState } from "react";
+import StripeCheckout from "react-stripe-checkout";
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../assets/styles/checkout.css";
 import Register from "../../pages/register/Register";
+import { getCurrentUser } from "../../redux/reduicers/auth/auth";
 import { getTotal } from "../../redux/reduicers/cart/cart";
 import { useCreateOrderMutation } from "../../redux/reduicers/order";
 const CheckOut = () => {
@@ -12,6 +15,8 @@ const CheckOut = () => {
   );
   const [createOrder, { data, isLoading, isSuccess, error }] =
     useCreateOrderMutation();
+  const { user } = useSelector((state) => state.currentUser);
+
   const [login, setLogin] = useState(false);
   const [copun, setCopun] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -35,6 +40,7 @@ const CheckOut = () => {
     }, 0);
     setTotalPrice(totalPriceCount);
     dispatch(getTotal());
+    dispatch(getCurrentUser());
   }, [cartItems, quantity, totalAmount]);
   useEffect(() => {
     const test = totalPrice / 100;
@@ -47,6 +53,8 @@ const CheckOut = () => {
       products: cartItems,
       amount: totalPrice,
       status: "proccessing",
+      user: user?.data.email,
+      status: "proccessing",
       // orderBy: user._id,
     };
     createOrder(data);
@@ -57,6 +65,32 @@ const CheckOut = () => {
   if (error) {
     console.log("errrrrrrrrrrr", error);
   }
+  // console.log("hello user ", user);
+
+  const makePayment = (token) => {
+    const body = {
+      token,
+      products: cartItems,
+      amount: totalPrice,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    return fetch("http://localhost:5000/payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((result) => {
+        console.log("RESULT", result);
+        console.log("status", result.status);
+      })
+      .catch((err) => {
+        console.log("ERROR", err);
+      });
+  };
   return (
     <div className="check_out_container">
       <div className="check_out_header">
@@ -362,24 +396,29 @@ const CheckOut = () => {
                 </div>
               </div>
               <div style={{ padding: "20px 0px" }}>
-                <button
-                  onClick={handleSubmit}
-                  className="checkout_btn"
-                  style={{
-                    padding: "16px",
-                    width: "100%",
-                    cursor: "pointer",
-                    border: "none",
-                    fontSize: "20px",
-                    fontWeight: "600",
-                    color: "grey",
-                    fontFamily: "monospace",
-                    borderRadius: "50px",
-                    boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px 0px",
-                  }}
+                <StripeCheckout
+                  stripeKey="pk_test_51LNNMzC82usS9HEFIXxrDorMOsHdtpr624HEUfNrVmCoY0WwCkpae8b2kWYjOi2ysISzlUK5bvNIFCXczeO7hayP005H8TsmUz"
+                  token={makePayment}
+                  name="jMart"
+                  amount={(totalPrice + tax) * 100}
                 >
-                  {isLoading ? "Loading...." : "Place order"}
-                </button>
+                  <button
+                    style={{
+                      padding: "16px",
+                      width: "100%",
+                      cursor: "pointer",
+                      border: "none",
+                      fontSize: "20px",
+                      fontWeight: "600",
+                      color: "grey",
+                      fontFamily: "monospace",
+                      borderRadius: "50px",
+                      boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px 0px",
+                    }}
+                  >
+                    Place order
+                  </button>
+                </StripeCheckout>
               </div>
             </div>
           </div>

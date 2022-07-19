@@ -15,6 +15,7 @@ import {
   deleteById,
   getTotal,
 } from "../redux/reduicers/cart/cart";
+
 const DrawerCart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const DrawerCart = () => {
     setTotalPrice(totalPriceCount);
     dispatch(getTotal());
   }, [cartItems, quantity]);
+  console.log("hello dreawer checkoput page");
   return (
     <div>
       <div className="drawerContainer">
