@@ -1,4 +1,29 @@
+import { createSlice, current } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import jwt_decode from "jwt-decode";
+
+export const currentUserSlice = createSlice({
+  name: "user/getCurrentUser/getCurrentUser",
+  initialState: {
+    user: undefined,
+    isValidate: true,
+  },
+  reducers: {
+    getCurrentUser: (state) => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      state.user = user;
+      const token = user.data.token;
+      const { exp } = jwt_decode(token);
+      const expirationTime = exp * 1000 - 6000;
+      if (Date.now() >= expirationTime) {
+        //write expiration code
+        //localstorage remove item user
+        //history push('/login)
+      }
+      return state;
+    },
+  },
+});
 
 export const taskApi = createApi({
   reducerPath: "taskapi",
@@ -49,3 +74,6 @@ export const {
   useCreateOfferMutation,
   useLoginUserMutation,
 } = taskApi;
+
+export const { getCurrentUser } = currentUserSlice.actions;
+export default currentUserSlice.reducer;

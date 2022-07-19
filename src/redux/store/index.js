@@ -4,7 +4,7 @@ import category from "../reduicers/category";
 import drawer from "../reduicers/drawer";
 import tracker from "../reduicers/tracker";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { taskApi } from "../reduicers/auth/auth";
+import userSlice, { taskApi } from "../reduicers/auth/auth";
 import offerSlice, { offerApi } from "../reduicers/offer/offerSlice";
 import timeOut from "../reduicers/toggle/toggle";
 import { orderApi } from "../reduicers/order";
@@ -16,6 +16,7 @@ export const store = configureStore({
     category: category,
     traker: tracker,
     offer: offerSlice,
+    currentUser: userSlice,
     timeOut: timeOut,
     [taskApi.reducerPath]: taskApi.reducer,
     [offerApi.reducerPath]: offerApi.reducer,
