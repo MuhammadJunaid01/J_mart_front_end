@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
-import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -22,7 +20,6 @@ import DirectionsIcon from "@mui/icons-material/Directions";
 const Menubar = () => {
   const pages = ["Products", "Pricing", "Blog"];
   const navigate = useNavigate();
-  // const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const settings = [
     { name: "Profile", to: "profile" },
     { name: "Account", to: "account" },
@@ -166,9 +163,9 @@ const Menubar = () => {
               >
                 {settings.map((setting, i) => (
                   <MenuItem key={i} onClick={handleCloseUserMenu}>
-                    <Link to={`/${setting.to}`}>
+                    <span onClick={() => navigate(`/${setting.to}`)}>
                       <Typography textAlign="center">{setting.name}</Typography>
-                    </Link>
+                    </span>
                   </MenuItem>
                 ))}
               </Menu>

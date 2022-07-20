@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@mui/material";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import "../../assets/styles/products.css";
 
@@ -47,7 +46,6 @@ const Products = () => {
                 height: "260px",
                 boxShadow:
                   "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-                cursor: "pointer",
                 backgroundColor: "white",
                 borderRadius: "7px",
                 padding: "5px 10px",
@@ -58,12 +56,14 @@ const Products = () => {
                 style={{
                   width: "100%",
                   position: "relative",
+                  cursor: "pointer",
                   borderBottom: "2px solid rgba(128, 128, 128, 0.082)",
+                  textAlign: "center",
                 }}
               >
                 <img
                   style={{
-                    width: "90%",
+                    width: "170px",
                     height: "130px",
                     padding: "6px",
                     borderRadius: "11px",
@@ -95,7 +95,7 @@ const Products = () => {
                     onClick={() => handleAddToCart(product)}
                     className={` "add_to_cart_btn"  }`}
                   >
-                    <LibraryAddIcon />
+                    <LibraryAddIcon style={{}} />
                   </p>
                 </div>
               </div>

@@ -9,6 +9,9 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { getTrackerData } from "../redux/reduicers/tracker";
 import SweetPagination from "sweetpagination";
+import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import {
   allProducts,
   useGetAllProductsQuery,
@@ -61,14 +64,21 @@ const Product = () => {
         <Grid item xs={12} md={7}>
           <div>
             <img
-              style={{ width: "100%", borderRadius: "10px" }}
+              style={{ width: "70%", borderRadius: "10px" }}
               src={result?.ProductImage}
               alt=""
             />
           </div>
         </Grid>
         <Grid item xs={12} md={5}>
-          <div style={{ textAlign: "center" }}>
+          <div
+            style={{
+              textAlign: "center",
+              position: "relative",
+              height: "300px",
+              width: "100%",
+            }}
+          >
             <p
               style={{
                 fontFamily: "cursive",
@@ -153,6 +163,31 @@ const Product = () => {
                   {result?.ManufacturerName}
                 </span>
               </p>
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                bottom: "-10px",
+                display: "flex",
+              }}
+            >
+              <div>
+                <h3>
+                  <RemoveIcon />
+                </h3>
+              </div>
+              <p>0</p>
+              <div>
+                <h3>
+                  <AddIcon />
+                </h3>
+              </div>
+
+              <div>
+                <button>
+                  <LibraryAddIcon />
+                </button>
+              </div>
             </div>
           </div>
         </Grid>

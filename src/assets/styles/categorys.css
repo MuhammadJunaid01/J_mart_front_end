@@ -55,11 +55,7 @@
   display: block;
   text-decoration: none;
   color: gray;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.281);
   padding: 4px 0px;
   margin: 3px 0px;
   cursor: pointer;
-}
-.testtt {
-  border-left: 3px solid red;
 }
