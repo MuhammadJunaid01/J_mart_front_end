@@ -8,9 +8,12 @@ import {
   useGetAllPostQuery,
   useAddUserMutation,
   useLoginUserMutation,
+  updateUser,
 } from "../../redux/reduicers/auth/auth";
 import { memo } from "react";
+import { useDispatch } from "react-redux";
 const Register = memo(() => {
+  const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -38,13 +41,14 @@ const Register = memo(() => {
     };
     addUser(data);
   };
-  if (data) {
-    localStorage.setItem("user", JSON.stringify(data));
-  }
+  // if (data) {
+  //   localStorage.setItem("user", JSON.stringify(data));
+  // }
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    console.log("user", user);
-  }, []);
+    if (data) {
+      dispatch(updateUser(data.user));
+    }
+  }, [data]);
   console.log("user data", data);
   return (
     <div style={{ backgroundColor: "white", padding: "20px 0px" }}>

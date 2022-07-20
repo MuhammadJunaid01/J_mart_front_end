@@ -12,7 +12,8 @@ import axios from "axios";
 import { useCreateOfferMutation } from "../../redux/reduicers/auth/auth";
 import moment from "moment";
 const AddProducts = ({ isOffer }) => {
-  const [createOffer, { data, isLoading, error }] = useCreateOfferMutation();
+  const [createOffer, { data, isLoading, error, isSuccess }] =
+    useCreateOfferMutation();
   console.log("is offer", isOffer);
   const [expanded, setExpanded] = useState(true);
   const [show, setShow] = useState(false);
@@ -90,6 +91,17 @@ const AddProducts = ({ isOffer }) => {
     createOffer(formData);
   };
   console.log("data", data);
+  if (isSuccess) {
+    toast.success("successfully save!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
+  }
 
   /// test moment data
   return (

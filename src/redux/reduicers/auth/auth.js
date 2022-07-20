@@ -9,10 +9,11 @@ export const currentUserSlice = createSlice({
     isValidate: true,
   },
   reducers: {
-    getCurrentUser: (state) => {
+    getCurrentUser: (state, actions) => {
       const user = JSON.parse(localStorage.getItem("user"));
+      // console.log("user", user);
       state.user = user;
-      const token = user.data.token;
+      const token = user?.token;
       const { exp } = jwt_decode(token);
       const expirationTime = exp * 1000 - 6000;
       if (Date.now() >= expirationTime) {
@@ -20,6 +21,11 @@ export const currentUserSlice = createSlice({
         //localstorage remove item user
         //history push('/login)
       }
+      return state;
+    },
+    updateUser: (state, actions) => {
+      const user = actions.payload;
+      localStorage.setItem("user", JSON.stringify(user));
       return state;
     },
   },
@@ -47,7 +53,7 @@ export const taskApi = createApi({
     }),
     loginUser: builder.mutation({
       query: (body) => {
-        console.log("login user body", body);
+        // console.log("login user body", body);
         return {
           url: "http://localhost:5000/login",
           body: body,
@@ -75,5 +81,5 @@ export const {
   useLoginUserMutation,
 } = taskApi;
 
-export const { getCurrentUser } = currentUserSlice.actions;
+export const { getCurrentUser, updateUser } = currentUserSlice.actions;
 export default currentUserSlice.reducer;

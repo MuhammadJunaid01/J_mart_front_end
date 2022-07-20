@@ -8,6 +8,7 @@ import userSlice, { taskApi } from "../reduicers/auth/auth";
 import offerSlice, { offerApi } from "../reduicers/offer/offerSlice";
 import timeOut from "../reduicers/toggle/toggle";
 import { orderApi } from "../reduicers/order";
+import productsSlice, { productsApi } from "../reduicers/products/inedx";
 
 export const store = configureStore({
   reducer: {
@@ -17,10 +18,12 @@ export const store = configureStore({
     traker: tracker,
     offer: offerSlice,
     currentUser: userSlice,
+    products: productsSlice,
     timeOut: timeOut,
     [taskApi.reducerPath]: taskApi.reducer,
     [offerApi.reducerPath]: offerApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
+    [productsApi.reducerPath]: productsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(taskApi.middleware),
@@ -28,6 +31,8 @@ export const store = configureStore({
     getDefaultMiddleware().concat(offerApi.middleware),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(orderApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(productsApi.middleware),
 
   // getDefaultMiddleware().concat(offerApi.middleware),
 });

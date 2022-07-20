@@ -13,41 +13,37 @@ import DrawerCart from "../../components/DrawerCart";
 import { traking, getTrackerData } from "../../redux/reduicers/tracker";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  allProducts,
+  useGetAllProductsQuery,
+} from "../../redux/reduicers/products/inedx";
+import Loader from "../../components/Loader";
 
-export const products = [
-  { name: "fis", id: 1, img: productsImg1, stock: 10, price: 20 },
-  { name: "food", id: 2, img: productsImg2, stock: 20, price: 27 },
-  { name: "organic", id: 3, img: productsImg3, stock: 11, price: 15 },
-  { name: "orange", id: 4, img: productsImg1, stock: 15, price: 40 },
-  { name: "tomatto", id: 5, img: productsImg2, stock: 17, price: 22 },
-  { name: "lebo", id: 6, img: productsImg3, stock: 13, price: 10 },
-  { name: "komola", id: 7, img: productsImg1, stock: 25, price: 20 },
-  { name: "fis", id: 8, img: productsImg1, stock: 10, price: 20 },
-  { name: "food", id: 9, img: productsImg2, stock: 20, price: 27 },
-  { name: "organic", id: 10, img: productsImg3, stock: 11, price: 15 },
-  { name: "orange", id: 11, img: productsImg1, stock: 15, price: 40 },
-  { name: "tomatto", id: 12, img: productsImg2, stock: 17, price: 22 },
-  { name: "lebo", id: 12, img: productsImg3, stock: 13, price: 10 },
-  { name: "komola", id: 13, img: productsImg1, stock: 25, price: 20 },
-];
 const Products = () => {
   const navigate = useNavigate();
+  const { data, isError, isSuccess, isLoading } = useGetAllProductsQuery();
   const { trackingData } = useSelector((state) => state.traker);
   const disepatch = useDispatch();
   const handleAddToCart = (item) => {
     disepatch(addToCart(item));
   };
   useEffect(() => {
-    disepatch(getTrackerData());
+    if (data) {
+      disepatch(allProducts(data.data));
+    }
   }, []);
   const handleNavigate = (product) => {
-    navigate(`/product/${product.id}`);
+    navigate(`/product/${product._id}`);
     disepatch(traking(product));
   };
+  console.log("all products", data);
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div style={{ marginTop: "50px" }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        {products.map((product, i) => (
+        {data?.data.map((product, i) => (
           <Grid key={i} item xs={12} md={2}>
             <div
               style={{
@@ -67,7 +63,7 @@ const Products = () => {
                     padding: "6px",
                     borderRadius: "11px",
                   }}
-                  src={product.img}
+                  src={product.ProductImage}
                   alt="product image"
                 />
               </div>
