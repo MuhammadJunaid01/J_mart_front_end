@@ -10,6 +10,7 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import "../../src/assets/styles/menubar.css";
+import { Grid } from "@mui/material";
 import { testmonalData } from "../assets/data/authenticationItem";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -90,10 +91,9 @@ export default function Menubar() {
     if (menubarInputValue === "") {
       return;
     }
-    return item.name === menubarInputValue;
+    return item.name.includes(menubarInputValue);
   });
-  // console.log("hello menubar input", menubarInputValue);
-  console.log("search result", result);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -110,7 +110,6 @@ export default function Menubar() {
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
               cursor: "pointer",
-              letterSpacing: "7px",
             }}
           >
             JMART
@@ -141,9 +140,15 @@ export default function Menubar() {
         {menu.map((item, index) => {
           return (
             <p
-              onClick={() => navigate(item.to)}
-              className="menubar_menu"
               key={index}
+              onClick={() => {
+                if (item.to === "logout") {
+                  alert("logout");
+                  return;
+                }
+                return navigate(item.to);
+              }}
+              className="menubar_menu"
             >
               {item.name}
             </p>
@@ -152,14 +157,33 @@ export default function Menubar() {
       </div>
       {menubarInputValue && (
         <div className="search_result_show">
-          <h3>jhell</h3>
-          {result.map((item, index) => {
-            return (
-              <div key={index}>
-                <h1>{item.name}</h1>
-              </div>
-            );
-          })}
+          {result.length === 0 && <p>opps! Please try again.</p>}
+          <Grid container>
+            {result.map((item, index) => {
+              if (item) {
+              }
+              return (
+                <Grid key={index} item xs={12} md={6}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      border: "1px solid gray",
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                      marginTop: "6px",
+                    }}
+                  >
+                    <div style={{ width: "50%" }}>
+                      <p>{item.name}</p>
+                    </div>
+                    <img style={{ width: "80px" }} src={item.img} alt="" />
+                  </div>
+                </Grid>
+              );
+            })}
+          </Grid>
         </div>
       )}
     </Box>
