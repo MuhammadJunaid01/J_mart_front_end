@@ -41,7 +41,6 @@ const DrawerCart = () => {
     setTotalPrice(totalPriceCount);
     dispatch(getTotal());
   }, [cartItems, quantity]);
-  console.log("hello dreawer checkoput page");
   return (
     <div>
       <div className="drawerContainer">

@@ -3,9 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import productsImg1 from "../../assets/images/banner1.jpg";
-import productsImg2 from "../../assets/images/banner2.jpg";
-import productsImg3 from "../../assets/images/banner3.jpg";
+import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import "../../assets/styles/products.css";
 
 import { addToCart } from "../../redux/reduicers/cart/cart";
@@ -36,7 +34,6 @@ const Products = () => {
     navigate(`/product/${product._id}`);
     disepatch(traking(product));
   };
-  console.log("all products", data);
   if (isLoading) {
     return <Loader />;
   }
@@ -44,36 +41,45 @@ const Products = () => {
     <div style={{ marginTop: "50px" }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {data?.data.map((product, i) => (
-          <Grid key={i} item xs={12} md={2}>
+          <Grid key={i} item xs={12} md={3}>
             <div
               style={{
-                height: "13rem",
-                border: "2px solid gray",
+                height: "260px",
+                boxShadow:
+                  "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
                 cursor: "pointer",
+                backgroundColor: "white",
+                borderRadius: "7px",
+                padding: "5px 10px",
               }}
             >
               <div
                 onClick={() => handleNavigate(product)}
-                style={{ width: "100%", position: "relative" }}
+                style={{
+                  width: "100%",
+                  position: "relative",
+                  borderBottom: "2px solid rgba(128, 128, 128, 0.082)",
+                }}
               >
                 <img
                   style={{
                     width: "90%",
-                    height: "20vh",
+                    height: "130px",
                     padding: "6px",
                     borderRadius: "11px",
                   }}
-                  src={product.ProductImage}
+                  src={product?.ProductImage}
                   alt="product image"
                 />
               </div>
               <div>
-                <span>{product.name}</span>
+                <p>{product?.ProductName.slice(0, 40)}</p>
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
+                    marginTop: "13px",
                   }}
                 >
                   <p
@@ -83,13 +89,13 @@ const Products = () => {
                       fontSize: "18px",
                     }}
                   >
-                    ${product.price}
+                    ${product.Price}
                   </p>
                   <p
                     onClick={() => handleAddToCart(product)}
                     className={` "add_to_cart_btn"  }`}
                   >
-                    <LocalMallIcon />
+                    <LibraryAddIcon />
                   </p>
                 </div>
               </div>

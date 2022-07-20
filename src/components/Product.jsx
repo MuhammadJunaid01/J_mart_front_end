@@ -27,6 +27,9 @@ const Product = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.currentUser);
+
+  const result = data?.data.find((item) => item._id === id);
+
   useEffect(() => {
     dispatch(getCurrentUser());
     dispatch(allProducts);
@@ -37,24 +40,21 @@ const Product = () => {
 
   useEffect(() => {
     dispatch(getTrackerData());
-    // const relatedProducts = products?.filter((item) => {
-    //   return (
-    //     item.name === result.name ||
-    //     item.price === result.price ||
-    //     item.stock === result.stock
-    //   );
-    // });
-    // setRelatedProducts(relatedProducts);
+    const relatedProducts = data?.data?.filter((item) => {
+      return (
+        item.Category === result.Category ||
+        item.ManufacturerName === result.ManufacturerName ||
+        item.stock === result.stock
+      );
+    });
+
+    setRelatedProducts(relatedProducts);
   }, [id, data]);
-  // const handleNvigate=(id)
-  // console.log("products", data?.data);
-  // console.log("result", result);
-  const result = data?.data.find((item) => item._id === id);
-  console.log("ouof effect", result);
 
   if (isLoading) {
     return <Loader />;
   }
+  console.log(result);
   return (
     <div style={{ padding: "40px 17px" }}>
       <Grid container spacing={2}>
@@ -69,17 +69,90 @@ const Product = () => {
         </Grid>
         <Grid item xs={12} md={5}>
           <div style={{ textAlign: "center" }}>
-            <h3>{result?.name}</h3>
+            <p
+              style={{
+                fontFamily: "cursive",
+                fontWeight: "500",
+                fontSize: "20px",
+                color: "#808080",
+              }}
+            >
+              {result?.ProductName}
+            </p>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
+                marginTop: "10px",
               }}
             >
-              <p>{result?.price}</p>
-              <p>{result?.stock}</p>
-              <p>{result?.price}</p>
+              <p
+                style={{
+                  backgroundColor: "#F5F5FC",
+                  padding: "1px 10px",
+                  border: "1px solid rgba(128, 128, 128, 0.534)",
+                  borderRadius: "50px",
+                }}
+              >
+                Price:
+                <span
+                  style={{
+                    fontFamily: "'Trebuchet MS', 'sans-serif'",
+                    color: "#000000",
+                    lineHeight: "30px",
+                    fontWeight: "700",
+                    fontSize: "14px",
+                  }}
+                >
+                  {result?.Price}$
+                </span>
+              </p>
+
+              {result?.stock && (
+                <p
+                  style={{
+                    backgroundColor: "#F5F5FC",
+                    padding: "1px 10px",
+                    border: "1px solid rgba(128, 128, 128, 0.534)",
+                    borderRadius: "50px",
+                  }}
+                >
+                  Status:{" "}
+                  <span
+                    style={{
+                      fontFamily: "'Trebuchet MS', 'sans-serif'",
+                      color: "#000000",
+                      lineHeight: "30px",
+                      fontWeight: "700",
+                      fontSize: "14px",
+                    }}
+                  >
+                    In Stock
+                  </span>
+                </p>
+              )}
+              <p
+                style={{
+                  backgroundColor: "#F5F5FC",
+                  padding: "1px 10px",
+                  border: "1px solid rgba(128, 128, 128, 0.534)",
+                  borderRadius: "50px",
+                }}
+              >
+                Brand:
+                <span
+                  style={{
+                    fontFamily: "'Trebuchet MS', 'sans-serif'",
+                    color: "#000000",
+                    lineHeight: "30px",
+                    fontWeight: "700",
+                    fontSize: "14px",
+                  }}
+                >
+                  {result?.ManufacturerName}
+                </span>
+              </p>
             </div>
           </div>
         </Grid>
@@ -240,55 +313,59 @@ const Product = () => {
             >
               Realted Products
             </h1>
-            <div>
-              {currentPageData?.map((item, index) => {
-                return (
-                  <div
-                    onClick={() => navigate(`/product/${item.id}`)}
-                    key={index}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      cursor: "pointer",
-                      borderBottom: "1px solid #ECEDEF",
-                      padding: "8px 0px",
-                    }}
-                  >
-                    <div style={{ width: "50%" }}>
-                      <img
-                        style={{ width: "80%", borderRadius: "7px" }}
-                        src={item?.img}
-                        alt=""
-                      />
-                    </div>
+            {relatedProducts && (
+              <div>
+                {currentPageData?.map((item, index) => {
+                  return (
                     <div
+                      onClick={() => navigate(`/product/${item.id}`)}
+                      key={index}
                       style={{
-                        width: "50%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        cursor: "pointer",
+                        borderBottom: "1px solid #ECEDEF",
+                        padding: "8px 0px",
                       }}
                     >
-                      <p style={{ marginBottom: "7px" }}>{item?.name}</p>
-                      <p style={{ marginBottom: "7px" }}>{item?.price}</p>
-                      <p style={{ marginBottom: "7px" }}>{item?.stock}</p>
-                      <button
+                      <div style={{ width: "50%" }}>
+                        <img
+                          style={{ width: "80%", borderRadius: "7px" }}
+                          src={item?.ProductImage}
+                          alt=""
+                        />
+                      </div>
+                      <div
                         style={{
-                          marginBottom: "7px",
-                          display: "flex",
-                          alignItems: "center",
+                          width: "50%",
                         }}
                       >
-                        <ShoppingCartIcon /> Add To Cart
-                      </button>
+                        <p style={{ marginBottom: "7px" }}>
+                          {item?.ProductName}
+                        </p>
+                        <p style={{ marginBottom: "7px" }}>{item?.Price}</p>
+                        <button
+                          style={{
+                            marginBottom: "7px",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          <ShoppingCartIcon /> Add To Cart
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-            <SweetPagination
-              currentPageData={setCurrentPageData}
-              getData={relatedProducts}
-              dataPerPage={2}
-            />
+                  );
+                })}
+                <SweetPagination
+                  currentPageData={setCurrentPageData}
+                  getData={relatedProducts}
+                  dataPerPage={2}
+                />
+              </div>
+            )}
+
             {/* recently view */}
           </div>
 

@@ -9,7 +9,7 @@ export const trackerSlice = createSlice({
     traking: (state, action) => {
       const currentState = current(state);
       const check = state.trackingData.find((item) => {
-        return item.id === action.payload.id;
+        return item._id === action.payload._id;
       });
       if (check) {
         return state;
