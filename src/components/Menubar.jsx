@@ -1,55 +1,78 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
-import { useNavigate } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
-const Menubar = () => {
-  const pages = ["Products", "Pricing", "Blog"];
-  const navigate = useNavigate();
-  const settings = [
-    { name: "Profile", to: "profile" },
-    { name: "Account", to: "account" },
-    { name: "Dashboard", to: "dashboard" },
-    { name: "Logout", to: "logout" },
-  ];
-  const [anchorElNav, setAnchorElNav] = useState(null);
+import "../../src/assets/styles/menubar.css";
+import { testmonalData } from "../assets/data/authenticationItem";
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
 
-  const [anchorElUser, setAnchorElUser] = useState(null);
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "auto",
+  },
+}));
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event?.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-  //resize window height
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+  },
+}));
+const menu = [
+  { name: "Profile", to: "profile" },
+  { name: "Account", to: "account" },
+  { name: "Dashboard", to: "dashboard" },
+  { name: "Logout", to: "logout" },
+];
+export default function Menubar() {
+  const [showMenu, setShowMenu] = useState(false);
+  const [topMenuBar, setTopMenuBar] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);
-  const [topMenuBar, setTopMenuBar] = useState(false);
+  const [menubarInputValue, setMenubarInputValue] = useState("");
+  const [searchResult, setSearchReasult] = useState([]);
+  const navigate = useNavigate();
+  const handleOnclick = () => {
+    setShowMenu((prev) => !prev);
+  };
   let resizeWindow = () => {
-    if (window.scrollY >= 120) {
+    if (window.scrollY >= 300) {
       setTopMenuBar(true);
     } else {
       setTopMenuBar(false);
@@ -63,118 +86,82 @@ const Menubar = () => {
     return () => window.removeEventListener("resize", resizeWindow);
   }, [windowHeight]);
 
+  const result = testmonalData.filter((item) => {
+    if (menubarInputValue === "") {
+      return;
+    }
+    return item.name === menubarInputValue;
+  });
+  // console.log("hello menubar input", menubarInputValue);
+  console.log("search result", result);
   return (
-    <div>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        style={{ transition: "ease-in-out" }}
-        sx={{ backgroundColor: "#10B981", padding: "7px" }}
+        style={{ backgroundColor: "#10B981" }}
         position={topMenuBar ? "fixed" : "static"}
       >
-        <>
-          <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-            <Typography
-              onClick={() => navigate("/")}
-              variant="h6"
-              noWrap
-              component=""
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-                cursor: "pointer",
-              }}
-            >
-              JMART
-            </Typography>
-
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            ></Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {/* start */}
-              <Paper
-                component="form"
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                  alignItems: "center",
-                  padding: "0px",
-                  width: 800,
-                  height: "40px",
-                  padding: "4px",
-                  marginLeft: "76px",
-                }}
-              >
-                <InputBase
-                  sx={{ ml: 1, flex: 1 }}
-                  placeholder="Search Google Maps"
-                  inputProps={{ "aria-label": "search google maps" }}
-                />
-                <IconButton
-                  type="submit"
-                  sx={{ p: "10px" }}
-                  aria-label="search"
-                >
-                  <SearchIcon />
-                </IconButton>
-              </Paper>
-              {/* end */}
-            </Box>
-
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting, i) => (
-                  <MenuItem key={i} onClick={handleCloseUserMenu}>
-                    <span onClick={() => navigate(`/${setting.to}`)}>
-                      <Typography textAlign="center">{setting.name}</Typography>
-                    </span>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </Toolbar>
-        </>
+        <Toolbar>
+          <Typography
+            onClick={() => navigate("/")}
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", sm: "block" },
+              cursor: "pointer",
+              letterSpacing: "7px",
+            }}
+          >
+            JMART
+          </Typography>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              onChange={(e) => setMenubarInputValue(e.target.value)}
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+          <IconButton
+            onClick={handleOnclick}
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 0, ml: 1 }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
       </AppBar>
-    </div>
+      <div className={`${showMenu ? "show_menu open" : "show_menu"}`}>
+        {menu.map((item, index) => {
+          return (
+            <p
+              onClick={() => navigate(item.to)}
+              className="menubar_menu"
+              key={index}
+            >
+              {item.name}
+            </p>
+          );
+        })}
+      </div>
+      {menubarInputValue && (
+        <div className="search_result_show">
+          <h3>jhell</h3>
+          {result.map((item, index) => {
+            return (
+              <div key={index}>
+                <h1>{item.name}</h1>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </Box>
   );
-};
-
-export default Menubar;
+}
