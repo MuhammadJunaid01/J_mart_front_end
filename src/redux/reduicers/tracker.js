@@ -9,10 +9,17 @@ export const trackerSlice = createSlice({
     traking: (state, action) => {
       const currentState = current(state);
       console.log("tracking data", action.payload);
+      const check = state.trackingData.find((item) => {
+        return item.id === action.payload.id;
+      });
+      if (check) {
+        return state;
+      } else {
+        state?.trackingData?.push(action.payload);
+        localStorage.setItem("trackingDataStore", JSON.stringify(state));
+      }
       console.log("state before", currentState);
       //   currentState.trackingData.push(action.payload);
-      state?.trackingData?.push(action.payload);
-      localStorage.setItem("trackingDataStore", JSON.stringify(state));
     },
     getTrackerData: (state) => {},
   },

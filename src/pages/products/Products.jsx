@@ -22,6 +22,13 @@ export const products = [
   { name: "tomatto", id: 5, img: productsImg2, stock: 17, price: 22 },
   { name: "lebo", id: 6, img: productsImg3, stock: 13, price: 10 },
   { name: "komola", id: 7, img: productsImg1, stock: 25, price: 20 },
+  { name: "fis", id: 8, img: productsImg1, stock: 10, price: 20 },
+  { name: "food", id: 9, img: productsImg2, stock: 20, price: 27 },
+  { name: "organic", id: 10, img: productsImg3, stock: 11, price: 15 },
+  { name: "orange", id: 11, img: productsImg1, stock: 15, price: 40 },
+  { name: "tomatto", id: 12, img: productsImg2, stock: 17, price: 22 },
+  { name: "lebo", id: 12, img: productsImg3, stock: 13, price: 10 },
+  { name: "komola", id: 13, img: productsImg1, stock: 25, price: 20 },
 ];
 const Products = () => {
   const navigate = useNavigate();
@@ -29,19 +36,19 @@ const Products = () => {
   const disepatch = useDispatch();
   const handleAddToCart = (item) => {
     disepatch(addToCart(item));
-    disepatch(traking(item));
   };
   useEffect(() => {
     disepatch(getTrackerData());
   }, []);
-  const handleNavigate = (id) => {
-    navigate(`/product/${id}`);
+  const handleNavigate = (product) => {
+    navigate(`/product/${product.id}`);
+    disepatch(traking(product));
   };
   return (
     <div style={{ marginTop: "50px" }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        {products.map((product) => (
-          <Grid key={product.id} item xs={12} md={2}>
+        {products.map((product, i) => (
+          <Grid key={i} item xs={12} md={2}>
             <div
               style={{
                 height: "13rem",
@@ -50,7 +57,7 @@ const Products = () => {
               }}
             >
               <div
-                onClick={() => handleNavigate(product.id)}
+                onClick={() => handleNavigate(product)}
                 style={{ width: "100%", position: "relative" }}
               >
                 <img

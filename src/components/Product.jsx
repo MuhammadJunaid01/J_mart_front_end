@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { products } from "../pages/products/Products";
 import { Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,22 +7,40 @@ import { useEffect } from "react";
 import { getCurrentUser } from "../redux/reduicers/auth/auth";
 import { useState } from "react";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import { fontFamily } from "@mui/system";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { getTrackerData } from "../redux/reduicers/tracker";
+import SweetPagination from "sweetpagination";
 const Product = () => {
+  const navigate = useNavigate();
   const [reveiw, setReveiw] = useState(false);
+  const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
+  const [pageData, setPageData] = useState(new Array(2).fill());
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const { trackingData } = useSelector((state) => state.traker);
   const { id } = useParams();
-  console.log("type params is", typeof id);
   const result = products.find((item) => item.id === Number(id));
-  console.log("result ", result);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.currentUser);
   useEffect(() => {
     dispatch(getCurrentUser());
   }, [id]);
-  console.log("hello user", user);
   const handleReview = () => {
     setReveiw((prev) => !prev);
   };
+
+  useEffect(() => {
+    dispatch(getTrackerData());
+    const relatedProducts = products?.filter((item) => {
+      return (
+        item.name === result.name ||
+        item.price === result.price ||
+        item.stock === result.stock
+      );
+    });
+    setRelatedProducts(relatedProducts);
+  }, [id]);
+  // const handleNvigate=(id)
+  console.log("recently viewd");
   return (
     <div style={{ padding: "40px 17px" }}>
       <h1>hello product id:{id}</h1>
@@ -52,7 +70,7 @@ const Product = () => {
             </div>
           </div>
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={9}>
           <div
             style={{
               boxShadow:
@@ -199,13 +217,128 @@ const Product = () => {
         </Grid>
 
         {/* releated products section */}
-        <Grid item xs={12} md={4}>
-          <div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-              dolores consequatur voluptate, ut illo enim pariatur veniam
-              architecto nemo sequi!
-            </p>
+        <Grid item xs={12} md={3}>
+          <div
+            style={{
+              width: "100%",
+              boxShadow:
+                "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+              padding: "20px 4px",
+              borderRadius: "7px",
+            }}
+          >
+            <h1
+              style={{
+                fontFamily: "'Trebuchet MS', 'sans-serif'",
+                fontSize: "18px",
+                lineHeight: "24px",
+                fontWeight: "700",
+                color: "#3749bbab",
+                borderBottom: "1px solid gray",
+                paddingBottom: "10px",
+              }}
+            >
+              Realted Products
+            </h1>
+            <div>
+              {currentPageData?.map((item, index) => {
+                return (
+                  <div
+                    onClick={() => navigate(`/product/${item.id}`)}
+                    key={index}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      cursor: "pointer",
+                      borderBottom: "1px solid #ECEDEF",
+                      padding: "8px 0px",
+                    }}
+                  >
+                    <div style={{ width: "50%" }}>
+                      <img
+                        style={{ width: "80%", borderRadius: "7px" }}
+                        src={item?.img}
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      style={{
+                        width: "50%",
+                      }}
+                    >
+                      <p style={{ marginBottom: "7px" }}>{item?.name}</p>
+                      <p style={{ marginBottom: "7px" }}>{item?.price}</p>
+                      <p style={{ marginBottom: "7px" }}>{item?.stock}</p>
+                      <button
+                        style={{
+                          marginBottom: "7px",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <ShoppingCartIcon /> Add To Cart
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <SweetPagination
+              currentPageData={setCurrentPageData}
+              getData={relatedProducts}
+              dataPerPage={2}
+            />
+            {/* recently view */}
+          </div>
+
+          <div
+            style={{
+              marginTop: "10px",
+              width: "100%",
+              boxShadow:
+                "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+              padding: "20px 4px",
+              borderRadius: "7px",
+            }}
+          >
+            <h3
+              style={{
+                fontFamily: "'Trebuchet MS', 'sans-serif'",
+                fontSize: "18px",
+                lineHeight: "24px",
+                fontWeight: "700",
+                color: "#3749bbab",
+                borderBottom: "1px solid gray",
+                paddingBottom: "10px",
+                marginBottom: "15px",
+              }}
+            >
+              Recently Viewed
+            </h3>
+            {pageData?.map((item, index) => {
+              return (
+                <div key={index}>
+                  <Grid container>
+                    <Grid item xs={6} md={6}>
+                      <img
+                        style={{ width: "80%", borderRadius: "7px" }}
+                        src={item?.img}
+                        alt=""
+                      />
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                      <p>{item?.name}</p>
+                    </Grid>
+                  </Grid>
+                </div>
+              );
+            })}
+            <SweetPagination
+              currentPageData={setPageData}
+              getData={trackingData}
+              dataPerPage={3}
+            />
           </div>
         </Grid>
       </Grid>
