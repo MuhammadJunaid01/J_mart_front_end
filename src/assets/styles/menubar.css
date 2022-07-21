@@ -48,15 +48,47 @@
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
 }
-.search_result_show {
-  width: 50%;
-  margin: 0 auto;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  padding: 20px;
-  border-radius: 7px;
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  -ms-border-radius: 7px;
-  -o-border-radius: 7px;
+.show_search_result {
+  position: absolute;
+  transition: all 2s ease-in-out;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -ms-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transform: translateY(-130%);
+  -webkit-transform: translateY(-130%);
+  -moz-transform: translateY(-130%);
+  -ms-transform: translateY(-130%);
+  -o-transform: translateY(-130%);
+  background-color: white;
+  z-index: 10;
+  right: 60px;
+  height: 300px;
+  width: 500px;
+  padding: 0px 7px;
+  overflow-y: scroll;
+}
+.show_search_result.upDown {
+  transition: all 2s ease-in-out;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -ms-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transform: translateY(-0%);
+  -webkit-transform: translateY(-0%);
+  -moz-transform: translateY(-0%);
+  -ms-transform: translateY(-0%);
+  -o-transform: translateY(-0%);
+  background-color: white;
+}
+.serch_bar_products_categories {
+  display: flex;
+  padding: 10px 5px;
+  background-color: gainsboro;
+  /* color: lightslategrey; */
+}
+
+.search_result_products:hover {
+  background-color: gainsboro;
+  padding: 10px;
 }

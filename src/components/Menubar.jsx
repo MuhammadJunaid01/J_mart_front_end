@@ -12,6 +12,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import "../../src/assets/styles/menubar.css";
 import { Grid } from "@mui/material";
 import { testmonalData } from "../assets/data/authenticationItem";
+import { useSelector } from "react-redux";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
 
@@ -69,6 +70,7 @@ export default function Menubar() {
   const [menubarInputValue, setMenubarInputValue] = useState("");
   const [searchResult, setSearchReasult] = useState([]);
   const navigate = useNavigate();
+  const { products } = useSelector((state) => state.products);
   const handleOnclick = () => {
     setShowMenu((prev) => !prev);
   };
@@ -87,13 +89,13 @@ export default function Menubar() {
     return () => window.removeEventListener("resize", resizeWindow);
   }, [windowHeight]);
 
-  const result = testmonalData.filter((item) => {
-    if (menubarInputValue === "") {
+  const result = products.filter((item) => {
+    if (menubarInputValue === "" || products.length < 0) {
       return;
     }
-    return item.name.includes(menubarInputValue);
+    return item.ProductName || item.Category.includes(menubarInputValue);
   });
-
+  console.log("all products", products);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -146,46 +148,90 @@ export default function Menubar() {
                   alert("logout");
                   return;
                 }
-                return navigate(item.to);
+                return navigate(`/${item.to}`);
               }}
               className="menubar_menu"
             >
-              {item.name}
+              {item?.name}
             </p>
           );
         })}
       </div>
-      {menubarInputValue && (
-        <div className="search_result_show">
-          {result.length === 0 && <p>opps! Please try again.</p>}
-          <Grid container>
-            {result.map((item, index) => {
-              if (item) {
-              }
-              return (
-                <Grid key={index} item xs={12} md={6}>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      border: "1px solid gray",
-                      cursor: "pointer",
-                      marginLeft: "10px",
-                      marginTop: "6px",
-                    }}
-                  >
-                    <div style={{ width: "50%" }}>
-                      <p>{item.name}</p>
-                    </div>
-                    <img style={{ width: "80px" }} src={item.img} alt="" />
-                  </div>
-                </Grid>
-              );
-            })}
-          </Grid>
+
+      <div
+        className={
+          menubarInputValue ? "show_search_result upDown" : "show_search_result"
+        }
+      >
+        <div className="serch_bar_products_categories">
+          <div className="serch_bar_products_btn">
+            <button
+              style={{
+                backgroundColor: "#10B981",
+                padding: "3px 15px",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontFamily: "monospace",
+                fontSize: "18px",
+                fontWeight: "500",
+                color: "white",
+              }}
+            >
+              Products
+            </button>
+          </div>
+          <div className="serch_bar_categories_btn">
+            <button
+              style={{
+                marginLeft: "17px",
+                backgroundColor: "lightslategrey",
+                padding: "3px 15px",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontFamily: "monospace",
+                fontSize: "18px",
+                fontWeight: "500",
+                color: "black",
+              }}
+            >
+              Categories
+            </button>
+          </div>
         </div>
-      )}
+        {result.length === 0 && <p>opps! Please try again.</p>}
+        <Grid container>
+          {result.map((item, index) => {
+            if (item) {
+            }
+            return (
+              <Grid key={index} item xs={12} md={12}>
+                <div
+                  onClick={() => navigate(`/product/${item._id}`)}
+                  className="search_result_products"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    cursor: "pointer",
+                    marginTop: "6px",
+                  }}
+                >
+                  <div style={{ width: "50%" }}>
+                    <p>{item.ProductName}</p>
+                  </div>
+                  <img
+                    style={{ width: "70px" }}
+                    src={item.ProductImage}
+                    alt=""
+                  />
+                </div>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </div>
     </Box>
   );
 }

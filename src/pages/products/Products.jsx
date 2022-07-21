@@ -28,7 +28,7 @@ const Products = () => {
     if (data) {
       disepatch(allProducts(data.data));
     }
-  }, []);
+  }, [data]);
   const handleNavigate = (product) => {
     navigate(`/product/${product._id}`);
     disepatch(traking(product));

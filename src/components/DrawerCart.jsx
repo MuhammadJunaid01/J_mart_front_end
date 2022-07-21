@@ -33,7 +33,7 @@ const DrawerCart = () => {
 
   useEffect(() => {
     const total = cartItems?.map((item) => {
-      return item?.price * item?.quantity;
+      return item?.Price * item?.quantity;
     });
     const totalPriceCount = total?.reduce((prev, next) => {
       return prev + next;
@@ -41,6 +41,7 @@ const DrawerCart = () => {
     setTotalPrice(totalPriceCount);
     dispatch(getTotal());
   }, [cartItems, quantity]);
+  console.log("total price", totalPrice);
   return (
     <div>
       <div className="drawerContainer">
@@ -110,17 +111,17 @@ const DrawerCart = () => {
                             width: "60px",
                             borderRadius: "50%",
                           }}
-                          src={items?.img}
+                          src={items?.ProductImage}
                           alt=""
                         />
                       </div>
                       <div style={{ marginLeft: "7px" }}>
-                        <p>{items?.name}</p>
+                        <p>{items?.ProductName}</p>
                         <p style={{ color: "gray" }}>
-                          item price {items?.price}
+                          item price {items?.Price}
                         </p>
                         {items ? (
-                          <h4>{items?.price * items?.quantity}</h4>
+                          <h4>{items?.Price * items?.quantity}</h4>
                         ) : null}
                       </div>
                     </div>
@@ -132,7 +133,7 @@ const DrawerCart = () => {
                       }}
                     >
                       <h4
-                        onClick={() => dispatch(inceaseById(items?.id))}
+                        onClick={() => dispatch(inceaseById(items?._id))}
                         style={{ cursor: "pointer", marginRight: "6px" }}
                       >
                         <AddIcon />

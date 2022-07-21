@@ -1,9 +1,4 @@
-import {
-  createApi,
-  CreateApi,
-  fetchBaseQuery,
-  FetchBaseQueryError,
-} from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const productsSlice = createSlice({

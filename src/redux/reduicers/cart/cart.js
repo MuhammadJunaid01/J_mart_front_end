@@ -10,14 +10,13 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const currentState = current(state);
-      console.log("action payload id");
       const isExist = currentState?.cartItems?.find(
-        (item) => item.id === action.payload.id
+        (item) => item._id === action.payload._id
       );
       // console.log("check", isExist);
       if (isExist) {
         state.cartItems = state.cartItems.map((item) => {
-          if (item.id === action.payload.id) {
+          if (item._id === action.payload._id) {
             state.quantity = state.quantity + 1;
             const update = {
               ...item,
@@ -42,13 +41,13 @@ export const cartSlice = createSlice({
         state?.cartItems?.push(updatedState);
       }
       state.totalAmount = state?.cartItems?.map((item) => {
-        return item.quantity * item.price;
+        return item.quantity * item.Price;
       });
     },
     inceaseById: (state, action) => {
       const currentState = current(state);
       state.cartItems = state?.cartItems?.map((item) => {
-        if (action.payload === item.id) {
+        if (action.payload === item._id) {
           state.quantity = state.quantity + 1;
           const update = {
             ...item,
@@ -64,7 +63,7 @@ export const cartSlice = createSlice({
     decreseById: (state, action) => {
       const currentState = current(state);
       state.cartItems = state.cartItems.map((item) => {
-        if (item.id === action.payload.id) {
+        if (item._id === action.payload._id) {
           if (action.payload.quantity > 1) {
             state.quantity = state.quantity - 1;
 
