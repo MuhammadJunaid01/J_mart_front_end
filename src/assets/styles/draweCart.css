@@ -106,7 +106,7 @@
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
   cursor: pointer;
-  position: fixed;
+  position: absolute;
   bottom: 10px;
   width: 80%;
 }

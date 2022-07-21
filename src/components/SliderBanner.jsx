@@ -6,9 +6,11 @@ import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import "../assets/styles/slider.css";
 
-import banner1 from "../assets/images/banner1.jpg";
-import banner2 from "../assets/images/banner2.jpg";
-import banner3 from "../assets/images/banner3.jpg";
+import banner1 from "../assets/images/desktop1.jpg";
+import banner2 from "../assets/images/desktop2.jpg";
+import banner3 from "../assets/images/laptop2.jpg";
+import banner4 from "../assets/images/tablet1.jpg";
+import banner5 from "../assets/images/ipad2.jpg";
 import Offer from "../pages/offer/Offer";
 const SliderBanner = () => {
   const [slide, setSlide] = useState(0);
@@ -20,7 +22,11 @@ const SliderBanner = () => {
       image: banner2,
     },
     {
-      image: banner3,
+      image: banner4,
+    },
+
+    {
+      image: banner5,
     },
   ];
 

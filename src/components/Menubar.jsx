@@ -95,7 +95,6 @@ export default function Menubar() {
     }
     return item.ProductName || item.Category.includes(menubarInputValue);
   });
-  console.log("all products", products);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar

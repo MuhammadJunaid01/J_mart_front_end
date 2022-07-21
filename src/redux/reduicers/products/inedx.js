@@ -23,9 +23,19 @@ export const productsApi = createApi({
     getAllProducts: builder.query({
       query: () => "/allProducts",
     }),
+    reviewProducts: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/review",
+          body: data,
+          method: "POST",
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetAllProductsQuery } = productsApi;
+export const { useGetAllProductsQuery, useReviewProductsMutation } =
+  productsApi;
 export const { allProducts } = productsSlice.actions;
 export default productsSlice.reducer;

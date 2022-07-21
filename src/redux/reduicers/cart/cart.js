@@ -25,6 +25,7 @@ export const cartSlice = createSlice({
             localStorage.setItem("cartItems", JSON.stringify(state));
             return update;
           } else {
+            console.log("check item", item);
             return item;
           }
         });
@@ -66,11 +67,12 @@ export const cartSlice = createSlice({
         if (item._id === action.payload._id) {
           if (action.payload.quantity > 1) {
             state.quantity = state.quantity - 1;
-
-            return {
+            const update = {
               ...item,
               quantity: item.quantity - 1,
             };
+            localStorage.setItem("cartItems", JSON.stringify(state));
+            return update;
           } else {
             return item;
           }
@@ -80,13 +82,18 @@ export const cartSlice = createSlice({
       });
     },
     deleteById: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       const currentState = current(state);
-      console.log("hello current state", currentState);
-      const index = currentState.cartItems.findIndex(
-        (item) => item.id === action.payload.id
-      );
-      console.log("index", index);
+
+      const check = currentState.cartItems.includes(action.payload);
+      if (check) {
+        currentState.cartItems.map((item, index, arr) => {
+          if (action.payload._id === item._id) {
+            state.cartItems.splice(index, 1);
+            localStorage.setItem("cartItems", JSON.stringify(state));
+          }
+        });
+      }
     },
     getTotal: (state) => {
       const currentState = current(state);

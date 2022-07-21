@@ -33,7 +33,7 @@ const CheckOut = () => {
   };
   useEffect(() => {
     const total = cartItems?.map((item) => {
-      return item?.price * item?.quantity;
+      return item?.Price * item?.quantity;
     });
     const totalPriceCount = total?.reduce((prev, next) => {
       return prev + next;

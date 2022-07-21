@@ -92,6 +92,7 @@ const Products = () => {
                     ${product.Price}
                   </p>
                   <p
+                    style={{ cursor: "pointer" }}
                     onClick={() => handleAddToCart(product)}
                     className={` "add_to_cart_btn"  }`}
                   >

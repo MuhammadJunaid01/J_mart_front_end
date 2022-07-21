@@ -12,15 +12,18 @@ import SweetPagination from "sweetpagination";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { useForm } from "react-hook-form";
+
 import {
   allProducts,
   useGetAllProductsQuery,
+  useReviewProductsMutation,
 } from "../redux/reduicers/products/inedx";
 import Loader from "./Loader";
 const Product = () => {
   const navigate = useNavigate();
   const { data, isLoading, isSuccess } = useGetAllProductsQuery();
-
+  const { register, handleSubmit, reset } = useForm();
   const [reveiw, setReveiw] = useState(false);
   const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
   const [pageData, setPageData] = useState(new Array(2).fill());
@@ -30,7 +33,15 @@ const Product = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.currentUser);
-
+  const [
+    reviewProducts,
+    {
+      data: reveiwData,
+      isSuccess: reveiwsuccess,
+      isLoading: reviewLoading,
+      isError: reviewError,
+    },
+  ] = useReviewProductsMutation();
   const result = data?.data.find((item) => item._id === id);
 
   useEffect(() => {
@@ -57,7 +68,17 @@ const Product = () => {
   if (isLoading) {
     return <Loader />;
   }
-  console.log(result);
+  const handleReviewSubmit = (data) => {
+    console.log(data.text);
+    const body = {
+      id: result._id,
+      text: data.text,
+    };
+    reviewProducts(body);
+
+    reset();
+  };
+  console.log("review data", result.reviews);
   return (
     <div style={{ padding: "40px 17px" }}>
       <Grid container spacing={2}>
@@ -242,7 +263,7 @@ const Product = () => {
                 color: "#000000",
               }}
             >
-              Reviews (0)
+              Reviews ({result?.reviews?.length})
             </p>
             <div
               style={{
@@ -281,9 +302,65 @@ const Product = () => {
               </button>
             </div>
             {/* review container */}
-            {reveiw ? (
+            {reveiw && (
               <div>
                 <h2>say hello</h2>
+                <form onSubmit={handleSubmit(handleReviewSubmit)}>
+                  <textarea
+                    style={{
+                      maxWidth: "100%",
+                      minWidth: "100%",
+                      minHeight: "60px",
+                      maxHeight: "120px",
+                      outline: "none",
+                      border: "1px solid gainsboro",
+                      width: "100%",
+                      padding: "9px 0px",
+                      borderRadius: "3px",
+                      fontSize: "18px",
+                      boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+                    }}
+                    {...register("text", {
+                      required: true,
+                    })}
+                  ></textarea>
+
+                  <input
+                    style={{
+                      border: "none",
+                      padding: "3px 20px",
+                      borderRadius: "2px",
+                      backgroundColor: "#10B981",
+                      fontSize: "17px",
+                      fontWeight: "400",
+                      fontFamily: "cursive",
+                      cursor: "pointer",
+                    }}
+                    type="submit"
+                  />
+                </form>
+              </div>
+            )}
+            {result?.reviews?.length >= 0 ? (
+              <div>
+                {result.reviews?.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <i
+                        style={{
+                          display: "block",
+                          fontFamily: "'Trebuchet MS', 'sans-serif'",
+                          fontWeight: "400",
+                          fontSize: "17px",
+                          color: "#666666",
+                          marginBottom: "5px",
+                        }}
+                      >
+                        {item.reveiw}
+                      </i>
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div
