@@ -8,9 +8,9 @@ import "../assets/styles/slider.css";
 
 import banner1 from "../assets/images/desktop1.jpg";
 import banner2 from "../assets/images/desktop2.jpg";
-import banner3 from "../assets/images/laptop2.jpg";
-import banner4 from "../assets/images/tablet1.jpg";
-import banner5 from "../assets/images/ipad2.jpg";
+import banner3 from "../assets/images/ipad1.jpg";
+import banner4 from "../assets/images/ipad2.jpg";
+import banner5 from "../assets/images/laptop2.jpg";
 import Offer from "../pages/offer/Offer";
 const SliderBanner = () => {
   const [slide, setSlide] = useState(0);

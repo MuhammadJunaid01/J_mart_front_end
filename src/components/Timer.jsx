@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "../assets/styles/timer.css";
 import useAuth from "../hooks/useAuth";
 import { timerHelper } from "../redux/helper/timerHelper";
@@ -53,6 +54,7 @@ const Timer = (...props) => {
   useEffect(() => {
     myInterval(props);
   }, [seconds]);
+
   return (
     <div
       onClick={() => navigate(`/product/${props[0]?.data._id}`)}

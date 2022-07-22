@@ -8,10 +8,10 @@
 
 .side-drawer {
   position: fixed;
-  height: 75vh;
+  height: 540px;
   padding-bottom: 40px;
   background-color: #f5f6f875;
-  top: 15%;
+  top: 10%;
   right: 0;
   width: 30%;
   z-index: 200;

@@ -30,7 +30,7 @@ const Offer = () => {
       </div>
     );
   }
-
+  console.log("offer data", data);
   return (
     <div style={{ cursor: "pointer" }} className="offer_container">
       <div className="offer_title">
@@ -61,10 +61,7 @@ const Offer = () => {
             <Grid container key={i}>
               <Grid key={i} item xs={12} md={3}>
                 <div className="offer_image">
-                  <img
-                    src={oferUrlImage + item.ProductImage}
-                    alt="offer_image"
-                  />
+                  <img src={item.ProductImage} alt="offer_image" />
                 </div>
               </Grid>
               <Grid item xs={12} md={6}>
@@ -73,7 +70,7 @@ const Offer = () => {
                 </div>
               </Grid>
               <Grid item xs={12} md={3}>
-                <CopyToClipBoard />
+                <CopyToClipBoard copun={item.copunCode} />
               </Grid>
             </Grid>
           </div>

@@ -110,3 +110,6 @@
   background-color: #2110b991;
   bottom: -2px;
 }
+.user_undifined {
+  pointer-events: none;
+}

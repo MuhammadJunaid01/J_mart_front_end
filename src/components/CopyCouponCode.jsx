@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import useClipboard from "react-hook-clipboard";
 import "../assets/styles/copyCopun.css";
-const CopyToClipBoard = () => {
+const CopyToClipBoard = ({ copun }) => {
   const [clipboard, copyToClipboard] = useClipboard();
-  const [clip, setClip] = useState("J_MART02");
+  const [clip, setClip] = useState(copun);
   const [check, setCheck] = useState(false);
   const copy = () => {
     copyToClipboard(clip);

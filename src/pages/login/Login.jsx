@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const Login = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.currentUser);
+  // const { user } = useSelector((state) => state.currentUser);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [loginUser, { data, isSuccess, isError, error, isLoading }] =
@@ -29,7 +29,7 @@ const Login = () => {
       dispatch(updateUser(data.user));
     }
   }, [data, dispatch]);
-
+  // console.log(data);
   return (
     <div style={{ padding: "0px 0px" }}>
       <Grid container>

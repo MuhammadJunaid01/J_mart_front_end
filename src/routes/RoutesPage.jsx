@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Chat from "../components/Chat";
 import AddProducts from "../components/dashBoard/AddProducts";
@@ -20,7 +22,14 @@ import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Notfound from "../pages/notFound/Notfound";
 import Register from "../pages/register/Register";
+import { getCurrentUser } from "../redux/reduicers/auth/auth";
+// import PrivateRoute from "./PrivateRoute";
 const RoutesPage = () => {
+  const dispatch = useDispatch();
+  const { isValidate, user } = useSelector((state) => state.currentUser);
+  useEffect(() => {
+    // dispatch(getCurrentUser());
+  }, []);
   return (
     <div>
       <Router>

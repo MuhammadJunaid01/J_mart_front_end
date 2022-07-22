@@ -9,7 +9,7 @@ export const orderApi = createApi({
     createOrder: builder.mutation({
       query: (data) => {
         return {
-          url: "http://localhost:5000/order",
+          url: "http://localhost:5000/payment",
           body: data,
           method: "POST",
         };

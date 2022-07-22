@@ -1,6 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import jwt_decode from "jwt-decode";
+import { toast } from "react-toastify";
 
 export const currentUserSlice = createSlice({
   name: "user/getCurrentUser/getCurrentUser",
@@ -13,17 +14,27 @@ export const currentUserSlice = createSlice({
       const user = JSON.parse(localStorage.getItem("user"));
       // console.log("user", user);
       state.user = user;
+      state.isValidate = true;
+
       const token = user?.token;
       const { exp } = jwt_decode(token);
       const expirationTime = exp * 1000 - 6000;
       if (Date.now() >= expirationTime) {
-        //write expiration code
-        //localstorage remove item user
-        //history push('/login)
+        state.isValidate = false;
+        toast.warn("your token is expire! Please login again", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
       return state;
     },
     updateUser: (state, actions) => {
+      console.log("hello user redux", actions.payload);
       const user = actions.payload;
       localStorage.setItem("user", JSON.stringify(user));
       return state;
