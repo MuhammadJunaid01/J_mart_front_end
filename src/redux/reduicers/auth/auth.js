@@ -12,7 +12,6 @@ export const currentUserSlice = createSlice({
   reducers: {
     getCurrentUser: (state, actions) => {
       const user = JSON.parse(localStorage.getItem("user"));
-      // console.log("user", user);
       state.user = user;
       state.isValidate = true;
 

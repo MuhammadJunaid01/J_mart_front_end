@@ -1,0 +1,15 @@
+.admin_message {
+  background-color: red;
+}
+.admin_message_content {
+  max-width: 40%;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  overflow-wrap: break-word;
+  background-color: #e7e7e7;
+  font-family: "Roboto", sans-serif;
+}
+.user_message {
+  background-color: blueviolet;
+}

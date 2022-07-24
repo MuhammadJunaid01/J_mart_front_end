@@ -105,6 +105,22 @@ export const cartSlice = createSlice({
         return prev + next;
       }, 0);
     },
+    applyCopun: (state, action) => {
+      console.log("copun apply payload", action.payload);
+      const currentState = current(state);
+      const find = currentState.cartItems.map((item) => {
+        if (item.copunCode === action.payload) {
+          // item.appliyed = "true";
+          Object.assign({}, item, { applied: true });
+          console.log("hello cart items match", item);
+          const total = item.quantity * item.Price;
+          console.log("total price ", total);
+          console.log("total price ", total / Number(item.percentage));
+          return item;
+        }
+      });
+      // console.log("find items", find);
+    },
   },
 });
 export const {
@@ -114,5 +130,6 @@ export const {
   decreseById,
   deleteById,
   getTotal,
+  applyCopun,
 } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -1,6 +1,10 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Chat from "../components/Chat";
 import AddProducts from "../components/dashBoard/AddProducts";
 import CheckOut from "../components/dashBoard/CheckOut";
@@ -22,14 +26,14 @@ import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Notfound from "../pages/notFound/Notfound";
 import Register from "../pages/register/Register";
-import { getCurrentUser } from "../redux/reduicers/auth/auth";
-// import PrivateRoute from "./PrivateRoute";
+import ReactGA from "react-ga4";
 const RoutesPage = () => {
-  const dispatch = useDispatch();
-  const { isValidate, user } = useSelector((state) => state.currentUser);
+  // const location = useLocation();
   useEffect(() => {
-    // dispatch(getCurrentUser());
-  }, []);
+    ReactGA.initialize("UA-209409172-1");
+    ReactGA.pageview(window.location.pathname);
+  }, [window.location.pathname]);
+  console.log(window.location.pathname);
   return (
     <div>
       <Router>

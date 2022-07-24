@@ -20,6 +20,7 @@ import {
   useReviewProductsMutation,
 } from "../redux/reduicers/products/inedx";
 import Loader from "./Loader";
+import { addToCart } from "../redux/reduicers/cart/cart";
 const Product = () => {
   const navigate = useNavigate();
   const { data, isLoading, isSuccess } = useGetAllProductsQuery();
@@ -32,7 +33,6 @@ const Product = () => {
   const { products } = useSelector((state) => state.products);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.currentUser);
   const [
     reviewProducts,
     {
@@ -45,7 +45,6 @@ const Product = () => {
   const result = data?.data.find((item) => item._id === id);
 
   useEffect(() => {
-    dispatch(getCurrentUser());
     dispatch(allProducts);
   }, [id]);
   const handleReview = () => {
@@ -79,6 +78,9 @@ const Product = () => {
     reset();
   };
   console.log("review data", result.reviews);
+  const handleAddTocart = () => {
+    dispatch(addToCart(result));
+  };
   return (
     <div style={{ padding: "40px 17px" }}>
       <Grid container spacing={2}>
@@ -205,7 +207,7 @@ const Product = () => {
               </div>
 
               <div>
-                <button>
+                <button onClick={handleAddTocart}>
                   <LibraryAddIcon />
                 </button>
               </div>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import "../../assets/styles/products.css";
+import ReactGA from "react-ga4";
 
 import { addToCart } from "../../redux/reduicers/cart/cart";
 import DrawerCart from "../../components/DrawerCart";
@@ -18,6 +19,9 @@ import Loader from "../../components/Loader";
 
 const Products = () => {
   const navigate = useNavigate();
+  // const TRACKING_ID = "UA-209409172-1";
+  // ReactGA.initialize(TRACKING_ID);
+
   const { data, isError, isSuccess, isLoading } = useGetAllProductsQuery();
   const { trackingData } = useSelector((state) => state.traker);
   const disepatch = useDispatch();
@@ -32,6 +36,11 @@ const Products = () => {
   const handleNavigate = (product) => {
     navigate(`/product/${product._id}`);
     disepatch(traking(product));
+    // ReactGA.event({
+    //   category: "products",
+    //   action: "productsClick",
+    //   label: "bookMarks",
+    // });
   };
   if (isLoading) {
     return <Loader />;

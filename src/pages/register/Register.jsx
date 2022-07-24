@@ -38,18 +38,17 @@ const Register = memo(() => {
       name: name,
       email: email,
       password: password,
+      role: false,
     };
     addUser(data);
   };
-  // if (data) {
-  //   localStorage.setItem("user", JSON.stringify(data));
-  // }
+
   useEffect(() => {
     if (data) {
-      dispatch(updateUser(data.user));
+      dispatch(updateUser(data.data));
     }
   }, [data]);
-  console.log("user data", data);
+  console.log("user data", data?.data);
   return (
     <div style={{ backgroundColor: "white", padding: "20px 0px" }}>
       <Grid container spacing={2}>

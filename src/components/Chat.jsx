@@ -3,25 +3,60 @@ import { io } from "socket.io-client";
 import { v4 as uuid } from "uuid";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import SendIcon from "@mui/icons-material/Send";
+import { getCurrentUser } from "../redux/reduicers/auth/auth";
+import { useDispatch, useSelector } from "react-redux";
+import "../assets/styles/chat.css";
 const Chat = () => {
   const socket = io("http://localhost:5000");
-
+  const dispatch = useDispatch();
+  const { isValidate, user } = useSelector((state) => state.currentUser);
   const [msg, setMsg] = useState("");
-  const [msgReceive, setMsgReceive] = useState("");
+  const [users, setUsers] = useState([]);
+  const [msgReceive, setMsgReceive] = useState([]);
+  const [admin, setAdmin] = useState(undefined);
+  const reciveMessage = [];
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (msg === "") {
+      alert("please wrote somithing!");
+      return;
+    }
     const message = {
-      userID: 1234566,
+      to: admin,
+      from: user,
       msg: msg,
     };
     socket.emit("message", message);
+    setMsg("");
   };
   useEffect(() => {
-    socket.on("send", (data) => {
-      setMsgReceive(data.msg);
-      console.log("hello use effect", data);
+    if (user) {
+      socket.emit("add-user", user);
+    }
+    socket.on("users", (data) => {
+      setUsers(data);
     });
-  }, [socket]);
+    users.map((user) => {
+      if (user.isAdmin) {
+        setAdmin(user);
+      }
+    });
+    socket.on("msgSend", (data) => {
+      const admin = data.from.isAdmin ? true : false;
+
+      reciveMessage.push({ admin, message: data.msg });
+      setMsgReceive(reciveMessage);
+    });
+  }, [users.length, user, reciveMessage.length]);
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, []);
+  if (user === undefined) {
+    return <h1>Loading...............</h1>;
+  }
+
+  console.log("msgReceive", msgReceive);
   return (
     <div
       style={{
@@ -49,9 +84,36 @@ const Chat = () => {
         </p>
       </div>
       {/* message body */}
-      <div>
-        <p>{msgReceive}</p>
+      <div style={{ width: "100%" }}>
+        {msgReceive.map((data, index) => {
+          console.log("hello dxata", data);
+          return (
+            <div key={index}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p className={data.admin ? "admin_message" : "user_message"}>
+                  {data.message}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
+      {users &&
+        users.map((user, index) => {
+          return (
+            <div key={index}>
+              <li>{user.username}</li>
+            </div>
+          );
+        })}
+
+      <div></div>
 
       <form
         style={{
