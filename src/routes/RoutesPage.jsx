@@ -5,7 +5,6 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import Chat from "../components/Chat";
 import AddProducts from "../components/dashBoard/AddProducts";
 import CheckOut from "../components/dashBoard/CheckOut";
 import Coustomers from "../components/dashBoard/Coustomers";
@@ -58,7 +57,6 @@ const RoutesPage = () => {
           <Route path="dashboard" element={<DashBoardLayoute />}>
             <Route path="home" element={<DashBoardHome />} />
             <Route path="user" element={<Users />} />
-            <Route path="chat" element={<Chat />} />
             <Route path="products" element={<DashBoardProducts />} />
             <Route
               path="productsDetail"

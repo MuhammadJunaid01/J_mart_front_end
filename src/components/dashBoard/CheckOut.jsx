@@ -12,7 +12,6 @@ import jwt_decode from "jwt-decode";
 
 import { useCreateOrderMutation } from "../../redux/reduicers/order";
 const CheckOut = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { cartItems, quantity, totalAmount } = useSelector(
     (state) => state.cart
@@ -46,13 +45,8 @@ const CheckOut = () => {
     }, 0);
     setTotalPrice(totalPriceCount);
     dispatch(getTotal());
-    dispatch(getCurrentUser());
   }, [cartItems, quantity, totalAmount, applyCode]);
   useEffect(() => {
-    if (!isValidate) {
-      navigate("/login");
-    }
-
     const test = totalPrice / 100;
     const taxCoutn = test * 6;
     setTax(taxCoutn);

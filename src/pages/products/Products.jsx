@@ -16,6 +16,7 @@ import {
   useGetAllProductsQuery,
 } from "../../redux/reduicers/products/inedx";
 import Loader from "../../components/Loader";
+import Chat from "../../components/Chat";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -47,17 +48,20 @@ const Products = () => {
   }
   return (
     <div style={{ marginTop: "50px" }}>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 1 }}>
         {data?.data.map((product, i) => (
           <Grid key={i} item xs={12} md={3}>
             <div
               style={{
-                height: "260px",
+                height: "270px",
+                width: "100%",
+                boxSizing: "border-box",
                 boxShadow:
                   "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
                 backgroundColor: "white",
                 borderRadius: "7px",
                 padding: "5px 10px",
+                margin: "0px",
               }}
             >
               <div
@@ -115,6 +119,7 @@ const Products = () => {
       </Grid>
 
       <DrawerCart />
+      <Chat />
     </div>
   );
 };

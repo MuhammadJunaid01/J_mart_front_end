@@ -26,8 +26,9 @@ const Timer = (...props) => {
       const data = timerHelper(payload, status);
       if (data.expire.length > 0) {
         setActiveOffer(true);
-
         data.expire.forEach((el) => {
+          console.log("ele expire", el);
+
           setTimeout(() => {
             updateProducts(el);
           }, 20000);

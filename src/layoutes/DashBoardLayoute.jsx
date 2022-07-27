@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DashboardNavbar from "../components/DashboardNavbar";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ForumIcon from "@mui/icons-material/Forum";
@@ -19,7 +19,9 @@ import CollapsebleItems from "../components/CollapsebleItems";
 import authenticationItem from "../assets/data/authenticationItem";
 import emailItem from "../assets/data/email";
 import Footer from "../pages/footer/Footer";
+import { useEffect } from "react";
 const DashBoardLayoute = () => {
+  const navigate = useNavigate();
   const { open } = useAuth();
   const [collapseSidebar, setCollapseSidebar] = useState(true);
   const [pagesSidebar, setPagesSidebar] = useState(true);
@@ -34,6 +36,9 @@ const DashBoardLayoute = () => {
   const controlEmailBar = () => {
     setEmailBar((emailBar) => !emailBar);
   };
+  useEffect(() => {
+    navigate("/dashboard/home");
+  }, []);
   return (
     <div>
       <div>

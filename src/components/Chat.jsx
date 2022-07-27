@@ -1,154 +1,164 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import { v4 as uuid } from "uuid";
-import PersonPinIcon from "@mui/icons-material/PersonPin";
-import SendIcon from "@mui/icons-material/Send";
-import { getCurrentUser } from "../redux/reduicers/auth/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "../assets/styles/chat.css";
+import User from "../assets/images/user_chat.jpg";
 const Chat = () => {
-  const socket = io("http://localhost:5000");
-  const dispatch = useDispatch();
+  const socket = io.connect("http://localhost:5000");
   const { isValidate, user } = useSelector((state) => state.currentUser);
-  const [msg, setMsg] = useState("");
-  const [users, setUsers] = useState([]);
-  const [msgReceive, setMsgReceive] = useState([]);
-  const [admin, setAdmin] = useState(undefined);
-  const reciveMessage = [];
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
-    if (msg === "") {
-      alert("please wrote somithing!");
-      return;
-    }
-    const message = {
-      to: admin,
-      from: user,
+  const [chatOPen, setChatOpen] = useState(false);
+  const { users } = useSelector((state) => state.user);
+  const [introduice, setIntroduice] = useState("");
+  // const [user, setUser] = useState(undefined);
+  const [msg, setMsg] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [admin, setAdmin] = useState(undefined);
+  const handleChatOpen = () => {
+    setChatOpen((prev) => !prev);
+  };
+  console.log("chatopen", chatOPen);
+
+  const registerUserSocket = () => {};
+
+  useEffect(() => {
+    socket.on("private", (data) => {
+      const receive = [...messages];
+      alert("");
+      receive.push(data);
+      setMessages(receive);
+
+      console.log("message receive data ", data);
+    });
+  }, [messages, socket]);
+  const sendMessage = () => {
+    socket.emit("msg", {
+      senderId: user._id,
+      senderName: user.username,
+      receiverId: admin._id,
       msg: msg,
-    };
-    socket.emit("message", message);
-    setMsg("");
+    });
   };
   useEffect(() => {
-    if (user) {
-      socket.emit("add-user", user);
-    }
-    socket.on("users", (data) => {
-      setUsers(data);
-    });
-    users.map((user) => {
+    users?.forEach((user) => {
       if (user.isAdmin) {
         setAdmin(user);
       }
     });
-    socket.on("msgSend", (data) => {
-      const admin = data.from.isAdmin ? true : false;
-
-      reciveMessage.push({ admin, message: data.msg });
-      setMsgReceive(reciveMessage);
-    });
-  }, [users.length, user, reciveMessage.length]);
-  useEffect(() => {
-    dispatch(getCurrentUser());
-  }, []);
-  if (user === undefined) {
-    return <h1>Loading...............</h1>;
-  }
-
-  console.log("msgReceive", msgReceive);
+  }, [users, admin, user]);
+  console.log("messages", messages);
+  const handleRegester = () => {
+    socket.emit("user", user._id);
+  };
   return (
-    <div
-      style={{
-        padding: "20px 10px",
-        minHeight: "90vh",
-        position: "relative",
-        width: "100%",
-        boxSizing: "border-box",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          boxShadow:
-            "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-          padding: "10px 6px",
-          borderRadius: "7px",
-        }}
-      >
-        <h4>Junaid</h4>
-        <p>
-          <PersonPinIcon />
-        </p>
+    <div className="chat_container">
+      <div onClick={handleChatOpen} className="chat_contaner_main">
+        <span>Chat With jMart</span>
+
+        <div onClick={handleRegester} className="chat_icon">
+          <h1>
+            <ChatBubbleIcon />
+          </h1>
+          <h2>
+            <ModeEditIcon />
+          </h2>
+        </div>
       </div>
-      {/* message body */}
-      <div style={{ width: "100%" }}>
-        {msgReceive.map((data, index) => {
-          console.log("hello dxata", data);
-          return (
-            <div key={index}>
-              <div
+      {/*chat body  */}
+      <div className={chatOPen ? "chat_body open" : "chat_body"}>
+        <div className="chat_body_header">
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <img
+              style={{ height: "50px", width: "50px", borderRadius: "50%" }}
+              src={User}
+              alt="user_logo"
+            />
+            <div style={{ marginLeft: "10px", color: "white" }}>
+              <h4>Chat with </h4>
+              <h4>jMart</h4>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <div className="chat_notification">
+              <h1
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
+                  color: "white",
+                  cursor: "pointer",
+                  padding: "0px",
+                  margin: "0px",
                 }}
               >
-                <p className={data.admin ? "admin_message" : "user_message"}>
-                  {data.message}
-                </p>
-              </div>
+                <MoreVertIcon />
+              </h1>
             </div>
-          );
-        })}
+            <h1
+              style={{ cursor: "pointer", color: "white" }}
+              onClick={handleChatOpen}
+            >
+              <KeyboardArrowDownIcon style={{ fontSize: "34px" }} />
+            </h1>
+          </div>
+        </div>
+        {/* message body */}
+        {user ? (
+          <div></div>
+        ) : (
+          <div>
+            {" "}
+            <input
+              onBlur={(e) => setIntroduice(e.target.value)}
+              style={{
+                padding: "6px 8px",
+                outline: "none",
+                border: "none",
+                marginTop: "10px",
+                marginLeft: "10px",
+                borderRadius: "4px",
+              }}
+              type="text"
+              placeholder="Please Intoduce your Self"
+            />
+            <button
+              onClick={registerUserSocket}
+              style={{
+                border: "none",
+                backgroundColor: "white",
+                cursor: "pointer",
+                padding: "6px 8px",
+              }}
+            >
+              Submit
+            </button>
+          </div>
+        )}
+        {user && (
+          <div className="message_body">
+            <h1>hello</h1>
+            {messages.map((msg) => {
+              return (
+                <div>
+                  <p className={msg.from.isAdmin ? "chat_admin" : "chat_user"}>
+                    {msg.msg}
+                  </p>
+                </div>
+              );
+            })}
+            <div className="write_message_input">
+              <input
+                onBlur={(e) => setMsg(e.target.value)}
+                type="text"
+                placeholder="Write Your Message::"
+              />
+              <button onClick={sendMessage}>Send</button>
+            </div>
+          </div>
+        )}
       </div>
-      {users &&
-        users.map((user, index) => {
-          return (
-            <div key={index}>
-              <li>{user.username}</li>
-            </div>
-          );
-        })}
-
-      <div></div>
-
-      <form
-        style={{
-          position: "absolute",
-          bottom: "10px",
-          width: "90%",
-          overflow: "hidden",
-        }}
-        onSubmit={handleSubmit}
-      >
-        <input
-          onBlur={(e) => setMsg(e.target.value)}
-          style={{
-            outline: "none",
-            border: "1px solid gainsboro",
-            width: "80%",
-            padding: "9px 0px",
-            borderRadius: "3px",
-            height: "70px",
-          }}
-          type="text"
-        />
-        <button
-          style={{
-            color: "black",
-            padding: "4px 0px",
-            cursor: "pointer",
-            border: "none",
-            borderRadius: "5px",
-          }}
-          type="submit"
-        >
-          <SendIcon style={{ fontSize: "30px", marginTop: "127px" }} />
-        </button>
-      </form>
     </div>
   );
 };

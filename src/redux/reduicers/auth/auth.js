@@ -3,6 +3,18 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
 
+export const userSlice = createSlice({
+  name: "userSlice",
+  initialState: {
+    users: [],
+  },
+  reducers: {
+    allUsers: (state, action) => {
+      state.users = action.payload;
+    },
+  },
+});
+
 export const currentUserSlice = createSlice({
   name: "user/getCurrentUser/getCurrentUser",
   initialState: {
@@ -71,6 +83,10 @@ export const taskApi = createApi({
         };
       },
     }),
+    getAllUsers: builder.query({
+      query: () => "/users",
+      providesTags: ["users"],
+    }),
     createOffer: builder.mutation({
       query: (body) => {
         console.log("add user body", body);
@@ -89,7 +105,10 @@ export const {
   useAddUserMutation,
   useCreateOfferMutation,
   useLoginUserMutation,
+  useGetAllUsersQuery,
 } = taskApi;
 
 export const { getCurrentUser, updateUser } = currentUserSlice.actions;
 export default currentUserSlice.reducer;
+export const { allUsers } = userSlice.actions;
+export const usersSlice = userSlice.reducer;
