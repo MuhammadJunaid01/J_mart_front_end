@@ -14,6 +14,8 @@ import {
   getBestSaleProducts,
   useGetBestSaleProductsQuery,
 } from "./redux/reduicers/products/inedx";
+import BestSale from "./components/BestSale";
+import { useLocation } from "react-router-dom";
 function App() {
   const history = createBrowserHistory();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -27,7 +29,7 @@ function App() {
       setIsLoggedIn(false);
     }
     dispatch(allUsers(data));
-    dispatch(getBestSaleProducts(bestSale));
+    dispatch(getBestSaleProducts(bestSale?.data));
     dispatch(getCurrentUser());
   }, [isLoggedIn, data, bestSale]);
   return (
@@ -43,7 +45,6 @@ function App() {
         draggable
         pauseOnHover
       />
-      {/* Same as */}
 
       <Context>
         <RoutesPage />

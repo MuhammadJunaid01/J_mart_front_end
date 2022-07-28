@@ -12,6 +12,7 @@ import HomeRoutes from "../../components/HomeRoutes";
 import TopRated from "../../components/TopRated";
 import BestSale from "../../components/BestSale";
 import MarqueeSlider from "../../components/Testimonal";
+import QuickVeiw from "../../components/QuickVeiw";
 const Home = () => {
   const [data, setData] = useState([]);
   const { openDrawerBox } = useSelector((state) => state.draw);
@@ -31,16 +32,17 @@ const Home = () => {
           <Category />
         </Grid>
         <Grid item xs={12} md={10}>
-          {/* <Products />
-          <DrawerCart /> */}
-
           <HomeRoutes />
         </Grid>
 
         <Grid item xs={12} md={12}>
           <MarqueeSlider />
         </Grid>
+        <Grid item xs={12} md={12}>
+          <BestSale />
+        </Grid>
       </Grid>
+      {/* <QuickVeiw /> */}
     </div>
   );
 };

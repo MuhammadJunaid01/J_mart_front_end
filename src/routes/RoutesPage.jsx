@@ -95,7 +95,6 @@ const RoutesPage = () => {
               </HomeLayoute>
             }
           />
-          {/* just testing */}
 
           <Route
             path="/account"
