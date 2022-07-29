@@ -1,25 +1,55 @@
-.dash_board_nvbar_container {
+.dashboard_navbar_conatiner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+  background-color: white;
+  padding: 15px 10px;
+  position: relative;
 }
-.tooltip > .tooltipIcon {
-  padding: 10px;
-  text-align: center;
+.dasboard_navbar_logo > i {
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 600;
+  font-size: 29px;
+  font-family: monospace;
+  cursor: pointer;
+}
+.dashboard_search_bar {
   display: flex;
   align-items: center;
-  color: gainsboro;
-  cursor: pointer;
-  background-size: cover;
+  position: relative;
 }
-.tooltip .tooltipIcon:hover {
-  background-color: gainsboro;
-  color: black;
+.dashboard_search_bar > input {
+  position: relative;
+  display: block;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  padding: 7px 10px;
+  width: 80%;
+  outline: none;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.dashboard_search_bar > span {
+  position: absolute;
+  cursor: pointer;
+  right: 2;
+}
+.dashoard_notification_profile {
+  display: flex;
+  align-items: center;
+}
+.dashoard_notification_profile > img {
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+  cursor: pointer;
 }
