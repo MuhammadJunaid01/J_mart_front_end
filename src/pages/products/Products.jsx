@@ -21,6 +21,7 @@ import {
 import Loader from "../../components/Loader";
 import Chat from "../../components/Chat";
 import { quickVeiw } from "../../redux/reduicers/quickVeiw/quickVeiw";
+import QuickVeiw from "../../components/QuickVeiw";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -31,7 +32,6 @@ const Products = () => {
   const { quickVeiw: quick } = useSelector((state) => state.quickVeiw);
 
   const { products } = useSelector((state) => state.products);
-  const { trackingData } = useSelector((state) => state.traker);
   const dispatch = useDispatch();
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
@@ -85,7 +85,7 @@ const Products = () => {
                 >
                   {product.ProductName.slice(0, 25)}...
                 </p>
-                <strong>${product.Price}</strong>
+                <strong>Price: ${product.Price}</strong>
               </div>
               <div className="add_to_card_quick_view">
                 <p onClick={() => handleAddToCart(product)}>
@@ -99,89 +99,7 @@ const Products = () => {
           </Grid>
         ))}
         <Grid item xs={12} md={6}>
-          <div
-            className={quick ? " quic_veiw_content open" : " quic_veiw_content"}
-          >
-            <div className="quic_veiw_close">
-              <p onClick={() => dispatch(quickVeiw())}>X</p>
-            </div>
-
-            <div className="quick_veiw_container">
-              <div className="quic_veiw_content_content">
-                <img src={quickVeiwData?.ProductImage} alt="" />
-              </div>
-
-              <div className="quick_veiw_info">
-                <p>{quickVeiwData?.ProductName}</p>
-                <p
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    fontSize: "12px",
-                    marginTop: "12px",
-                    lineHeight: "12px",
-                    color: "#919191",
-                  }}
-                >
-                  <StarBorderIcon
-                    style={{ fontSize: "15px", color: "#9ac93c" }}
-                  />
-                  <StarBorderIcon
-                    style={{ fontSize: "15px", color: "#9ac93c" }}
-                  />
-                  <StarBorderIcon
-                    style={{ fontSize: "15px", color: "#9ac93c" }}
-                  />
-                  <StarBorderIcon
-                    style={{ fontSize: "15px", color: "#9ac93c" }}
-                  />
-                  <StarBorderIcon
-                    style={{ fontSize: "15px", color: "#9ac93c" }}
-                  />{" "}
-                  {quickVeiwData?.reviews.length} reviews
-                </p>
-                <p style={{ marginTop: "12px", fontSize: "14px" }}>
-                  Regular Price: ${quickVeiwData?.Price}
-                </p>
-                <button
-                  onClick={() => dispatch(addToCart(quickVeiwData))}
-                  style={{
-                    border: "none",
-                    marginTop: "33px",
-                    backgroundColor: "#9AC93C",
-                    color: "white",
-                    cursor: "pointer",
-                    padding: "5px 40px",
-                    fontSize: "17px",
-                    borderRadius: "3px",
-                  }}
-                >
-                  Add to Cart
-                </button>
-                <p
-                  style={{
-                    color: "#212529",
-                    fontSize: "18px",
-                    margin: "12px 0px",
-                    lineHeight: "18px",
-                    fontWeight: "700",
-                  }}
-                >
-                  Quick Overveiw
-                </p>
-                <p
-                  style={{
-                    fontFamily: "monospace",
-                    fontWeight: "600",
-                    fontSize: "16px",
-                    color: "#212529",
-                  }}
-                >
-                  {quickVeiwData?.description}
-                </p>
-              </div>
-            </div>
-          </div>
+          <QuickVeiw data={quickVeiwData} />
         </Grid>
       </Grid>
 

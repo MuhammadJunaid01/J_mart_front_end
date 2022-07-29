@@ -12,7 +12,6 @@ import HomeRoutes from "../../components/HomeRoutes";
 import TopRated from "../../components/TopRated";
 import BestSale from "../../components/BestSale";
 import MarqueeSlider from "../../components/Testimonal";
-import QuickVeiw from "../../components/QuickVeiw";
 const Home = () => {
   const [data, setData] = useState([]);
   const { openDrawerBox } = useSelector((state) => state.draw);
@@ -42,7 +41,6 @@ const Home = () => {
           <BestSale />
         </Grid>
       </Grid>
-      {/* <QuickVeiw /> */}
     </div>
   );
 };
