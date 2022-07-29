@@ -8,24 +8,23 @@ import FitScreenIcon from "@mui/icons-material/FitScreen";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import QuickVeiw from "./QuickVeiw";
 import { quickVeiw } from "../redux/reduicers/quickVeiw/quickVeiw";
+import Loader from "./Loader";
 
 const BestSale = () => {
   const dispatch = useDispatch();
   const { bestSale: data } = useSelector((state) => state.bestSale);
-  // console.log("hello best sale", bestSale);
   const [bestSale, setBestSale] = useState([]);
-  const [quickVeiwData, setQuickVeiwData] = useState(undefined);
   useEffect(() => {
     const result = data?.map((item, index) => {
       return setBestSale(item[index].products);
     });
   }, [data]);
   const handleQuickVeiw = (product) => {
-    console.log("hello fitscreen p", product);
-    dispatch(quickVeiw());
-
-    setQuickVeiwData(product);
+    dispatch(quickVeiw(product));
   };
+  if (!data) {
+    return <Loader />;
+  }
   return (
     <div className="best_sale_container">
       <div style={{ borderBottom: "2px solid rgba(128, 128, 128, 0.493)" }}>
@@ -63,7 +62,7 @@ const BestSale = () => {
                   </p>
                 </div>
               </div>
-              <QuickVeiw data={quickVeiwData} />
+              <QuickVeiw />
             </Grid>
           );
         })}

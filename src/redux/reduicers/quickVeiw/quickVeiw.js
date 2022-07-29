@@ -4,12 +4,13 @@ export const quickVeiwSlice = createSlice({
   name: "quickVeiw",
   initialState: {
     quickVeiw: false,
+    product: undefined,
   },
   reducers: {
-    quickVeiw: (state) => {
+    quickVeiw: (state, action) => {
       const currentState = current(state);
       state.quickVeiw = !state.quickVeiw;
-      console.log("hello quick veiw");
+      state.product = action.payload;
     },
   },
 });

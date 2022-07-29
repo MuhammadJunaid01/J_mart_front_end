@@ -29,8 +29,8 @@ export const currentUserSlice = createSlice({
 
       const token = user?.token;
       const { exp } = jwt_decode(token);
-      const expirationTime = exp * 1000 - 6000;
-      if (Date.now() >= expirationTime) {
+      const expirationTime = exp * 1000;
+      if (expirationTime < Date.now()) {
         state.isValidate = false;
         toast.warn("your token is expire! Please login again", {
           position: "top-right",

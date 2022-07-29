@@ -9,11 +9,15 @@ import logo from "../../assets/images/register.gif";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch();
-  // const { user } = useSelector((state) => state.currentUser);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const from = location.state?.from || "/";
+
   const [loginUser, { data, isSuccess, isError, error, isLoading }] =
     useLoginUserMutation();
   const handleSubmit = (e) => {
@@ -24,6 +28,7 @@ const Login = () => {
   useEffect(() => {
     if (data) {
       dispatch(updateUser(data.user));
+      navigate(from, { replace: true });
     }
   }, [data, dispatch]);
   // console.log(data);

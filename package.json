@@ -38,7 +38,7 @@
     "react-stripe-checkout": "^2.6.3",
     "react-timer-hook": "^3.0.5",
     "react-toastify": "^9.0.1",
-    "recharts": "^2.1.10",
+    "recharts": "^2.1.13",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.5.1",
     "sweetpagination": "^1.0.15",

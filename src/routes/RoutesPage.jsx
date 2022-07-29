@@ -26,13 +26,17 @@ import Login from "../pages/login/Login";
 import Notfound from "../pages/notFound/Notfound";
 import Register from "../pages/register/Register";
 import ReactGA from "react-ga4";
+import PrivateRoute from "./PrivateRoute";
+import { useDispatch, useSelector } from "react-redux";
 const RoutesPage = () => {
-  // const location = useLocation();
+  const dispatch = useDispatch();
+  const { isValidate, user } = useSelector((state) => state.currentUser);
+
   useEffect(() => {
     ReactGA.initialize("UA-209409172-1");
     ReactGA.pageview(window.location.pathname);
   }, [window.location.pathname]);
-  console.log(window.location.pathname);
+
   return (
     <div>
       <Router>
@@ -83,7 +87,9 @@ const RoutesPage = () => {
             path="/checkout"
             element={
               <HomeLayoute>
-                <CheckOut />
+                <PrivateRoute user={isValidate}>
+                  <CheckOut />
+                </PrivateRoute>
               </HomeLayoute>
             }
           />

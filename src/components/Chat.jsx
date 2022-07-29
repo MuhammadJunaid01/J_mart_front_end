@@ -21,7 +21,6 @@ const Chat = () => {
   const handleChatOpen = () => {
     setChatOpen((prev) => !prev);
   };
-  console.log("chatopen", chatOPen);
 
   const registerUserSocket = () => {};
 
@@ -50,7 +49,6 @@ const Chat = () => {
       }
     });
   }, [users, admin, user]);
-  console.log("messages", messages);
   const handleRegester = () => {
     socket.emit("user", user._id);
   };

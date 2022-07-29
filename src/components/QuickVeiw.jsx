@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/reduicers/cart/cart";
 import { quickVeiw } from "../redux/reduicers/quickVeiw/quickVeiw";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 
-const QuickVeiw = ({ data }) => {
+const QuickVeiw = () => {
   const dispatch = useDispatch();
-  const { quickVeiw: quick } = useSelector((state) => state.quickVeiw);
-
+  const { quickVeiw: quick, product } = useSelector((state) => state.quickVeiw);
   return (
     <div>
       <div className={quick ? " quic_veiw_content open" : " quic_veiw_content"}>
@@ -17,11 +16,11 @@ const QuickVeiw = ({ data }) => {
 
         <div className="quick_veiw_container">
           <div className="quic_veiw_content_content">
-            <img src={data?.ProductImage} alt="" />
+            <img src={product?.ProductImage} alt="" />
           </div>
 
           <div className="quick_veiw_info">
-            <p>{data?.ProductName}</p>
+            <p>{product?.ProductName}</p>
             <p
               style={{
                 display: "flex",
@@ -38,14 +37,14 @@ const QuickVeiw = ({ data }) => {
               <StarBorderIcon style={{ fontSize: "15px", color: "#9ac93c" }} />
               <StarBorderIcon style={{ fontSize: "15px", color: "#9ac93c" }} />
               <span style={{ marginLeft: "5px" }}>
-                {data?.reviews.length} reviews
+                {product?.reviews.length} reviews
               </span>
             </p>
             <p style={{ marginTop: "12px", fontSize: "14px" }}>
-              Regular Price: ${data?.Price}
+              Regular Price: ${product?.Price}
             </p>
             <button
-              onClick={() => dispatch(addToCart(data))}
+              onClick={() => dispatch(addToCart(product))}
               style={{
                 border: "none",
                 marginTop: "33px",
@@ -78,7 +77,7 @@ const QuickVeiw = ({ data }) => {
                 color: "#212529",
               }}
             >
-              {data?.description}
+              {product?.description}
             </p>
           </div>
         </div>

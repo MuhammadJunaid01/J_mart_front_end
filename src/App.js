@@ -24,10 +24,10 @@ function App() {
   const { data: bestSale } = useGetBestSaleProductsQuery();
   const { data, isLoading, isError } = useGetAllUsersQuery();
   useEffect(() => {
-    if (!isValidate) {
-      history.replace("/login");
-      setIsLoggedIn(false);
-    }
+    // if (!isValidate) {
+    //   history.replace("/login");
+    //   setIsLoggedIn(false);
+    // }
     dispatch(allUsers(data));
     dispatch(getBestSaleProducts(bestSale?.data));
     dispatch(getCurrentUser());

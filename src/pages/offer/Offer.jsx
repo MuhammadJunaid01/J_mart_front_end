@@ -30,7 +30,6 @@ const Offer = () => {
       </div>
     );
   }
-  console.log("offer data", data);
   return (
     <div style={{ cursor: "pointer" }} className="offer_container">
       <div className="offer_title">

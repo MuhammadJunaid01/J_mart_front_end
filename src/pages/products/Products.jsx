@@ -27,7 +27,6 @@ const Products = () => {
   const navigate = useNavigate();
   // const TRACKING_ID = "UA-209409172-1";
   // ReactGA.initialize(TRACKING_ID);
-  const [quickVeiwData, setQuickVeiwData] = useState(undefined);
   const { data, isError, isSuccess, isLoading } = useGetAllProductsQuery();
   const { quickVeiw: quick } = useSelector((state) => state.quickVeiw);
 
@@ -40,7 +39,7 @@ const Products = () => {
     if (data) {
       dispatch(allProducts(data.data));
     }
-  }, [data]);
+  }, [data, quick]);
   const handleNavigate = (product) => {
     navigate(`/product/${product._id}`);
     dispatch(traking(product));
@@ -54,10 +53,9 @@ const Products = () => {
     return <Loader />;
   }
   const handleQuickVeiw = (product) => {
-    dispatch(quickVeiw());
-    setQuickVeiwData(product);
+    dispatch(quickVeiw(product));
+    console.log("quickVeiwData product", product);
   };
-  console.log("quickVeiwData", quickVeiwData);
   return (
     <div className="products_container">
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 1 }}>
@@ -99,7 +97,7 @@ const Products = () => {
           </Grid>
         ))}
         <Grid item xs={12} md={6}>
-          <QuickVeiw data={quickVeiwData} />
+          <QuickVeiw />
         </Grid>
       </Grid>
 
