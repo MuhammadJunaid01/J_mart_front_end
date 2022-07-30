@@ -14,6 +14,17 @@ export const productsSlice = createSlice({
   },
 });
 
+export const bestSaleProductsSlice = createSlice({
+  name: "bestSale",
+  initialState: {
+    bestSale: [],
+  },
+  reducers: {
+    getBestSaleProducts: (state, action) => {
+      state.bestSale = action.payload;
+    },
+  },
+});
 export const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({
@@ -32,10 +43,18 @@ export const productsApi = createApi({
         };
       },
     }),
+    getBestSaleProducts: builder.query({
+      query: () => "/bestSaleProducts",
+    }),
   }),
 });
 
-export const { useGetAllProductsQuery, useReviewProductsMutation } =
-  productsApi;
+export const {
+  useGetAllProductsQuery,
+  useReviewProductsMutation,
+  useGetBestSaleProductsQuery,
+} = productsApi;
 export const { allProducts } = productsSlice.actions;
 export default productsSlice.reducer;
+export const { getBestSaleProducts } = bestSaleProductsSlice.actions;
+export const bestSaleProductsSliceReducer = bestSaleProductsSlice.reducer;

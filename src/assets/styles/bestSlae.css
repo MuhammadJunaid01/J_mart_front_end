@@ -1,0 +1,84 @@
+.best_Sale_product_card {
+  height: 270px;
+  width: 100%;
+  box-sizing: border-box;
+
+  background-color: white;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  padding: 5px 10px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+.best_Sale_product_card:hover {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+.best_sale_container {
+  padding: 20px 0px;
+}
+.best_saleHeader {
+  background-color: #10b981dc;
+  color: white;
+
+  padding: 2px 40px 2px 8px;
+  clip-path: polygon(0 0, 85% 0, 95% 100%, 0% 100%);
+  width: 140px;
+  /* border-bottom: 1px solid rgba(128, 128, 128, 0.493); */
+}
+.best_Sale_product_card_image {
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+.best_Sale_product_card_image img {
+  height: 130px;
+  width: 170px;
+  padding: 6px;
+  border-radius: 11px;
+  -webkit-border-radius: 11px;
+  -moz-border-radius: 11px;
+  -ms-border-radius: 11px;
+  -o-border-radius: 11px;
+  transition: 2s ease-in-out;
+  -webkit-transition: 2s ease-in-out;
+  -moz-transition: 2s ease-in-out;
+  -ms-transition: 2s ease-in-out;
+  -o-transition: 2s ease-in-out;
+}
+.best_Sale_product_card:hover .best_Sale_product_card_image img {
+  transform: scale(1.4);
+  -webkit-transform: scale(1.4);
+  -moz-transform: scale(1.4);
+  -ms-transform: scale(1.4);
+  -o-transform: scale(1.4);
+}
+.best_sale_quick_veiw_container {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  visibility: hidden;
+}
+.best_Sale_product_card:hover .best_sale_quick_veiw_container {
+  visibility: visible;
+}
+.best_sale_quick_veiw_container > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 39px;
+  width: 39px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  background-color: gray;
+  margin-bottom: 8px;
+  cursor: pointer;
+  color: white;
+}

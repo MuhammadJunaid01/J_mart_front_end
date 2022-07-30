@@ -1,0 +1,112 @@
+.quic_veiw_content {
+  position: fixed;
+  /*padding-bottom: 40px;
+  */
+  background-color: white;
+  top: 17%;
+  right: 0;
+  width: 50%;
+  left: 300px;
+  bottom: 10px;
+  z-index: 200;
+  transform: translateY(-160%);
+  -webkit-transform: translateY(-160%);
+  -moz-transform: translateY(-160%);
+  -ms-transform: translateY(-160%);
+  -o-transform: translateY(-160%);
+  transition: transform 1s ease-in;
+  -webkit-transition: transform 1s ease-in;
+  -moz-transition: transform 1s ease-in;
+  -ms-transition: transform 1s ease-in;
+  -o-transition: transform 1s ease-in;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  padding: 20px;
+  overflow: hidden;
+}
+.quic_veiw_content.open {
+  transform: translateY(-0%);
+  background-color: white;
+  /*transform: translateX(100%);
+  */
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  -webkit-transform: translateY(-0%);
+  -moz-transform: translateY(-0%);
+  -ms-transform: translateY(-0%);
+  -o-transform: translateY(-0%);
+  cursor: pointer;
+}
+.quick_veiw_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.quic_veiw_content_content {
+  text-align: center;
+  padding: 20px;
+  width: 50%;
+}
+.quic_veiw_content_content img {
+  width: 100%;
+}
+.quic_veiw_close {
+  display: flex;
+  justify-content: end;
+}
+.quic_veiw_close > p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  background-color: lightslategray;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  color: white;
+  font-weight: 700;
+  font-family: monospace;
+  font-size: 20px;
+}
+.quick_veiw_info {
+  margin-top: 40px;
+  width: 50%;
+}
+.quick_veiw_info:nth-child(1) {
+  font-size: 20px;
+  line-height: 24px;
+  color: #212529;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@media (min-width: 340px) and (max-width: 720px) {
+  .quic_veiw_content {
+    left: 0;
+    width: 70%;
+  }
+  .quic_veiw_content.open {
+    left: 0;
+    width: 70%;
+  }
+  .quick_veiw_container {
+    display: block;
+  }
+  .quick_veiw_info {
+    width: 100%;
+  }
+  .quic_veiw_content_content {
+    width: 100%;
+  }
+}

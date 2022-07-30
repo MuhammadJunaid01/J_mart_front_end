@@ -1,18 +1,18 @@
 import { Grid } from "@mui/material";
 import React, { useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../assets/styles/checkout.css";
 import Register from "../../pages/register/Register";
 import { getCurrentUser } from "../../redux/reduicers/auth/auth";
-import { getTotal } from "../../redux/reduicers/cart/cart";
+import { applyCopun, getTotal } from "../../redux/reduicers/cart/cart";
 import jwt_decode from "jwt-decode";
 
 import { useCreateOrderMutation } from "../../redux/reduicers/order";
 const CheckOut = () => {
-  const navigate = useNavigate();
+  const location = useLocation();
   const { cartItems, quantity, totalAmount } = useSelector(
     (state) => state.cart
   );
@@ -22,6 +22,7 @@ const CheckOut = () => {
 
   const [login, setLogin] = useState(false);
   const [copun, setCopun] = useState(false);
+  const [applyCode, setApplyCode] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
   const [tax, setTax] = useState(0);
   const [success, setSuccess] = useState(true);
@@ -44,13 +45,8 @@ const CheckOut = () => {
     }, 0);
     setTotalPrice(totalPriceCount);
     dispatch(getTotal());
-    dispatch(getCurrentUser());
-  }, [cartItems, quantity, totalAmount]);
+  }, [cartItems, quantity, totalAmount, applyCode]);
   useEffect(() => {
-    if (!isValidate) {
-      navigate("/login");
-    }
-
     const test = totalPrice / 100;
     const taxCoutn = test * 6;
     setTax(taxCoutn);
@@ -66,6 +62,7 @@ const CheckOut = () => {
       // orderBy: user._id,
     };
   };
+
   const makePayment = (token) => {
     const body = {
       token,
@@ -77,7 +74,7 @@ const CheckOut = () => {
     createOrder(body);
   };
   useEffect(() => {
-    if (data.message === "OK") {
+    if (data) {
       localStorage.removeItem("cartItems");
     }
   }, [data]);
@@ -90,6 +87,15 @@ const CheckOut = () => {
 
   console.log("hello user", user);
   console.log("data", data);
+  console.log("location pathname", location.pathname);
+  const handleCpunApply = (e) => {
+    e.preventDefault();
+    if (applyCode === "") {
+      alert("please give me your cupun code.");
+      return;
+    }
+    dispatch(applyCopun(applyCode));
+  };
   return (
     <div className="check_out_container">
       <div className="check_out_header">
@@ -129,8 +135,9 @@ const CheckOut = () => {
               </i>
               <br />
               <br />
-              <form style={{ position: "relative" }}>
+              <form onSubmit={handleCpunApply} style={{ position: "relative" }}>
                 <input
+                  onBlur={(e) => setApplyCode(e.target.value)}
                   className="copun_apply_input"
                   placeholder=" coupon cod"
                   type="text"

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DashboardNavbar from "../components/DashboardNavbar";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ForumIcon from "@mui/icons-material/Forum";
@@ -19,7 +19,12 @@ import CollapsebleItems from "../components/CollapsebleItems";
 import authenticationItem from "../assets/data/authenticationItem";
 import emailItem from "../assets/data/email";
 import Footer from "../pages/footer/Footer";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 const DashBoardLayoute = () => {
+  const navigate = useNavigate();
+  const { dark } = useSelector((state) => state.timeOut);
+
   const { open } = useAuth();
   const [collapseSidebar, setCollapseSidebar] = useState(true);
   const [pagesSidebar, setPagesSidebar] = useState(true);
@@ -34,8 +39,17 @@ const DashBoardLayoute = () => {
   const controlEmailBar = () => {
     setEmailBar((emailBar) => !emailBar);
   };
+  useEffect(() => {
+    navigate("/dashboard/home");
+  }, []);
   return (
-    <div>
+    <div
+      className={
+        dark
+          ? "dashboard_layoute_container_dark"
+          : "dashboard_layoute_container_white"
+      }
+    >
       <div>
         <DashboardNavbar />
       </div>

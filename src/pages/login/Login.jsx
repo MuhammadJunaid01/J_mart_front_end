@@ -22,9 +22,6 @@ const Login = () => {
   };
 
   useEffect(() => {
-    dispatch(getCurrentUser());
-  }, [data, dispatch]);
-  useEffect(() => {
     if (data) {
       dispatch(updateUser(data.user));
     }

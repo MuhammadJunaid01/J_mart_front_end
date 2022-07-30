@@ -1,67 +1,47 @@
-import { Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
-import Tooltip from "@mui/material/Tooltip";
-import DensityMediumIcon from "@mui/icons-material/DensityMedium";
-import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
-import "../assets/styles/dashboardNavbar.css";
-import userImage from "../assets/images/user.jpg";
-import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import "../assets/styles/dashboardNavbar.css";
+import SearchIcon from "@mui/icons-material/Search";
+import EmailIcon from "@mui/icons-material/Email";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import SettingsIcon from "@mui/icons-material/Settings";
+import User from "../assets/images/user_chat.jpg";
+import Switch from "@mui/material/Switch";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { dashboardToggle } from "../redux/reduicers/toggle/toggle";
 const DashboardNavbar = () => {
-  // const [open, setOpen] = useState(true);
   const navigate = useNavigate();
-  const { open, setOpen, check } = useAuth();
+  const dispatch = useDispatch();
+  const handleCheck = () => {
+    dispatch(dashboardToggle());
+  };
   return (
-    <div className="dash_board_nvbar_container">
-      <div className="tooltip">
-        <Tooltip title={`${open ? "open menu" : "close menu"}`}>
-          <span onClick={check} className="tooltipIcon">
-            {open ? <DensityMediumIcon /> : <FormatAlignRightIcon />}
-          </span>
-        </Tooltip>
+    <div className="dashboard_navbar_conatiner">
+      <div className="dasboard_navbar_logo">
+        <i onClick={() => navigate("/")}>jmart</i>
       </div>
-
-      <span>
-        {" "}
-        <Typography
-          onClick={() => navigate("/")}
-          variant="h6"
-          noWrap
-          component="p"
-          sx={{
-            mr: 2,
-            display: { xs: "none", md: "flex" },
-            fontFamily: "monospace",
-            fontWeight: 700,
-            letterSpacing: ".3rem",
-            color: "#45C438",
-            textDecoration: "none",
-            cursor: "pointer",
-          }}
-        >
-          JMART
-        </Typography>
-      </span>
-      <div
-        style={{
-          backgroundSize: "cover",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "100px",
-          cursor: "pointer",
-        }}
-      >
-        <img
-          style={{
-            height: "40px",
-            width: "40px",
-            borderRadius: "50%",
-          }}
-          src={userImage}
-          alt=""
-        />
-        <p>junaid</p>
+      <div className="dashboard_search_bar">
+        <p>Dashboard</p>
+        <input type="text" placeholder="Searche...." />
+        <span>
+          <SearchIcon style={{ fontSize: "28px" }} />
+        </span>
+      </div>
+      <div className="dashoard_notification_profile">
+        <p>
+          <EmailIcon />
+        </p>
+        <p>
+          <NotificationsIcon />
+        </p>
+        <p className="dashboard_setting_icon">
+          <SettingsIcon style={{ fontSize: "30px" }} />
+        </p>
+        <img src={User} alt="" />
+        <span>
+          <Switch onClick={handleCheck} />
+        </span>
       </div>
     </div>
   );

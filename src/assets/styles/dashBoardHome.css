@@ -1,0 +1,12 @@
+.dashboard_home_container {
+  margin-top: 20px;
+  overflow: hidden;
+}
+.dashoboard_home_content > p {
+  color: #24262d;
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: 30px;
+}

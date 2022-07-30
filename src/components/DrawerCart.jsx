@@ -25,10 +25,6 @@ const DrawerCart = () => {
   );
   const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
 
-  const handleRouting = () => {
-    // setOpenDrawer((prev) => !prev);
-  };
-
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -92,7 +88,7 @@ const DrawerCart = () => {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      // marginTop: "8px",
+
                       padding: "10px",
                     }}
                   >
@@ -100,7 +96,6 @@ const DrawerCart = () => {
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        // marginTop: "8px",
                       }}
                     >
                       <div>
@@ -128,7 +123,6 @@ const DrawerCart = () => {
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        // marginTop: "8px",
                       }}
                     >
                       <h4

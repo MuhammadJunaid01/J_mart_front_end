@@ -13,6 +13,7 @@ import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useForm } from "react-hook-form";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 import {
   allProducts,
@@ -20,6 +21,7 @@ import {
   useReviewProductsMutation,
 } from "../redux/reduicers/products/inedx";
 import Loader from "./Loader";
+import { addToCart } from "../redux/reduicers/cart/cart";
 const Product = () => {
   const navigate = useNavigate();
   const { data, isLoading, isSuccess } = useGetAllProductsQuery();
@@ -32,7 +34,6 @@ const Product = () => {
   const { products } = useSelector((state) => state.products);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.currentUser);
   const [
     reviewProducts,
     {
@@ -45,7 +46,6 @@ const Product = () => {
   const result = data?.data.find((item) => item._id === id);
 
   useEffect(() => {
-    dispatch(getCurrentUser());
     dispatch(allProducts);
   }, [id]);
   const handleReview = () => {
@@ -79,136 +79,123 @@ const Product = () => {
     reset();
   };
   console.log("review data", result.reviews);
+
+  console.log("result", result);
   return (
     <div style={{ padding: "40px 17px" }}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={7}>
-          <div>
+          <div style={{ cursor: "pointer" }}>
             <img
               style={{ width: "70%", borderRadius: "10px" }}
               src={result?.ProductImage}
-              alt=""
+              alt="product-image"
             />
           </div>
         </Grid>
         <Grid item xs={12} md={5}>
           <div
             style={{
-              textAlign: "center",
               position: "relative",
-              height: "300px",
-              width: "100%",
+              height: "550px",
             }}
           >
-            <p
-              style={{
-                fontFamily: "cursive",
-                fontWeight: "500",
-                fontSize: "20px",
-                color: "#808080",
-              }}
-            >
-              {result?.ProductName}
-            </p>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                marginTop: "10px",
+                textAlign: "center",
+                position: "relative",
               }}
             >
               <p
                 style={{
-                  backgroundColor: "#F5F5FC",
-                  padding: "1px 10px",
-                  border: "1px solid rgba(128, 128, 128, 0.534)",
-                  borderRadius: "50px",
+                  fontFamily: "cursive",
+                  fontWeight: "500",
+                  fontSize: "20px",
+                  color: "#808080",
                 }}
               >
-                Price:
-                <span
-                  style={{
-                    fontFamily: "'Trebuchet MS', 'sans-serif'",
-                    color: "#000000",
-                    lineHeight: "30px",
-                    fontWeight: "700",
-                    fontSize: "14px",
-                  }}
-                >
-                  {result?.Price}$
-                </span>
-              </p>
-
-              {result?.stock && (
-                <p
-                  style={{
-                    backgroundColor: "#F5F5FC",
-                    padding: "1px 10px",
-                    border: "1px solid rgba(128, 128, 128, 0.534)",
-                    borderRadius: "50px",
-                  }}
-                >
-                  Status:{" "}
-                  <span
-                    style={{
-                      fontFamily: "'Trebuchet MS', 'sans-serif'",
-                      color: "#000000",
-                      lineHeight: "30px",
-                      fontWeight: "700",
-                      fontSize: "14px",
-                    }}
-                  >
-                    In Stock
-                  </span>
-                </p>
-              )}
-              <p
-                style={{
-                  backgroundColor: "#F5F5FC",
-                  padding: "1px 10px",
-                  border: "1px solid rgba(128, 128, 128, 0.534)",
-                  borderRadius: "50px",
-                }}
-              >
-                Brand:
-                <span
-                  style={{
-                    fontFamily: "'Trebuchet MS', 'sans-serif'",
-                    color: "#000000",
-                    lineHeight: "30px",
-                    fontWeight: "700",
-                    fontSize: "14px",
-                  }}
-                >
-                  {result?.ManufacturerName}
-                </span>
+                {result?.ProductName}
               </p>
             </div>
-            <div
-              style={{
-                position: "absolute",
-                bottom: "-10px",
-                display: "flex",
-              }}
-            >
-              <div>
-                <h3>
-                  <RemoveIcon />
-                </h3>
-              </div>
-              <p>0</p>
-              <div>
-                <h3>
-                  <AddIcon />
-                </h3>
-              </div>
+            <div>
+              <p
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "15px",
+                }}
+              >
+                <StarBorderIcon
+                  style={{ fontSize: "15px", color: "#9AC93C" }}
+                />
+                <StarBorderIcon
+                  style={{ fontSize: "15px", color: "#9AC93C" }}
+                />
+                <StarBorderIcon
+                  style={{ fontSize: "15px", color: "#9AC93C" }}
+                />
+                <StarBorderIcon
+                  style={{ fontSize: "15px", color: "#9AC93C" }}
+                />
+                <StarBorderIcon
+                  style={{ fontSize: "15px", color: "#9AC93C" }}
+                />
 
-              <div>
-                <button>
-                  <LibraryAddIcon />
-                </button>
-              </div>
+                <span style={{ color: "#919191", marginLeft: "3px" }}>
+                  {result?.reviews.length} reviews
+                </span>
+              </p>
+              <p
+                style={{
+                  marginTop: "7px",
+                  fontSize: "14px",
+                  lineHeight: "21px",
+                  color: "#212529",
+                  fontWeight: "500",
+                }}
+              >
+                Product id: {result._id.slice(0, 15)}
+              </p>
+              <p
+                style={{
+                  marginTop: "11px",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                  color: "#212529",
+                }}
+              >
+                Regular Price: ${result.Price}
+              </p>
+              <button
+                style={{
+                  cursor: "pointer",
+                  marginTop: "17px",
+                  backgroundColor: "#9AC93C",
+                  border: "none",
+                  color: "white",
+                  fontSize: "16px",
+                  lineHeight: "25px",
+                }}
+              >
+                Check Availability
+              </button>
+            </div>
+            <div style={{ position: "absolute", bottom: "10px" }}>
+              <button
+                onClick={() => dispatch(addToCart(result))}
+                style={{
+                  cursor: "pointer",
+                  backgroundColor: "#9AC93C",
+                  border: "none",
+                  color: "white",
+                  fontSize: "16px",
+                  lineHeight: "25px",
+                  padding: "0px 20px",
+                  borderRadius: "4px",
+                }}
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
         </Grid>
@@ -458,10 +445,18 @@ const Product = () => {
                         </p>
                         <p style={{ marginBottom: "7px" }}>{item?.Price}</p>
                         <button
+                          onClick={() => dispatch(item)}
                           style={{
                             marginBottom: "7px",
                             display: "flex",
                             alignItems: "center",
+                            border: "none",
+                            backgroundColor: "#9AC93C",
+                            color: "white",
+                            fontSize: "17px",
+                            cursor: "pointer",
+                            padding: "2px 15px",
+                            borderRadius: "2px",
                           }}
                         >
                           <ShoppingCartIcon /> Add To Cart

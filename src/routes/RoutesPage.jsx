@@ -1,7 +1,10 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Chat from "../components/Chat";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import AddProducts from "../components/dashBoard/AddProducts";
 import CheckOut from "../components/dashBoard/CheckOut";
 import Coustomers from "../components/dashBoard/Coustomers";
@@ -22,14 +25,9 @@ import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Notfound from "../pages/notFound/Notfound";
 import Register from "../pages/register/Register";
-import { getCurrentUser } from "../redux/reduicers/auth/auth";
-// import PrivateRoute from "./PrivateRoute";
 const RoutesPage = () => {
-  const dispatch = useDispatch();
-  const { isValidate, user } = useSelector((state) => state.currentUser);
-  useEffect(() => {
-    // dispatch(getCurrentUser());
-  }, []);
+  // const location = useLocation();
+ 
   return (
     <div>
       <Router>
@@ -54,7 +52,6 @@ const RoutesPage = () => {
           <Route path="dashboard" element={<DashBoardLayoute />}>
             <Route path="home" element={<DashBoardHome />} />
             <Route path="user" element={<Users />} />
-            <Route path="chat" element={<Chat />} />
             <Route path="products" element={<DashBoardProducts />} />
             <Route
               path="productsDetail"
@@ -93,7 +90,6 @@ const RoutesPage = () => {
               </HomeLayoute>
             }
           />
-          {/* just testing */}
 
           <Route
             path="/account"

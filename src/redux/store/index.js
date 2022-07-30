@@ -4,11 +4,15 @@ import category from "../reduicers/category";
 import drawer from "../reduicers/drawer";
 import tracker from "../reduicers/tracker";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import userSlice, { taskApi } from "../reduicers/auth/auth";
+import currentUser, { taskApi, usersSlice } from "../reduicers/auth/auth";
 import offerSlice, { offerApi } from "../reduicers/offer/offerSlice";
 import timeOut from "../reduicers/toggle/toggle";
 import { orderApi } from "../reduicers/order";
-import productsSlice, { productsApi } from "../reduicers/products/inedx";
+import productsSlice, {
+  bestSaleProductsSliceReducer,
+  productsApi,
+} from "../reduicers/products/inedx";
+import quickVeiwSlice from "../reduicers/quickVeiw/quickVeiw";
 
 export const store = configureStore({
   reducer: {
@@ -17,9 +21,12 @@ export const store = configureStore({
     category: category,
     traker: tracker,
     offer: offerSlice,
-    currentUser: userSlice,
+    bestSale: bestSaleProductsSliceReducer,
+    currentUser: currentUser,
     products: productsSlice,
     timeOut: timeOut,
+    quickVeiw: quickVeiwSlice,
+    user: usersSlice,
     [taskApi.reducerPath]: taskApi.reducer,
     [offerApi.reducerPath]: offerApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,

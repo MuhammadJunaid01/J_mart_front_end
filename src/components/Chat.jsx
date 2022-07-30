@@ -1,92 +1,164 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import { v4 as uuid } from "uuid";
-import PersonPinIcon from "@mui/icons-material/PersonPin";
-import SendIcon from "@mui/icons-material/Send";
+import { useSelector } from "react-redux";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import "../assets/styles/chat.css";
+import User from "../assets/images/user_chat.jpg";
 const Chat = () => {
-  const socket = io("http://localhost:5000");
+  const socket = io.connect("http://localhost:5000");
+  const { isValidate, user } = useSelector((state) => state.currentUser);
 
+  const [chatOPen, setChatOpen] = useState(false);
+  const { users } = useSelector((state) => state.user);
+  const [introduice, setIntroduice] = useState("");
+  // const [user, setUser] = useState(undefined);
   const [msg, setMsg] = useState("");
-  const [msgReceive, setMsgReceive] = useState("");
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const message = {
-      userID: 1234566,
+  const [messages, setMessages] = useState([]);
+  const [admin, setAdmin] = useState(undefined);
+  const handleChatOpen = () => {
+    setChatOpen((prev) => !prev);
+  };
+  console.log("chatopen", chatOPen);
+
+  const registerUserSocket = () => {};
+
+  useEffect(() => {
+    socket.on("private", (data) => {
+      const receive = [...messages];
+      alert("");
+      receive.push(data);
+      setMessages(receive);
+
+      console.log("message receive data ", data);
+    });
+  }, [messages, socket]);
+  const sendMessage = () => {
+    socket.emit("msg", {
+      senderId: user._id,
+      senderName: user.username,
+      receiverId: admin._id,
       msg: msg,
-    };
-    socket.emit("message", message);
+    });
   };
   useEffect(() => {
-    socket.on("send", (data) => {
-      setMsgReceive(data.msg);
-      console.log("hello use effect", data);
+    users?.forEach((user) => {
+      if (user.isAdmin) {
+        setAdmin(user);
+      }
     });
-  }, [socket]);
+  }, [users, admin, user]);
+  console.log("messages", messages);
+  const handleRegester = () => {
+    socket.emit("user", user._id);
+  };
   return (
-    <div
-      style={{
-        padding: "20px 10px",
-        minHeight: "90vh",
-        position: "relative",
-        width: "100%",
-        boxSizing: "border-box",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          boxShadow:
-            "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-          padding: "10px 6px",
-          borderRadius: "7px",
-        }}
-      >
-        <h4>Junaid</h4>
-        <p>
-          <PersonPinIcon />
-        </p>
-      </div>
-      {/* message body */}
-      <div>
-        <p>{msgReceive}</p>
-      </div>
+    <div className="chat_container">
+      <div onClick={handleChatOpen} className="chat_contaner_main">
+        <span>Chat With jMart</span>
 
-      <form
-        style={{
-          position: "absolute",
-          bottom: "10px",
-          width: "90%",
-          overflow: "hidden",
-        }}
-        onSubmit={handleSubmit}
-      >
-        <input
-          onBlur={(e) => setMsg(e.target.value)}
-          style={{
-            outline: "none",
-            border: "1px solid gainsboro",
-            width: "80%",
-            padding: "9px 0px",
-            borderRadius: "3px",
-            height: "70px",
-          }}
-          type="text"
-        />
-        <button
-          style={{
-            color: "black",
-            padding: "4px 0px",
-            cursor: "pointer",
-            border: "none",
-            borderRadius: "5px",
-          }}
-          type="submit"
-        >
-          <SendIcon style={{ fontSize: "30px", marginTop: "127px" }} />
-        </button>
-      </form>
+        <div onClick={handleRegester} className="chat_icon">
+          <h1>
+            <ChatBubbleIcon />
+          </h1>
+          <h2>
+            <ModeEditIcon />
+          </h2>
+        </div>
+      </div>
+      {/*chat body  */}
+      <div className={chatOPen ? "chat_body open" : "chat_body"}>
+        <div className="chat_body_header">
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <img
+              style={{ height: "50px", width: "50px", borderRadius: "50%" }}
+              src={User}
+              alt="user_logo"
+            />
+            <div style={{ marginLeft: "10px", color: "white" }}>
+              <h4>Chat with </h4>
+              <h4>jMart</h4>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <div className="chat_notification">
+              <h1
+                style={{
+                  color: "white",
+                  cursor: "pointer",
+                  padding: "0px",
+                  margin: "0px",
+                }}
+              >
+                <MoreVertIcon />
+              </h1>
+            </div>
+            <h1
+              style={{ cursor: "pointer", color: "white" }}
+              onClick={handleChatOpen}
+            >
+              <KeyboardArrowDownIcon style={{ fontSize: "34px" }} />
+            </h1>
+          </div>
+        </div>
+        {/* message body */}
+        {user ? (
+          <div></div>
+        ) : (
+          <div>
+            {" "}
+            <input
+              onBlur={(e) => setIntroduice(e.target.value)}
+              style={{
+                padding: "6px 8px",
+                outline: "none",
+                border: "none",
+                marginTop: "10px",
+                marginLeft: "10px",
+                borderRadius: "4px",
+              }}
+              type="text"
+              placeholder="Please Intoduce your Self"
+            />
+            <button
+              onClick={registerUserSocket}
+              style={{
+                border: "none",
+                backgroundColor: "white",
+                cursor: "pointer",
+                padding: "6px 8px",
+              }}
+            >
+              Submit
+            </button>
+          </div>
+        )}
+        {user && (
+          <div className="message_body">
+            <h1>hello</h1>
+            {messages.map((msg) => {
+              return (
+                <div>
+                  <p className={msg.from.isAdmin ? "chat_admin" : "chat_user"}>
+                    {msg.msg}
+                  </p>
+                </div>
+              );
+            })}
+            <div className="write_message_input">
+              <input
+                onBlur={(e) => setMsg(e.target.value)}
+                type="text"
+                placeholder="Write Your Message::"
+              />
+              <button onClick={sendMessage}>Send</button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -9,7 +9,7 @@ export const timerHelper = (data, status) => {
   let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   let secounds = Math.floor((diff % (1000 * 60)) / 1000);
-  if (days <= 0 && hours <= 0 && minutes <= 0 && secounds <= 0) {
+  if (days <= 0 || hours <= 0 || (minutes <= 0 && secounds <= 0)) {
     timeOutOfferData.push(data[0].arr[data[0].count]);
   }
   const obj = {

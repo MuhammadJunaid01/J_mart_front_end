@@ -12,3 +12,36 @@ export const chartData = [
   { time: "november", desktop: 170, laptop: 140, iphone: 70, tablet: 100 },
   { time: "december", desktop: 190, laptop: 120, iphone: 20, tablet: 80 },
 ];
+
+export const nivoChartData = [
+  {
+    id: "css",
+    label: "css",
+    value: 312,
+    color: "hsl(299, 70%, 50%)",
+  },
+  {
+    id: "ruby",
+    label: "ruby",
+    value: 251,
+    color: "hsl(163, 70%, 50%)",
+  },
+  {
+    id: "c",
+    label: "c",
+    value: 428,
+    color: "hsl(113, 70%, 50%)",
+  },
+  {
+    id: "python",
+    label: "python",
+    value: 593,
+    color: "hsl(41, 70%, 50%)",
+  },
+  {
+    id: "stylus",
+    label: "stylus",
+    value: 381,
+    color: "hsl(239, 70%, 50%)",
+  },
+];
