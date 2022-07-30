@@ -10,6 +10,7 @@ import Switch from "@mui/material/Switch";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { dashboardToggle } from "../redux/reduicers/toggle/toggle";
+import { Badge } from "@mui/material";
 const DashboardNavbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,10 +31,14 @@ const DashboardNavbar = () => {
       </div>
       <div className="dashoard_notification_profile">
         <p>
-          <EmailIcon />
+          <Badge badgeContent={20} color="secondary">
+            <EmailIcon />
+          </Badge>
         </p>
         <p>
-          <NotificationsIcon />
+          <Badge badgeContent={10} color="secondary">
+            <NotificationsIcon />
+          </Badge>
         </p>
         <p className="dashboard_setting_icon">
           <SettingsIcon style={{ fontSize: "30px" }} />

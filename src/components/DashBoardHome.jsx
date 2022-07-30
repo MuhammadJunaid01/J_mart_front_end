@@ -9,6 +9,7 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import DoneIcon from "@mui/icons-material/Done";
 import Barchart from "./dashBoard/chart/Barchart";
 import PieChart from "./dashBoard/chart/PieChart";
+import RecentOrder from "./dashBoard/RecentOrder";
 const DashBoardHome = () => {
   const { dark } = useSelector((state) => state.timeOut);
   return (
@@ -115,9 +116,9 @@ const DashBoardHome = () => {
                   <p
                     style={{
                       color: "",
-                      fontSize: "20px",
+                      fontSize: "17px",
                       fontWeight: "500",
-                      lineHeight: "28px",
+                      lineHeight: "24px",
                       fontFamily: "cursive",
                     }}
                   >
@@ -171,9 +172,9 @@ const DashBoardHome = () => {
                   <p
                     style={{
                       color: "",
-                      fontSize: "20px",
+                      fontSize: "17px",
                       fontWeight: "500",
-                      lineHeight: "28px",
+                      lineHeight: "24px",
                       fontFamily: "cursive",
                     }}
                   >
@@ -189,7 +190,7 @@ const DashBoardHome = () => {
                       marginTop: "7px",
                     }}
                   >
-                    186
+                    50
                   </p>
                 </div>
               </div>
@@ -227,13 +228,13 @@ const DashBoardHome = () => {
                   <p
                     style={{
                       color: "",
-                      fontSize: "20px",
+                      fontSize: "17px",
                       fontWeight: "500",
-                      lineHeight: "28px",
+                      lineHeight: "24px",
                       fontFamily: "cursive",
                     }}
                   >
-                    Total Order
+                    Order Processing
                   </p>
                   <p
                     style={{
@@ -245,7 +246,7 @@ const DashBoardHome = () => {
                       marginTop: "7px",
                     }}
                   >
-                    186
+                    90
                   </p>
                 </div>
               </div>
@@ -283,13 +284,13 @@ const DashBoardHome = () => {
                   <p
                     style={{
                       color: "",
-                      fontSize: "20px",
+                      fontSize: "17px",
                       fontWeight: "500",
-                      lineHeight: "28px",
+                      lineHeight: "24px",
                       fontFamily: "cursive",
                     }}
                   >
-                    Total Order
+                    Order Delivered
                   </p>
                   <p
                     style={{
@@ -301,7 +302,7 @@ const DashBoardHome = () => {
                       marginTop: "7px",
                     }}
                   >
-                    186
+                    88
                   </p>
                 </div>
               </div>
@@ -340,6 +341,9 @@ const DashBoardHome = () => {
                   </p>
                   <PieChart />
                 </div>
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <RecentOrder />
               </Grid>
             </Grid>
           </div>
