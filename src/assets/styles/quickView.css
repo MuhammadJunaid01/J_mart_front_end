@@ -25,7 +25,19 @@
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
   padding: 20px;
-  overflow: hidden;
+  overflow-y: scroll;
+}
+.quic_veiw_content::-webkit-scrollbar {
+  width: 4px;
+  background-color: #10b981;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.quic_veiw_content::-webkit-scrollbar-thumb {
+  background-color: #023759;
 }
 .quic_veiw_content.open {
   transform: translateY(-0%);

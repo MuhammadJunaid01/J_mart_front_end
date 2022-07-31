@@ -21,7 +21,6 @@ const Chat = () => {
   const handleChatOpen = () => {
     setChatOpen((prev) => !prev);
   };
-  console.log("chatopen", chatOPen);
 
   const registerUserSocket = () => {};
 
@@ -50,7 +49,6 @@ const Chat = () => {
       }
     });
   }, [users, admin, user]);
-  console.log("messages", messages);
   const handleRegester = () => {
     socket.emit("user", user._id);
   };
@@ -105,59 +103,28 @@ const Chat = () => {
           </div>
         </div>
         {/* message body */}
-        {user ? (
-          <div></div>
-        ) : (
-          <div>
-            {" "}
+        {user ? <div></div> : <div> </div>}
+
+        <div className="message_body">
+          <h1>hello</h1>
+          {messages.map((msg) => {
+            return (
+              <div>
+                <p className={msg.from.isAdmin ? "chat_admin" : "chat_user"}>
+                  {msg.msg}
+                </p>
+              </div>
+            );
+          })}
+          <div className="write_message_input">
             <input
-              onBlur={(e) => setIntroduice(e.target.value)}
-              style={{
-                padding: "6px 8px",
-                outline: "none",
-                border: "none",
-                marginTop: "10px",
-                marginLeft: "10px",
-                borderRadius: "4px",
-              }}
+              onBlur={(e) => setMsg(e.target.value)}
               type="text"
-              placeholder="Please Intoduce your Self"
+              placeholder="Write Your Message::"
             />
-            <button
-              onClick={registerUserSocket}
-              style={{
-                border: "none",
-                backgroundColor: "white",
-                cursor: "pointer",
-                padding: "6px 8px",
-              }}
-            >
-              Submit
-            </button>
+            <button onClick={sendMessage}>Send</button>
           </div>
-        )}
-        {user && (
-          <div className="message_body">
-            <h1>hello</h1>
-            {messages.map((msg) => {
-              return (
-                <div>
-                  <p className={msg.from.isAdmin ? "chat_admin" : "chat_user"}>
-                    {msg.msg}
-                  </p>
-                </div>
-              );
-            })}
-            <div className="write_message_input">
-              <input
-                onBlur={(e) => setMsg(e.target.value)}
-                type="text"
-                placeholder="Write Your Message::"
-              />
-              <button onClick={sendMessage}>Send</button>
-            </div>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );
