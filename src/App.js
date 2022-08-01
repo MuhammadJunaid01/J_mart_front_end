@@ -30,7 +30,7 @@ function App() {
     }
     dispatch(allUsers(data));
     dispatch(getBestSaleProducts(bestSale?.data));
-    // dispatch(getCurrentUser());
+    dispatch(getCurrentUser());
   }, [isLoggedIn, data, bestSale]);
   return (
     <div>

@@ -11,11 +11,22 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { dashboardToggle } from "../redux/reduicers/toggle/toggle";
 import { Badge } from "@mui/material";
+import DashboardProfileMenu from "./dashBoard/DashboardProfileMenu";
+import DashboardNotification from "./nootification/DashboardNotification";
 const DashboardNavbar = () => {
+  const [profileMenuShow, setProfileMenuShow] = useState(false);
+  const [showNotificatin, setShowNotificatin] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleCheck = () => {
     dispatch(dashboardToggle());
+  };
+  const handleClick = () => {
+    setProfileMenuShow((prev) => !prev);
+  };
+  const handleNotification = () => {
+    setShowNotificatin((prev) => !prev);
   };
   return (
     <div className="dashboard_navbar_conatiner">
@@ -35,7 +46,7 @@ const DashboardNavbar = () => {
             <EmailIcon />
           </Badge>
         </p>
-        <p>
+        <p onClick={handleNotification}>
           <Badge badgeContent={10} color="secondary">
             <NotificationsIcon />
           </Badge>
@@ -43,11 +54,13 @@ const DashboardNavbar = () => {
         <p className="dashboard_setting_icon">
           <SettingsIcon style={{ fontSize: "30px" }} />
         </p>
-        <img src={User} alt="" />
+        <img onClick={handleClick} src={User} alt="" />
         <span>
           <Switch onClick={handleCheck} />
         </span>
       </div>
+      <DashboardNotification showNotificatin={showNotificatin} />
+      <DashboardProfileMenu profileMenuShow={profileMenuShow} />
     </div>
   );
 };

@@ -52,6 +52,7 @@ const CheckOut = () => {
     setTax(taxCoutn);
   }, [cartItems, quantity, totalPrice]);
 
+  console.log(user);
   const handleSubmit = async () => {
     const data = {
       products: cartItems,

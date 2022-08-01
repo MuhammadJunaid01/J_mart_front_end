@@ -9,9 +9,10 @@ import logo from "../../assets/images/register.gif";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch();
-  // const { user } = useSelector((state) => state.currentUser);
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [loginUser, { data, isSuccess, isError, error, isLoading }] =
@@ -24,9 +25,10 @@ const Login = () => {
   useEffect(() => {
     if (data) {
       dispatch(updateUser(data.user));
+      Navigate("/");
     }
   }, [data, dispatch]);
-  // console.log(data);
+  console.log(data);
   return (
     <div style={{ padding: "0px 0px" }}>
       <Grid container>
