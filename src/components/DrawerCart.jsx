@@ -66,6 +66,8 @@ const DrawerCart = () => {
                   marginLeft: "6px",
                   fontSize: "25px",
                   marginBottom: "7px",
+                  fontWeight: "500",
+                  fontFamily: "cursive",
                 }}
               >
                 shopping cart

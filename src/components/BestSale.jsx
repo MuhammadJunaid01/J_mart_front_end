@@ -9,6 +9,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import QuickVeiw from "./QuickVeiw";
 import { quickVeiw } from "../redux/reduicers/quickVeiw/quickVeiw";
 import Loader from "./Loader";
+import { addToCart } from "../redux/reduicers/cart/cart";
 
 const BestSale = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const BestSale = () => {
                   <p>{item.ProductName}</p>
                 </div>
                 <div className="best_sale_quick_veiw_container">
-                  <p>
+                  <p onClick={() => dispatch(addToCart(item))}>
                     <ShoppingCartIcon />
                   </p>
                   <p onClick={() => handleQuickVeiw(item)}>

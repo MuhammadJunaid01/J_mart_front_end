@@ -13,6 +13,7 @@ import productsSlice, {
   productsApi,
 } from "../reduicers/products/inedx";
 import quickVeiwSlice from "../reduicers/quickVeiw/quickVeiw";
+import paginate from "../reduicers/paginate";
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
     currentUser: currentUser,
     products: productsSlice,
     timeOut: timeOut,
+    paginate: paginate,
     quickVeiw: quickVeiwSlice,
     user: usersSlice,
     [taskApi.reducerPath]: taskApi.reducer,

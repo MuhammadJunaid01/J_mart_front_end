@@ -3,15 +3,16 @@
   align-items: center;
   justify-content: space-between;
   list-style-type: none;
-  width: 100%;
   box-sizing: border-box;
+  width: 100%;
 }
 .activePaginate {
-  border: 2px solid #00b579;
+  border: 1px solid #00b579;
   padding: 2px 20px;
+  background-color: rgba(0, 0, 0, 0.74) !important;
 }
 .page-link {
-  padding: 2px 15px;
+  padding: 2px 20px;
   background-color: #136effbb;
   cursor: pointer;
   border-radius: 50px;
@@ -51,4 +52,10 @@
   -moz-border-radius: 50px;
   -ms-border-radius: 50px;
   -o-border-radius: 50px;
+  z-index: 120;
+}
+@media (min-width: 320px) and (max-width: 720px) {
+  .pagination {
+    width: 50%;
+  }
 }
