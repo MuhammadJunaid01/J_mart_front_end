@@ -612,6 +612,7 @@ const RecentOrder = () => {
             fontSize: "22px",
             lineHeight: "27px",
             color: "#24262d",
+            marginBottom: "20px",
           }}
         >
           Recent Order

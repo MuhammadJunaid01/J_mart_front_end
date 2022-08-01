@@ -1,44 +1,57 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { visuallyHidden } from "@mui/utils";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { Pagination } from "@mui/material";
 const Coustomers = () => {
-  function descendingComparator(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-      return 1;
-    }
-    return 0;
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
+      setPosts(res.data);
+      setLoading(false);
+    };
+    fetchPosts();
+  }, []);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexofFristPost = indexOfLastPost - postsPerPage;
+  const currentPost = posts.slice(indexofFristPost, indexOfLastPost);
+
+  const pageNumber = posts.length / postsPerPage;
+  if (loading) {
+    return <h1>Loading............</h1>;
   }
-  function getComparator(order, orderBy) {
-    return order === "desc"
-      ? (a, b) => descendingComparator(a, b, orderBy)
-      : (a, b) => -descendingComparator(a, b, orderBy);
-  }
+  const paginate = (event, value) => {
+    console.log(value);
+    setCurrentPage(value);
+  };
+  console.log(pageNumber);
   return (
     <div>
-      <h1> hello dashboard coustomers</h1>
+      {currentPost?.map((data, index) => {
+        return (
+          <div key={index}>
+            <li style={{ marginTop: "7px" }}>{data.title}</li>
+          </div>
+        );
+      })}
+      <Pagination
+        onChange={paginate}
+        page={postsPerPage}
+        count={pageNumber}
+        variant="outlined"
+      />
+
+      {/* {pageNumbers?.map((number, index) => {
+        return (
+          <div key={index}>
+            <Pagination count={number} variant="outlined" />
+          </div>
+        );
+      })} */}
     </div>
   );
 };
