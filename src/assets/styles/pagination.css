@@ -1,0 +1,54 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style-type: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.activePaginate {
+  border: 2px solid #00b579;
+  padding: 2px 20px;
+}
+.page-link {
+  padding: 2px 15px;
+  background-color: #136effbb;
+  cursor: pointer;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  color: white;
+  font-weight: 600;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+}
+.page-num {
+  padding: 2px 11px;
+  font-weight: 700;
+  font-family: monospace;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #0098de;
+  color: white;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+.nextPage {
+  padding: 2px 11px;
+  font-weight: 700;
+  font-family: monospace;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #00b579;
+  color: white;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
