@@ -25,10 +25,12 @@ const Login = () => {
   useEffect(() => {
     if (data) {
       dispatch(updateUser(data.user));
-      Navigate("/");
     }
-  }, [data, dispatch]);
+  }, [data]);
   console.log(data);
+  // if (data) {
+  //   Navigate("/");
+  // }
   return (
     <div style={{ padding: "0px 0px" }}>
       <Grid container>

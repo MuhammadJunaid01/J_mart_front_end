@@ -20,7 +20,7 @@ const DashboardProfileMenu = ({ profileMenuShow }) => {
             <p>Dashboard</p>
           </div>
           <div
-            onClick={() => navigate("/dashboard/user")}
+            onClick={() => navigate("/dashboard/editProfile")}
             className="dashboard_profile_menu_content"
           >
             <p style={{ marginTop: "8px", marginRight: "10px" }}>

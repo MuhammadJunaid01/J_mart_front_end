@@ -1,0 +1,29 @@
+.edit_profile_container {
+  background-color: white;
+  padding: 20px 10px;
+}
+.edit_profile_image_upload_content {
+  width: 80%;
+  border: 3px dotted #d5d6d7;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.edit_profile_image_upload {
+  border: none;
+  cursor: pointer;
+  color: #000000;
+  background-color: white;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  font-family: "Open Sans", sans-serif;
+}

@@ -13,6 +13,7 @@ import DashBoardCart from "../components/dashBoard/DashBoardCart";
 import DashBoardOrders from "../components/dashBoard/DashBoardOrders";
 import DashBoardProducts from "../components/dashBoard/DashBoardProducts";
 import DashBoardProductsDetails from "../components/dashBoard/DashBoardProductsDetails";
+import EditProfile from "../components/dashBoard/EditProfile";
 import Shops from "../components/dashBoard/Shops";
 import DashBoardHome from "../components/DashBoardHome";
 import Product from "../components/Product";
@@ -27,7 +28,7 @@ import Notfound from "../pages/notFound/Notfound";
 import Register from "../pages/register/Register";
 const RoutesPage = () => {
   // const location = useLocation();
- 
+
   return (
     <div>
       <Router>
@@ -52,6 +53,7 @@ const RoutesPage = () => {
           <Route path="dashboard" element={<DashBoardLayoute />}>
             <Route path="home" element={<DashBoardHome />} />
             <Route path="user" element={<Users />} />
+            <Route path="editProfile" element={<EditProfile />} />
             <Route path="products" element={<DashBoardProducts />} />
             <Route
               path="productsDetail"
