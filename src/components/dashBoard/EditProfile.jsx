@@ -2,7 +2,20 @@ import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import "../../assets/styles/editProfile.css";
+import User from "../../assets/images/user_chat.jpg";
 import { Grid } from "@mui/material";
+
+const role = [
+  "Admin",
+  "CEO",
+  "Manager",
+  "Acountant",
+  "USER",
+  "Driver",
+  "Security Guard",
+  "Delivery Person",
+];
+
 const EditProfile = () => {
   const [images, setImages] = useState([]);
   const maxNumber = 69;
@@ -91,7 +104,159 @@ const EditProfile = () => {
                     </div>
                   )}
                 </ImageUploading>
+                <div
+                  style={{
+                    marginTop: "15px",
+                    marginLeft: "10px",
+                    backgroundColor: "white",
+                    maxWidth: "90px",
+                    padding: "3px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                    borderRadius: "5px",
+                  }}
+                >
+                  <img
+                    style={{
+                      width: "80%",
+                      boxSizing: "border-box",
+                      borderRadius: "4px",
+                    }}
+                    src={User}
+                    alt=""
+                  />
+                </div>
               </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginTop: "20px",
+              }}
+            >
+              <div style={{ width: "20%" }}>
+                <p>Edit Name</p>
+              </div>
+              <div style={{ width: "80%" }}>
+                <input
+                  style={{
+                    width: "80%",
+                    border: "none",
+                    backgroundColor: "#F4F5F7",
+                    padding: "13px 4px",
+                    outline: "none",
+                    boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                    borderRadius: "4px",
+                  }}
+                  type="text"
+                  defaultValue="admin"
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginTop: "20px",
+              }}
+            >
+              <div style={{ width: "20%" }}>
+                <p>Edit Email</p>
+              </div>
+              <div style={{ width: "80%" }}>
+                <input
+                  style={{
+                    width: "80%",
+                    border: "none",
+                    backgroundColor: "#F4F5F7",
+                    padding: "13px 4px",
+                    outline: "none",
+                    boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                    borderRadius: "4px",
+                  }}
+                  type="text"
+                  defaultValue="admin@gmail.com"
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginTop: "20px",
+              }}
+            >
+              <div style={{ width: "20%" }}>
+                <p>Edit Contact Number</p>
+              </div>
+              <div style={{ width: "80%" }}>
+                <input
+                  style={{
+                    width: "80%",
+                    border: "none",
+                    backgroundColor: "#F4F5F7",
+                    padding: "13px 4px",
+                    outline: "none",
+                    boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                    borderRadius: "4px",
+                  }}
+                  type="text"
+                  defaultValue="01634900664"
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginTop: "20px",
+              }}
+            >
+              <div style={{ width: "20%" }}>
+                <p>Your Role</p>
+              </div>
+              <div style={{ width: "80%" }}>
+                <input
+                  style={{
+                    width: "80%",
+                    border: "none",
+                    backgroundColor: "#F4F5F7",
+                    padding: "13px 4px",
+                    outline: "none",
+                    boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                    borderRadius: "4px",
+                  }}
+                  type="text"
+                  defaultValue="admin"
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                width: "80%",
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: "30px",
+              }}
+            >
+              <button
+                style={{
+                  padding: "10px 30px",
+                  backgroundColor: "#10B981",
+                  border: "none",
+                  color: "white",
+                  borderRadius: "5px",
+                }}
+              >
+                Update Profile
+              </button>
             </div>
           </div>
         </Grid>
