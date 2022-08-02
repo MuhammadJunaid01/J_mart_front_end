@@ -45,9 +45,9 @@ const DashboardNotification = ({ showNotificatin }) => {
     <div>
       {showNotificatin ? (
         <div className="Dashboard_notification_container">
-          {notification.map((noti) => {
+          {notification.map((noti, index) => {
             return (
-              <div className="Dashboard_notification_content">
+              <div key={index} className="Dashboard_notification_content">
                 <div
                   style={{
                     display: "flex",

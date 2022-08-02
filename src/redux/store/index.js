@@ -14,6 +14,7 @@ import productsSlice, {
 } from "../reduicers/products/inedx";
 import quickVeiwSlice from "../reduicers/quickVeiw/quickVeiw";
 import paginate from "../reduicers/paginate";
+import { editProfilApi } from "../reduicers/editprofile";
 
 export const store = configureStore({
   reducer: {
@@ -33,6 +34,7 @@ export const store = configureStore({
     [offerApi.reducerPath]: offerApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
     [productsApi.reducerPath]: productsApi.reducer,
+    [editProfilApi.reducerPath]: editProfilApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(taskApi.middleware),

@@ -4,6 +4,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import "../../assets/styles/editProfile.css";
 import User from "../../assets/images/user_chat.jpg";
 import { Grid } from "@mui/material";
+import { useEditProfileMutation } from "../../redux/reduicers/editprofile";
 
 const role = [
   "Admin",
@@ -18,11 +19,16 @@ const role = [
 
 const EditProfile = () => {
   const [images, setImages] = useState([]);
+  const [editProfile, { data, error, isLoading, isSuccess }] =
+    useEditProfileMutation();
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
+  };
+  const handleSubmit = () => {
+    editProfile("hello test");
   };
   return (
     <div>
@@ -247,12 +253,14 @@ const EditProfile = () => {
               }}
             >
               <button
+                onClick={handleSubmit}
                 style={{
                   padding: "10px 30px",
                   backgroundColor: "#10B981",
                   border: "none",
                   color: "white",
                   borderRadius: "5px",
+                  cursor: "pointer",
                 }}
               >
                 Update Profile
