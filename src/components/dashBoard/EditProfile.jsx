@@ -4,7 +4,8 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import "../../assets/styles/editProfile.css";
 import User from "../../assets/images/user_chat.jpg";
 import { Grid } from "@mui/material";
-import { useEditProfileMutation } from "../../redux/reduicers/editprofile";
+import { useUserProfileEditMutation } from "../../redux/reduicers/editprofile";
+import axios from "axios";
 
 const role = [
   "Admin",
@@ -19,16 +20,24 @@ const role = [
 
 const EditProfile = () => {
   const [images, setImages] = useState([]);
-  const [editProfile, { data, error, isLoading, isSuccess }] =
-    useEditProfileMutation();
+  const [userProfileEdit, {}] = useUserProfileEditMutation();
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
+    console.log(imageList[0]);
     setImages(imageList);
   };
-  const handleSubmit = () => {
-    editProfile("hello test");
+  const handleSubmit = async () => {
+    const data = {
+      image: images,
+      email: "junaid@email",
+      phone: "01666666666",
+    };
+    const formData = new FormData();
+    formData.append("image", images);
+    formData.append("name", "junaid");
+    formData.append("email", "email@junaid");
+    userProfileEdit(formData);
   };
   return (
     <div>

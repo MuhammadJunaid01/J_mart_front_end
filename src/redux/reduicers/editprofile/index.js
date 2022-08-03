@@ -1,18 +1,28 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { api } from "../../api/api";
 
-export const editProfilApi = createApi({
-  reducerPath: "editProfileApi",
+export const userProfileEditApi = createApi({
+  reducerPath: "userProfileEditApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: api,
+    baseUrl: "http://localhost:5000/",
+    prepareHeaders: (headers, { getState }) => {
+      const { currentUser } = getState();
+      if (currentUser) {
+        const token = currentUser.user.token;
+        if (token) {
+          headers.set("Content-Type", "multipart/form-data");
+          headers.set("authorization", `Bearer ${token}`);
+        }
+      }
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
-    editProfile: builder.mutation({
+    userProfileEdit: builder.mutation({
       query: (body) => {
         console.log("object", body);
         return {
-          url: "/edit",
-          method: "POST",
+          url: "editProfile",
+          method: "PUT",
           body: body,
         };
       },
@@ -20,4 +30,4 @@ export const editProfilApi = createApi({
   }),
 });
 
-export const { useEditProfileMutation } = editProfilApi;
+export const { useUserProfileEditMutation } = userProfileEditApi;
