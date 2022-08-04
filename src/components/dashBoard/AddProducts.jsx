@@ -30,7 +30,7 @@ const AddProducts = ({ isOffer }) => {
   const [expireDate, setExpireDate] = useState("");
   const [description, setDescription] = useState("");
   const [percentage, setPercentage] = useState("");
-
+  const user = JSON.parse(localStorage.getItem("user"));
   const handleExpand = () => {
     setExpanded((expanded) => !expanded);
   };
@@ -52,7 +52,30 @@ const AddProducts = ({ isOffer }) => {
 
   const sendDatabackend = () => {
     // for (const iterator of object) {
+
     // }
+    if (!user) {
+      toast.error("Please login!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    if (!user?.email == "m.junaidbkh2020@gmail.com") {
+      toast.error("Product Add Only Admin!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
     const offer = isOffer ? true : false;
     if (
       categoryName === "" ||
@@ -89,7 +112,7 @@ const AddProducts = ({ isOffer }) => {
     formData.append("offer", offer);
     formData.append("percentage", percentage);
     console.log("offer is", offer);
-    createOffer(formData);
+    // createOffer(formData);
   };
   console.log("data", data);
   if (isSuccess) {
@@ -105,6 +128,7 @@ const AddProducts = ({ isOffer }) => {
   }
 
   /// test moment data
+  console.log("user", user.email);
   return (
     <div style={{ marginTop: "40px", paddingBottom: "20px" }}>
       <div>

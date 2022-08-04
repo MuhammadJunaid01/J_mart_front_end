@@ -68,8 +68,22 @@ const RoutesPage = () => {
             <Route path="cart" element={<DashBoardCart />} />
             <Route path="checkout" element={<CheckOut />} />
             <Route path="shops" element={<Shops />} />
-            <Route path="create_offer" element={<CreateOffer />} />
-            <Route path="addproduct" element={<AddProducts />} />
+            <Route
+              path="create_offer"
+              element={
+                <PrivateRoute user={user}>
+                  <CreateOffer />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="addproduct"
+              element={
+                <PrivateRoute user={user}>
+                  <AddProducts />
+                </PrivateRoute>
+              }
+            />
           </Route>
 
           <Route
