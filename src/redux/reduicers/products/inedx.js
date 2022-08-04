@@ -44,7 +44,8 @@ export const productsApi = createApi({
       },
     }),
     getBestSaleProducts: builder.query({
-      query: () => "/bestSaleProducts",
+      query: () =>
+        "https://shrouded-reaches-11492.herokuapp.com/bestSaleProducts",
     }),
   }),
 });

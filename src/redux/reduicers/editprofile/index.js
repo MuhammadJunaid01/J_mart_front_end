@@ -20,7 +20,7 @@ export const userProfileEditApi = createApi({
       query: (body) => {
         console.log("object", body);
         return {
-          url: "editProfile",
+          url: "/editProfile",
           method: "PUT",
           body: body,
         };

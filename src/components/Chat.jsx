@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
@@ -8,7 +8,9 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "../assets/styles/chat.css";
 import User from "../assets/images/user_chat.jpg";
 const Chat = () => {
-  const socket = io.connect("https://shrouded-reaches-11492.herokuapp.com");
+  // const socket = io.connect("https://shrouded-reaches-11492.herokuapp.com", {
+  //   withCredentials: true,
+  // });
   const { isValidate, user } = useSelector((state) => state.currentUser);
 
   const [chatOPen, setChatOpen] = useState(false);
@@ -25,32 +27,31 @@ const Chat = () => {
   const registerUserSocket = () => {};
 
   useEffect(() => {
-    socket.on("private", (data) => {
-      const receive = [...messages];
-      alert("");
-      receive.push(data);
-      setMessages(receive);
-
-      console.log("message receive data ", data);
-    });
-  }, [messages, socket]);
+    // socket.on("private", (data) => {
+    //   const receive = [...messages];
+    //   alert("");
+    //   receive.push(data);
+    //   setMessages(receive);
+    //   console.log("message receive data ", data);
+    // });
+  }, [messages]);
   const sendMessage = () => {
-    socket.emit("msg", {
-      senderId: user._id,
-      senderName: user.username,
-      receiverId: admin._id,
-      msg: msg,
-    });
+    // socket.emit("msg", {
+    //   senderId: user._id,
+    //   senderName: user.username,
+    //   receiverId: admin._id,
+    //   msg: msg,
+    // });
   };
   useEffect(() => {
-    users?.forEach((user) => {
-      if (user.isAdmin) {
-        setAdmin(user);
-      }
-    });
+    // users?.forEach((user) => {
+    //   if (user.isAdmin) {
+    //     setAdmin(user);
+    //   }
+    // });
   }, [users, admin, user]);
   const handleRegester = () => {
-    socket.emit("user", user._id);
+    // socket.emit("user", user._id);
   };
   return (
     <div className="chat_container">

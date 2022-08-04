@@ -111,3 +111,12 @@
   bottom: 10px;
   width: 80%;
 }
+
+@media (min-width: 320px) and (max-width: 720px) {
+  .side-drawer {
+    width: 98%;
+  }
+  .side-drawer.open {
+    width: 98%;
+  }
+}

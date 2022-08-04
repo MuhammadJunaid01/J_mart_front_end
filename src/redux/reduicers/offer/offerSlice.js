@@ -21,7 +21,7 @@ export const offerApi = createApi({
   }),
   endpoints: (builder) => ({
     getAllOffer: builder.query({
-      query: () => "offer",
+      query: () => "/offer",
     }),
     updateProducts: builder.mutation({
       query: (data) => {
