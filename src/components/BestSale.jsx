@@ -11,7 +11,7 @@ import { quickVeiw } from "../redux/reduicers/quickVeiw/quickVeiw";
 import Loader from "./Loader";
 import { addToCart } from "../redux/reduicers/cart/cart";
 
-const BestSale = () => {
+const BestSale = ({ isHomePage }) => {
   const dispatch = useDispatch();
   const { bestSale: data } = useSelector((state) => state.bestSale);
   const [bestSale, setBestSale] = useState([]);
@@ -29,19 +29,21 @@ const BestSale = () => {
   }
   return (
     <div className="best_sale_container">
-      <div style={{ borderBottom: "2px solid rgba(128, 128, 128, 0.493)" }}>
-        <div className="best_saleHeader">
-          <i
-            style={{
-              fontFamily: "cursive",
-              letterSpacing: "5px",
-              fontWeight: "600",
-            }}
-          >
-            Best Sale
-          </i>
+      {isHomePage && (
+        <div style={{ borderBottom: "2px solid rgba(128, 128, 128, 0.493)" }}>
+          <div className="best_saleHeader">
+            <i
+              style={{
+                fontFamily: "cursive",
+                letterSpacing: "5px",
+                fontWeight: "600",
+              }}
+            >
+              Best Sale
+            </i>
+          </div>
         </div>
-      </div>
+      )}
       <br />
       <Grid container rowSpacing={1} columnSpacing={1}>
         {bestSale?.map((item, i) => {

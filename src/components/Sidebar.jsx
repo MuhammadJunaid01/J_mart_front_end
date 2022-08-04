@@ -11,8 +11,6 @@ const Sidebar = ({ to, name, count, Icon, chat }) => {
             alignItems: "center",
             justifyContent: "space-between",
             padding: "5px",
-
-            color: "#B2B4B5",
             marginBottom: "10px",
           }}
           className={(navData) => (navData.isActive ? "active" : "navlink")}

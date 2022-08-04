@@ -18,7 +18,7 @@ const Home = () => {
   }, []);
 
   // console.log(data);
-
+  const isHomePage = true;
   return (
     <div style={{ padding: "10px" }}>
       <SliderBanner />
@@ -34,7 +34,7 @@ const Home = () => {
           <MarqueeSlider />
         </Grid>
         <Grid item xs={12} md={12}>
-          <BestSale />
+          <BestSale isHomePage={isHomePage} />
         </Grid>
       </Grid>
       {/* <QuickVeiw /> */}

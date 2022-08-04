@@ -8,13 +8,12 @@ const CollapsableSidebarMenu = ({ array }) => {
         <div key={index}>
           <NavLink
             className={(navData) =>
-              navData.isActive ? "activeSidebarMnu" : "navlink"
+              navData.isActive ? "activeSidrbarMenu" : "navlink"
             }
             style={{
               textDecoration: "none",
               display: "block",
-              color: "#B2B4B5",
-              marginLeft: "21px",
+              marginLeft: "10px",
               marginBottom: "6px",
             }}
             to={arr.to}

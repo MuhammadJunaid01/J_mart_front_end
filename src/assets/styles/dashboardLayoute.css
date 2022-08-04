@@ -41,13 +41,32 @@
   margin-bottom: 5px;
 }
 .active {
-  border-left: 5px solid #28ac65;
+  border-left: 5px solid #3f83f8;
   text-decoration: none;
-  color: white;
   justify-content: space-between;
-  color: #a8b6f2;
-  /* background-color: #f3f8fb; */
+  color: white !important;
+  background-color: #10b981 !important;
   padding: 5px 0px;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: monospace;
+}
+.activeSidrbarMenu {
+  border-left: 5px solid #3f83f8;
+  text-decoration: none;
+  justify-content: space-between;
+  color: white !important;
+  background-color: #10b981 !important;
+  padding: 5px 0px;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: monospace;
+}
+.navlink {
+  color: #4c4f52d2 !important;
+  font-size: 17px;
+  font-weight: 400;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .dashboard_count {
   padding: 5px 7px;
