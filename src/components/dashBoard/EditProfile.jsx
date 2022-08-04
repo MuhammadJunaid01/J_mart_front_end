@@ -19,11 +19,14 @@ const role = [
 
 const EditProfile = () => {
   const [images, setImages] = useState([]);
-  const [userProfileEdit, {}] = useUserProfileEditMutation();
+  const [previewImage, setPreviewImage] = useState("");
+
+  const [userProfileEdit, { data, isLoading }] = useUserProfileEditMutation();
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList[0].file);
+    setPreviewImage(imageList[0].data_url);
+    console.log("imagelist", imageList);
     setImages(imageList[0].file);
   };
   const email = "email@junaid";
@@ -36,6 +39,7 @@ const EditProfile = () => {
     formData.append("email", email);
     userProfileEdit(formData);
   };
+  console.log("update user data", data);
   return (
     <div>
       <Grid container>
@@ -136,7 +140,7 @@ const EditProfile = () => {
                       boxSizing: "border-box",
                       borderRadius: "4px",
                     }}
-                    src={User}
+                    src={previewImage ? previewImage : User}
                     alt=""
                   />
                 </div>
@@ -269,7 +273,7 @@ const EditProfile = () => {
                   cursor: "pointer",
                 }}
               >
-                Update Profile
+                {isLoading ? "Update Profile....." : "Update Profile"}
               </button>
             </div>
           </div>

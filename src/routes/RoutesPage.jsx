@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import {
   BrowserRouter as Router,
   Routes,
@@ -26,8 +27,11 @@ import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Notfound from "../pages/notFound/Notfound";
 import Register from "../pages/register/Register";
+import PrivateRoute from "./PrivateRoute";
 const RoutesPage = () => {
   // const location = useLocation();
+  // const { isValidate, user } = useSelector((state) => state.currentUser);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div>
@@ -80,7 +84,9 @@ const RoutesPage = () => {
             path="/checkout"
             element={
               <HomeLayoute>
-                <CheckOut />
+                <PrivateRoute user={user}>
+                  <CheckOut />
+                </PrivateRoute>
               </HomeLayoute>
             }
           />

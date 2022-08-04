@@ -131,6 +131,20 @@ const Login = () => {
                   </form>
                 </div>
                 {/*  */}
+                <p
+                  onClick={() => navigate("/register")}
+                  style={{
+                    textAlign: "center",
+                    color: "#344055",
+                    fontFamily: "monospace",
+                    fontWeight: "600",
+                    fontSize: "14px",
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                  }}
+                >
+                  are you new User?
+                </p>
               </div>
             </div>
           </div>

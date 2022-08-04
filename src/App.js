@@ -33,7 +33,6 @@ function App() {
     }
     dispatch(allUsers(data));
     dispatch(getBestSaleProducts(bestSale?.data));
-    dispatch(getCurrentUser());
   }, [isLoggedIn, data, bestSale]);
 
   const { scrollYProgress } = useScroll();

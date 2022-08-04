@@ -144,29 +144,6 @@ const Register = memo(() => {
                   </form>
                 </div>
                 {/*  */}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <button
-                    style={{
-                      border: "1px solid #ECEDF3",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "70%",
-                      padding: "5px 25px",
-                      borderRadius: "3px",
-                      display: "flex",
-                      alignItems: "center",
-                      backgroundColor: "white",
-                    }}
-                  >
-                    <GoogleIcon /> login google
-                  </button>
-                </div>
               </div>
             </div>
           </Grid>

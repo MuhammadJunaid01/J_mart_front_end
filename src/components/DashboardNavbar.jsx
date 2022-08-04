@@ -8,7 +8,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import User from "../assets/images/user_chat.jpg";
 import Switch from "@mui/material/Switch";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { dashboardToggle } from "../redux/reduicers/toggle/toggle";
 import { Badge } from "@mui/material";
 import DashboardProfileMenu from "./dashBoard/DashboardProfileMenu";
@@ -16,7 +16,7 @@ import DashboardNotification from "./nootification/DashboardNotification";
 const DashboardNavbar = () => {
   const [profileMenuShow, setProfileMenuShow] = useState(false);
   const [showNotificatin, setShowNotificatin] = useState(false);
-
+  const { user } = useSelector((state) => state.currentUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleCheck = () => {
@@ -54,7 +54,7 @@ const DashboardNavbar = () => {
         <p className="dashboard_setting_icon">
           <SettingsIcon style={{ fontSize: "30px" }} />
         </p>
-        <img onClick={handleClick} src={User} alt="" />
+        <img onClick={handleClick} src={user ? user.image : User} alt="" />
         <span>
           <Switch onClick={handleCheck} />
         </span>
