@@ -45,6 +45,7 @@ const AddProducts = ({ isOffer }) => {
   };
 
   const handleImage = (e) => {
+    console.log("hello ", e);
     setImage(e[0]);
     setPreviewImage(URL.createObjectURL(e[0]));
   };

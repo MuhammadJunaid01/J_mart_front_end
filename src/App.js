@@ -4,6 +4,8 @@ import { createBrowserHistory } from "history";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RoutesPage from "./routes/RoutesPage";
+import { motion, useScroll, useMotionValue, useTransform } from "framer-motion";
+import "./App.css";
 import {
   allUsers,
   getCurrentUser,
@@ -23,6 +25,7 @@ function App() {
   const { isValidate, user } = useSelector((state) => state.currentUser);
   const { data: bestSale } = useGetBestSaleProductsQuery();
   const { data, isLoading, isError } = useGetAllUsersQuery();
+
   useEffect(() => {
     if (!isValidate) {
       history.replace("/login");
@@ -32,6 +35,9 @@ function App() {
     dispatch(getBestSaleProducts(bestSale?.data));
     dispatch(getCurrentUser());
   }, [isLoggedIn, data, bestSale]);
+
+  const { scrollYProgress } = useScroll();
+
   return (
     <div>
       <ToastContainer
@@ -44,6 +50,11 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+      />
+
+      <motion.div
+        className="progress-bar"
+        style={{ scaleX: scrollYProgress }}
       />
 
       <Context>

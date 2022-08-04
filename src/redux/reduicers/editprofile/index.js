@@ -9,7 +9,6 @@ export const userProfileEditApi = createApi({
       if (currentUser) {
         const token = currentUser.user.token;
         if (token) {
-          headers.set("Content-Type", "multipart/form-data");
           headers.set("authorization", `Bearer ${token}`);
         }
       }

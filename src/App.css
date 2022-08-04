@@ -1,3 +1,10 @@
-.appContainer {
-  opacity: 0.3;
+.progress-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #10b981;
+  transform-origin: 0%;
+  z-index: 999;
 }

@@ -5,7 +5,6 @@ import "../../assets/styles/editProfile.css";
 import User from "../../assets/images/user_chat.jpg";
 import { Grid } from "@mui/material";
 import { useUserProfileEditMutation } from "../../redux/reduicers/editprofile";
-import axios from "axios";
 
 const role = [
   "Admin",
@@ -24,19 +23,17 @@ const EditProfile = () => {
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList[0]);
-    setImages(imageList);
+    console.log(imageList[0].file);
+    setImages(imageList[0].file);
   };
+  const email = "email@junaid";
+  const name = "lllllllllllllllll";
   const handleSubmit = async () => {
-    const data = {
-      image: images,
-      email: "junaid@email",
-      phone: "01666666666",
-    };
     const formData = new FormData();
+
     formData.append("image", images);
-    formData.append("name", "junaid");
-    formData.append("email", "email@junaid");
+    formData.append("name", name);
+    formData.append("email", email);
     userProfileEdit(formData);
   };
   return (
