@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const userProfileEditApi = createApi({
   reducerPath: "userProfileEditApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/",
+    baseUrl: "https://shrouded-reaches-11492.herokuapp.com/",
     prepareHeaders: (headers, { getState }) => {
       const { currentUser } = getState();
       if (currentUser) {

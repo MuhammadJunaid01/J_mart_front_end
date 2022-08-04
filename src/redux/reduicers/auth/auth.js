@@ -56,7 +56,7 @@ export const currentUserSlice = createSlice({
 export const taskApi = createApi({
   reducerPath: "taskapi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/",
+    baseUrl: "https://shrouded-reaches-11492.herokuapp.com/",
     tagTypes: ["users"],
   }),
   endpoints: (builder) => ({
@@ -67,7 +67,7 @@ export const taskApi = createApi({
       query: (body) => {
         console.log("add user body", body);
         return {
-          url: "http://localhost:5000/register",
+          url: "/register",
           body: body,
           method: "POST",
         };
@@ -77,7 +77,7 @@ export const taskApi = createApi({
       query: (body) => {
         // console.log("login user body", body);
         return {
-          url: "http://localhost:5000/login",
+          url: "/login",
           body: body,
           method: "POST",
         };
@@ -91,7 +91,7 @@ export const taskApi = createApi({
       query: (body) => {
         console.log("add user body", body);
         return {
-          url: "http://localhost:5000/addProduct",
+          url: "/addProduct",
           body: body,
           method: "POST",
         };

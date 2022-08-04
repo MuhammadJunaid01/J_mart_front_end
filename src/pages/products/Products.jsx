@@ -7,7 +7,6 @@ import ReactPaginate from "react-paginate";
 
 import "../../assets/styles/products.css";
 import FitScreenIcon from "@mui/icons-material/FitScreen";
-import "../../assets/styles/products.css";
 import { addToCart } from "../../redux/reduicers/cart/cart";
 import DrawerCart from "../../components/DrawerCart";
 import { traking, getTrackerData } from "../../redux/reduicers/tracker";

@@ -18,7 +18,6 @@ const CheckOut = () => {
   );
   const [createOrder, { data, isLoading, isSuccess, error }] =
     useCreateOrderMutation();
-  const { isValidate, user } = useSelector((state) => state.currentUser);
 
   const [login, setLogin] = useState(false);
   const [copun, setCopun] = useState(false);
@@ -28,6 +27,7 @@ const CheckOut = () => {
   const [success, setSuccess] = useState(true);
   const dispatch = useDispatch();
 
+  const user = JSON.parse(localStorage.getItem("user"));
   const handleLoginPerform = () => {
     setLogin((login) => !login);
     setCopun(false);
@@ -52,7 +52,6 @@ const CheckOut = () => {
     setTax(taxCoutn);
   }, [cartItems, quantity, totalPrice]);
 
-  console.log(user);
   const handleSubmit = async () => {
     const data = {
       products: cartItems,
@@ -75,9 +74,7 @@ const CheckOut = () => {
     createOrder(body);
   };
   useEffect(() => {
-    if (data) {
-      localStorage.removeItem("cartItems");
-    }
+    localStorage.removeItem("cartItems");
   }, [data]);
   if (data) {
     console.log("data", data);
@@ -86,9 +83,6 @@ const CheckOut = () => {
     console.log("errrrrrrrrrrr", error);
   }
 
-  console.log("hello user", user);
-  console.log("data", data);
-  console.log("location pathname", location.pathname);
   const handleCpunApply = (e) => {
     e.preventDefault();
     if (applyCode === "") {
@@ -403,7 +397,7 @@ const CheckOut = () => {
                 </div>
               </div>
               <div style={{ padding: "20px 0px" }}>
-                {user && (
+                {user && totalPrice > 0 && (
                   <StripeCheckout
                     stripeKey="pk_test_51LNNMzC82usS9HEFIXxrDorMOsHdtpr624HEUfNrVmCoY0WwCkpae8b2kWYjOi2ysISzlUK5bvNIFCXczeO7hayP005H8TsmUz"
                     token={makePayment}
@@ -412,18 +406,34 @@ const CheckOut = () => {
                   >
                     <button
                       className={user ? "" : "user_undifined"}
-                      style={{
-                        padding: "16px",
-                        width: "100%",
-                        cursor: "pointer",
-                        border: "none",
-                        fontSize: "20px",
-                        fontWeight: "600",
-                        color: "grey",
-                        fontFamily: "monospace",
-                        borderRadius: "50px",
-                        boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px 0px",
-                      }}
+                      style={
+                        totalPrice === 0
+                          ? {
+                              padding: "16px",
+                              width: "100%",
+                              cursor: "pointer",
+                              border: "none",
+                              fontSize: "20px",
+                              fontWeight: "600",
+                              color: "grey",
+                              fontFamily: "monospace",
+                              borderRadius: "50px",
+                              boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px 0px",
+                              pointerEvents: "none",
+                            }
+                          : {
+                              padding: "16px",
+                              width: "100%",
+                              cursor: "pointer",
+                              border: "none",
+                              fontSize: "20px",
+                              fontWeight: "600",
+                              color: "grey",
+                              fontFamily: "monospace",
+                              borderRadius: "50px",
+                              boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px 0px",
+                            }
+                      }
                     >
                       Place order
                     </button>

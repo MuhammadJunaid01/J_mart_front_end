@@ -7,7 +7,6 @@ import "../assets/styles/quickView.css";
 const QuickVeiw = () => {
   const dispatch = useDispatch();
   const { quickVeiw: quick, product } = useSelector((state) => state.quickVeiw);
-  console.log("product", product);
   return (
     <div>
       <div className={quick ? " quic_veiw_content open" : " quic_veiw_content"}>

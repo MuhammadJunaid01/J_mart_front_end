@@ -28,7 +28,7 @@ export const bestSaleProductsSlice = createSlice({
 export const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/",
+    baseUrl: "https://shrouded-reaches-11492.herokuapp.com/",
   }),
   endpoints: (builder) => ({
     getAllProducts: builder.query({

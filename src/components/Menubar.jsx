@@ -93,7 +93,7 @@ export default function Menubar() {
     if (menubarInputValue === "" || products.length < 0) {
       return;
     }
-    return item.ProductName || item.Category.includes(menubarInputValue);
+    return item.ProductName.includes(menubarInputValue);
   });
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -199,7 +199,23 @@ export default function Menubar() {
             </button>
           </div>
         </div>
-        {result.length === 0 && <p>opps! Please try again.</p>}
+        {result.length === 0 && (
+          <div
+            style={{
+              textAlign: "center",
+              height: "200px",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: "33px",
+              fontFamily: "monospace",
+              fontWeight: "500",
+            }}
+          >
+            <p>opps! Please try again</p>
+          </div>
+        )}
         <Grid container>
           {result.map((item, index) => {
             if (item) {

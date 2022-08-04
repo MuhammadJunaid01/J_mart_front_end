@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid } from "@mui/material";
 import Timer from "../../components/Timer";
 import "../../assets/styles/offer.css";
@@ -6,11 +6,11 @@ import CopyToClipBoard from "../../components/CopyCouponCode";
 import { useSelector, useDispatch } from "react-redux";
 import { useGetAllOfferQuery } from "../../redux/reduicers/offer/offerSlice";
 import { useState } from "react";
+import "../../assets/styles/pagination.css";
 import { oferUrlImage } from "../../redux/api/api";
 import Loader from "../../components/Loader";
+import ReactPaginate from "react-paginate";
 const Offer = () => {
-  const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
-
   const { data, isError, isLoading } = useGetAllOfferQuery();
   const { days, hours, minutes, secounds } = useSelector(
     (state) => state.offer

@@ -17,7 +17,7 @@ export const offerSlice = createSlice({
 export const offerApi = createApi({
   reducerPath: "offerApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000",
+    baseUrl: "https://shrouded-reaches-11492.herokuapp.com/",
   }),
   endpoints: (builder) => ({
     getAllOffer: builder.query({
@@ -26,7 +26,7 @@ export const offerApi = createApi({
     updateProducts: builder.mutation({
       query: (data) => {
         return {
-          url: "http://localhost:5000/update",
+          url: "/update",
           body: data,
           method: "PUT",
         };
