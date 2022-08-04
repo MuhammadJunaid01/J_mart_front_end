@@ -8,7 +8,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "../assets/styles/chat.css";
 import User from "../assets/images/user_chat.jpg";
 const Chat = () => {
-  const socket = io.connect("http://localhost:5000");
+  const socket = io.connect("https://shrouded-reaches-11492.herokuapp.com");
   const { isValidate, user } = useSelector((state) => state.currentUser);
 
   const [chatOPen, setChatOpen] = useState(false);
