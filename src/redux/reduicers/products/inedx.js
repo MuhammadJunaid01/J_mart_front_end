@@ -21,14 +21,16 @@ export const bestSaleProductsSlice = createSlice({
   },
   reducers: {
     getBestSaleProducts: (state, action) => {
+      // console.log("called best", action.payload);
       state.bestSale = action.payload;
+      // console.log("state", state.bestSale);
     },
   },
 });
 export const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://shrouded-reaches-11492.herokuapp.com/",
+    baseUrl: "https://j-mart-gt4t.onrender.com",
   }),
   endpoints: (builder) => ({
     getAllProducts: builder.query({
@@ -44,8 +46,7 @@ export const productsApi = createApi({
       },
     }),
     getBestSaleProducts: builder.query({
-      query: () =>
-        "https://shrouded-reaches-11492.herokuapp.com/bestSaleProducts",
+      query: () => "/bestSaleProducts",
     }),
   }),
 });

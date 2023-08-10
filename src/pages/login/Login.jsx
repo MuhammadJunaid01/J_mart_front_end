@@ -25,11 +25,12 @@ const Login = () => {
   useEffect(() => {
     if (data) {
       dispatch(updateUser(data.user));
+      navigate(-1);
     }
-  }, [data]);
+  }, [data, dispatch, navigate]);
   console.log(data);
   // if (data) {
-  //   Navigate("/");
+  // Navigate(-1);
   // }
   return (
     <div style={{ padding: "0px 0px" }}>

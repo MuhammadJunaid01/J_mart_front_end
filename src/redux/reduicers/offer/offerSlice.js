@@ -17,7 +17,7 @@ export const offerSlice = createSlice({
 export const offerApi = createApi({
   reducerPath: "offerApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://shrouded-reaches-11492.herokuapp.com/",
+    baseUrl: "https://j-mart-gt4t.onrender.com",
   }),
   endpoints: (builder) => ({
     getAllOffer: builder.query({

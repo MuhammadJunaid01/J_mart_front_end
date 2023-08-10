@@ -36,7 +36,7 @@ const DrawerCart = () => {
     }, 0);
     setTotalPrice(totalPriceCount);
     dispatch(getTotal());
-  }, [cartItems, quantity]);
+  }, [cartItems, dispatch, quantity]);
   return (
     <div>
       <div className="drawerContainer">

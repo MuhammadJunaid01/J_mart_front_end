@@ -56,7 +56,7 @@ export const currentUserSlice = createSlice({
 export const taskApi = createApi({
   reducerPath: "taskapi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://shrouded-reaches-11492.herokuapp.com/",
+    baseUrl: "https://j-mart-gt4t.onrender.com",
     tagTypes: ["users"],
   }),
   endpoints: (builder) => ({

@@ -16,9 +16,9 @@ const BestSale = ({ isHomePage }) => {
   const { bestSale: data } = useSelector((state) => state.bestSale);
   const [bestSale, setBestSale] = useState([]);
   useEffect(() => {
-    const result = data?.map((item, index) => {
-      return setBestSale(item[index].products);
-    });
+    // Extract products from data and set in state
+    const extractedProducts = data?.map((item) => item.products).flat();
+    setBestSale(extractedProducts);
   }, [data]);
   const handleQuickVeiw = (product) => {
     console.log("item", product);

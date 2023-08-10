@@ -18,7 +18,7 @@ const CheckOut = () => {
   );
   const [createOrder, { data, isLoading, isSuccess, error }] =
     useCreateOrderMutation();
-
+  const navigate = useNavigate();
   const [login, setLogin] = useState(false);
   const [copun, setCopun] = useState(false);
   const [applyCode, setApplyCode] = useState("");
@@ -45,27 +45,16 @@ const CheckOut = () => {
     }, 0);
     setTotalPrice(totalPriceCount);
     dispatch(getTotal());
-  }, [cartItems, quantity, totalAmount, applyCode]);
+  }, [cartItems, quantity, totalAmount, applyCode, dispatch]);
   useEffect(() => {
     const test = totalPrice / 100;
     const taxCoutn = test * 6;
     setTax(taxCoutn);
   }, [cartItems, quantity, totalPrice]);
 
-  const handleSubmit = async () => {
-    const data = {
-      products: cartItems,
-      amount: totalPrice,
-      status: "proccessing",
-      user: user.data.email,
-      status: "proccessing",
-      // orderBy: user._id,
-    };
-  };
-
   const makePayment = (token) => {
     const body = {
-      token,
+      token: token.id,
       products: cartItems,
       amount: totalPrice,
       status: "proccessing",
@@ -74,8 +63,11 @@ const CheckOut = () => {
     createOrder(body);
   };
   useEffect(() => {
-    localStorage.removeItem("cartItems");
-  }, [data]);
+    if (isSuccess) {
+      localStorage.removeItem("cartItems");
+      navigate("/");
+    }
+  }, [isSuccess, navigate]);
   if (data) {
     console.log("data", data);
   }
